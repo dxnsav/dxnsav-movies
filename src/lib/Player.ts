@@ -37,9 +37,3 @@ export function useScript(url) {
 		};
 	}, [url]);
 }
-
-export function PlayNewVideo() {
-	if (window.pljssglobal.length > 0) {
-		window.pljssglobal[0].api("play", "https://plrjs.com/new.mp4");
-	}
-}
