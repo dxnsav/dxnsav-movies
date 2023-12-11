@@ -1,16 +1,21 @@
 import { Button } from "@/components/ui/button";
 import { PlayIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
+import SearchDrawer from "./SearchDrawer/SearchDrawer";
+import { useState } from "react";
 
-export default function MovieButtons(movie) {
+export default function MovieButtons({ movie }) {
 	const navigate = useNavigate();
+	const [open, setOpen] = useState(false);
 
 	const onHandleClickWatch = () => {
-		navigate(`/watch/${movie.id}`);
+		navigate(`/watch`, { state: { movie } });
 	};
 
+	// TODO: Make global context to open SearchDrawer
 	const onHandleClickDetails = () => {
-		navigate(`/details`, { state: { movie: movie } });
+		setOpen(true);
+		navigate(`/details`, { state: { movie } });
 	}
 
 	return (
@@ -23,6 +28,7 @@ export default function MovieButtons(movie) {
 			>
 				<InfoCircledIcon className="mr-2 h-6 w-6" /> Детальніше
 			</Button>
+			<SearchDrawer state={open} changeState={setOpen} />
 		</>
 	);
 }

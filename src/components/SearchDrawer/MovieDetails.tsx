@@ -9,7 +9,7 @@ import {
 	RocketIcon,
 	SpeakerLoudIcon,
 } from "@radix-ui/react-icons";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const MovieDetails = () => {
 	const [watchData, setWatchData] = useState(null);
@@ -31,6 +31,10 @@ const MovieDetails = () => {
 
 	if (!watchData) {
 		return <div>Loading...</div>;
+	}
+
+	const handlePlay = () => {
+		navigate(`watch/`, { state: { movie } });
 	}
 
 	return (
@@ -55,8 +59,8 @@ const MovieDetails = () => {
 				<div className="flex flex-row justify-between w-full items-center">
 					<div className="flex flex-col gap-x-3 mt-4">
 						<div className="flex gap-x-3 mt-4">
-							<Button>
-								<Link to={`/watch/${movie.movie_id}`}>Дивитись</Link>
+							<Button onClick={() => handlePlay()}>
+								Дивитись
 							</Button>
 							<Button variant="outline" className="w-10 h-10 p-0 rounded-full">
 								<PlusIcon className="w-5 h-5" />

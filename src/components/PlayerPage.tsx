@@ -1,21 +1,21 @@
-import { useState, useEffect, useRef } from "react";
-import Player, { useScript } from "./../lib/Player";
-import { Link, useParams } from "react-router-dom";
-import { supabase } from "@/supabase/supaClient";
+import { useState, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Button } from "./ui/button";
 import { ArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons";
 import "../assets/font-player.css";
 
-const WatchPage = () => {
+import { Player, useScript } from "../lib/Player.ts";
+
+export const PlayerPage = () => {
 	useScript(`${import.meta.env.VITE_PUBLIC_URL}playerjs.js`);
 
-	const { movieId } = useParams();
-	const [watchData, setWatchData] = useState(null);
-	const [showDescription, setShowDescription] = useState(false);
+	const [showDescription] = useState(false);
 	const playerRef = useRef(null);
-	const [isInit, setIsInit] = useState(false);
+	//const [isInit, setIsInit] = useState(false);
 
-	useEffect(() => {
+	const watchData = useLocation().state?.movie;
+
+	/*useEffect(() => {
 		const player = playerRef.current;
 		if (player) {
 			const handleUI = (event) => {
@@ -30,23 +30,9 @@ const WatchPage = () => {
 				setIsInit(true);
 			});
 
-			// Cleanup function
 			return () => player.removeEventListener("ui", handleUI);
 		}
-	}, [isInit, playerRef]);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data } = await supabase
-				.from("movie")
-				.select("*")
-				.eq("id", movieId)
-				.single();
-			setWatchData(data);
-			console.log(1);
-		};
-		fetchData();
-	}, [movieId]);
+	}, [isInit, playerRef]);/** */
 
 	const handleQuit = () => {
 		if (window.pljssglobal.length > 0) window.pljssglobal[0].api("stop");
@@ -93,5 +79,3 @@ const WatchPage = () => {
 		</div>
 	);
 };
-
-export default WatchPage;

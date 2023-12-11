@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 import ErrorPage from "./routes/error-page.tsx";
 import { ThemeProvider } from "./context/ThemeProvider.tsx";
-import WatchPage from "./components/WatchPage.tsx";
+import { PlayerPage } from "./components/PlayerPage.tsx";
 import { SearchContent } from "./components/SearchDrawer/SearchContent.tsx";
 import MovieDetails from "./components/SearchDrawer/MovieDetails.tsx";
 
@@ -24,8 +24,8 @@ const router = createBrowserRouter(
         <Route path="details" element={<MovieDetails />} />
       </Route >
 
-      <Route path="watch/:movieId" element={<WatchPage />} />
-    </>,
+      <Route path="watch" element={<PlayerPage />} />
+    </>
   ),
 );
 

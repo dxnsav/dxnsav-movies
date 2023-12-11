@@ -1,4 +1,4 @@
-import { supabase } from "@/supabase/supaClient";
+// import { supabase } from "@/supabase/supaClient";
 import MovieButtons from "./MovieButtons";
 
 export default function MovieVideo() {
@@ -11,7 +11,8 @@ export default function MovieVideo() {
 		videoSource: "https://www.youtube.com/embed/XEMwSdne6UE",
 		release: 2021,
 		duration: 97,
-		id: 1,
+		id: 6000,
+		movie_id: 6000,
 		age: 13,
 		youtubeString: "https://www.youtube.com/embed/XEMwSdne6UE",
 	};
@@ -36,16 +37,7 @@ export default function MovieVideo() {
 				</h1>
 				<p className="text-white text-lg mt-5 line-clamp-3">{data?.overview}</p>
 				<div className="flex gap-x-3 mt-4">
-					<MovieButtons
-						age={data?.age as number}
-						duration={data?.duration as number}
-						id={data?.id as number}
-						overview={data?.overview as string}
-						releaseDate={data?.release as number}
-						title={data?.title as string}
-						youtubeUrl={data?.youtubeString as string}
-						key={data?.id}
-					/>
+					<MovieButtons movie={data} />
 				</div>
 			</div>
 		</div>

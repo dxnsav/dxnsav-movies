@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export default function Player(config) {
+export function Player(config) {
 	CreatePlayer(config);
 	return "";
 }
