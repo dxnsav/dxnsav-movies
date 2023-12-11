@@ -5,13 +5,8 @@ import { useDebounce } from "@uidotdev/usehooks";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { ScrollArea } from "../ui/scroll-area.tsx";
 import { MovieHorizontalCard } from "./MovieHorizontalCard.tsx";
-
-import {
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-} from "../ui/dialog.tsx";
 import React, { useEffect, useState, useRef } from "react";
+import { Drawer } from "vaul";
 
 
 export const SearchContent = () => {
@@ -121,42 +116,45 @@ export const SearchContent = () => {
 
 	return (
 		<>
-			<DialogHeader>
-				<DialogTitle>Пошук</DialogTitle>
-				<DialogDescription>
-					Введіть назву фільму, який ви хочете подивитися
-				</DialogDescription>
-			</DialogHeader>
-			<div className="flex flex-row gap-2 justify-between items-start w-full h-96 ">
-				<div className="flex flex-col w-full">
-					<div className="flex flex-row gap-2 mb-2">
-						<Input
-							minLength="3"
-							type="text"
-							placeholder="Знайди щось на вечір"
-							value={searchTerm}
-							onChange={(e) => onInputChanged(e)}
-							ref={inputRef}
-						/>
-						<Button
-							onClick={() => onSearchClicked()}
-							onKeyDown={(e) => handleKeyDown(e)}
-							disabled={loading}
+			<div className="p-4 rounded-t-20 flex-1">
+				<div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
+				<div className="max-w-md mx-auto flex flex-col items-center">
+					<Drawer.Title className="font-medium mb-4">Пошук</Drawer.Title>
+					<Drawer.Description>
+						Введіть назву фільму, який ви хочете подивитися
+					</Drawer.Description>
+					<div className="flex flex-row gap-2 justify-between items-start w-full h-96 ">
+						<div className="flex flex-col w-full">
+							<div className="flex flex-row gap-2 mb-2">
+								<Input
+									minLength="3"
+									type="text"
+									placeholder="Знайди щось на вечір"
+									value={searchTerm}
+									onChange={(e) => onInputChanged(e)}
+									ref={inputRef}
+								/>
+								<Button
+									onClick={() => onSearchClicked()}
+									onKeyDown={(e) => handleKeyDown(e)}
+									disabled={loading}
 
-						>
-							{loading ? "Searching..." : "Пошук"}
-						</Button>
+								>
+									{loading ? "Searching..." : "Пошук"}
+								</Button>
+							</div>
+							<ScrollArea onScroll={handleScroll} className="w-full rounded-md border p-4 h-80">
+								{error && <div>Error: {error}</div>}
+
+								{movies.map((movie) => (
+									<MovieHorizontalCard movie={movie} />
+								))}
+							</ScrollArea>
+						</div>
+						<Separator orientation="vertical" />
+						<div className="flex flex-col w-72">Останні пошуки</div>
 					</div>
-					<ScrollArea onScroll={handleScroll} className="w-full rounded-md border p-4 h-80">
-						{error && <div>Error: {error}</div>}
-
-						{movies.map((movie) => (
-							<MovieHorizontalCard movie={movie} />
-						))}
-					</ScrollArea>
 				</div>
-				<Separator orientation="vertical" />
-				<div className="flex flex-col w-72">Останні пошуки</div>
 			</div>
 		</>
 	);

@@ -11,7 +11,6 @@ const AuthDrawer = ({ isOpen, setIsOpen }) => {
 		<Drawer.Root
 			open={isOpen}
 			onOpenChange={(state) => setIsOpen(state)}
-			shouldScaleBackground
 		>
 			<Drawer.Portal>
 				<Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm " />

@@ -16,6 +16,10 @@ module.exports = {
       },
     },
     extend: {
+      screens: {
+        "landscape": {"raw": "(orientation: landscape)"},
+        "portrait": { "raw": "(orientation: portrait)" },
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

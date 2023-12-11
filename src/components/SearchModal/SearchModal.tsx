@@ -1,27 +1,25 @@
-import {
-	Dialog,
-	DialogContent,
-} from "../ui/dialog.tsx";
 import { useContext } from "react";
 import { DialogContext } from './../../context/DialogContext';
+import { Drawer } from "vaul";
+import { SearchContent } from "./SearchContent";
 
 export default function SearchModal({ state, changeState }) {
 	const { content, setContent } = useContext(DialogContext);
 
 	const onOpenChange = () => {
-		changeState(!state);
+		changeState(true);
 		setContent(<SearchContent />);
 	}
 
-
 	return (
-		<Dialog open={state} onOpenChange={() => onOpenChange()} >
-			<DialogContent className="sm:max-w-[60vw] sm:min-h-[60vh] bg-opacity-60 bg-gray-950 backdrop-blur pt-0 px-0">
-				{content}
-			</DialogContent>
-		</Dialog>
+		<Drawer.Root open={state} onOpenChange={() => onOpenChange()} >
+			<Drawer.Portal>
+				<Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm " />
+				<Drawer.Content className="bg-background flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0 h-[80vh] landscape:w-[80vw] mx-auto">
+					{content}
+				</Drawer.Content>
+			</Drawer.Portal>
+		</Drawer.Root>
 	);
 }
-
-
 
