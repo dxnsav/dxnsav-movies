@@ -1,3 +1,4 @@
+import { supabase } from "@/supabase/supaClient";
 import MovieButtons from "./MovieButtons";
 
 export default function MovieVideo() {
@@ -15,16 +16,19 @@ export default function MovieVideo() {
 		youtubeString: "https://www.youtube.com/embed/XEMwSdne6UE",
 	};
 
+	// TODO: Use weekly movie from supabase
+	// const weeklyMovie = supabase.from("weekly_movie").select("*").single();
+
 	return (
 		<div className="h-[70vh] lg:h-[70vh] w-full flex justify-start items-center">
 			<video
-				poster={data?.imageString}
 				autoPlay
 				muted
 				loop
 				src={data?.videoSource}
+				poster={data?.imageString}
 				className="w-full absolute top-0 left-0 h-[70vh] object-cover -z-10 brightness-[60%]"
-			></video>
+			/>
 
 			<div className="absolute w-[90%] lg:w-[40%] mx-auto">
 				<h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-bold">

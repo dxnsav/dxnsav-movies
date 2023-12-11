@@ -2,28 +2,15 @@ import { Button } from "@/components/ui/button";
 import { PlayIcon, InfoCircledIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 
-interface iAppProps {
-	overview: string;
-	youtubeUrl: string;
-	id: number;
-	age: number;
-	title: string;
-	releaseDate: number;
-	duration: number;
-}
-
-export default function MovieButtons({
-	id,
-	title,
-}: iAppProps) {
+export default function MovieButtons(movie) {
 	const navigate = useNavigate();
 
 	const onHandleClickWatch = () => {
-		navigate(`/watch/${id}`);
+		navigate(`/watch/${movie.id}`);
 	};
 
 	const onHandleClickDetails = () => {
-		navigate(`/details`, { state: { movie: { id, title } } });
+		navigate(`/details`, { state: { movie: movie } });
 	}
 
 	return (
