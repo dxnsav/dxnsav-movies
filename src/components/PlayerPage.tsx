@@ -14,6 +14,9 @@ export const PlayerPage = () => {
 	//const [isInit, setIsInit] = useState(false);
 
 	const watchData = useLocation().state?.movie;
+	console.log(watchData);
+
+	const backdropPath = "https://image.tmdb.org/t/p/w500" + watchData.backdrop_path;
 
 	/*useEffect(() => {
 		const player = playerRef.current;
@@ -46,16 +49,15 @@ export const PlayerPage = () => {
 	};
 
 	return (
-		<div className="font-player">
+		<>
 			<Player
 				id="player"
-				className="flex flex-col w-full h-96"
 				title={watchData?.title}
-				poster={watchData?.poster_url}
+				poster={backdropPath}
 				file={watchData?.stream_url}
 				autoPlay
 			/>
-			<div id="player" ref={playerRef}></div>
+			<div id="player" className="w-full h-screen" ref={playerRef}></div>
 			{showDescription ? (
 				<>
 					<Button
@@ -76,6 +78,6 @@ export const PlayerPage = () => {
 					</Button>
 				</>
 			) : null}
-		</div>
+		</>
 	);
 };

@@ -34,7 +34,7 @@ const MovieDetails = () => {
 	}
 
 	const handlePlay = () => {
-		navigate(`watch/`, { state: { movie } });
+		navigate(`/watch`, { state: { movie } });
 	}
 
 	return (
