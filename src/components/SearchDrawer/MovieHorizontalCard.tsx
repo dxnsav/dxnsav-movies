@@ -1,18 +1,21 @@
 import { Button } from "../ui/button.tsx";
 import { Skeleton } from "../ui/skeleton.tsx";
-import { useContext, useState } from "react";
-import { DialogContext } from "@/context/DialogContext.tsx";
+import { useState } from "react";
 import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
-import WatchContent from "./WatchContent.tsx";
+import { useNavigate } from "react-router-dom";
 
 export const MovieHorizontalCard = (movie) => {
-	const { setContent } = useContext(DialogContext);
-	const { id, title, overview, poster_path } = movie.movie;
+	const { id, title, overview, poster_path, } = movie.movie;
 	const posterPath = "https://image.tmdb.org/t/p/w500" + poster_path;
 	const [isLiked, setIsLiked] = useState(false);
+	const navigate = useNavigate();
 
 	const description =
 		overview.length > 100 ? overview.substring(0, 100) + "..." : overview;
+
+	const handleOpenMovieDetails = () => {
+		navigate(`/details`, { state: { movie: movie.movie } });
+	}
 
 	return (
 		<div className="flex flex-row gap-2 items-center" key={id}>
@@ -24,7 +27,7 @@ export const MovieHorizontalCard = (movie) => {
 				<div className="text-sm text-white">{description}</div>
 				<div className="flex flex-row justify-start w-full items-center">
 					<Button
-						onClick={() => setContent(<WatchContent movie={movie.movie} />)}
+						onClick={() => handleOpenMovieDetails()}
 					>
 						Дивитись
 					</Button>
@@ -37,7 +40,7 @@ export const MovieHorizontalCard = (movie) => {
 					</Button>
 				</div>
 			</div>
-		</div>
+		</div >
 	);
 };
 

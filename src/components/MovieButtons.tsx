@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { PlayIcon, InfoCircledIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
-import PlayVideoModal from "./PlayVideoModal";
+import { useNavigate } from "react-router-dom";
 
 interface iAppProps {
 	overview: string;
@@ -14,38 +13,29 @@ interface iAppProps {
 }
 
 export default function MovieButtons({
-	age,
-	duration,
 	id,
-	overview,
-	releaseDate,
 	title,
-	youtubeUrl,
 }: iAppProps) {
-	const [open, setOpen] = useState(false);
+	const navigate = useNavigate();
+
+	const onHandleClickWatch = () => {
+		navigate(`/watch/${id}`);
+	};
+
+	const onHandleClickDetails = () => {
+		navigate(`/details`, { state: { movie: { id, title } } });
+	}
+
 	return (
 		<>
-			<Button onClick={() => setOpen(true)} className="text-lg font-medium">
+			<Button className="text-lg font-medium" onClick={() => onHandleClickWatch()}>
 				<PlayIcon className="mr-2 h-6 w-6" /> Дивитись
 			</Button>
 			<Button
-				onClick={() => setOpen(true)}
-				className="text-lg font-medium bg-white/40 hover:bg-white/30 text-white"
+				className="text-lg font-medium bg-white/40 hover:bg-white/30 text-white" onClick={() => onHandleClickDetails()}
 			>
 				<InfoCircledIcon className="mr-2 h-6 w-6" /> Детальніше
 			</Button>
-
-			<PlayVideoModal
-				state={open}
-				changeState={setOpen}
-				age={age}
-				duration={duration}
-				key={id}
-				overview={overview}
-				release={releaseDate}
-				title={title}
-				youtubeUrl={youtubeUrl}
-			/>
 		</>
 	);
 }

@@ -3,15 +3,19 @@ import { supabase } from "@/supabase/supaClient";
 import ReactPlayer from "react-player";
 import { Button } from "../ui/button";
 import {
+	ChevronLeftIcon,
 	PauseIcon,
 	PlusIcon,
 	RocketIcon,
 	SpeakerLoudIcon,
 } from "@radix-ui/react-icons";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const WatchContent = ({ movie }) => {
+const MovieDetails = () => {
 	const [watchData, setWatchData] = useState(null);
+	const location = useLocation();
+	const navigate = useNavigate();
+	const movie = location.state.movie;
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -32,6 +36,9 @@ const WatchContent = ({ movie }) => {
 	return (
 		<>
 			<div className="w-full h-fit object-cover brightness-[60%] rounded-t-lg">
+				<Button variant="outline" size="icon" className="absolute left-4 rounded-full z-50" onClick={() => navigate("/search", { state: { title: movie.title } })}>
+					<ChevronLeftIcon className="w-6 h-6" />
+				</Button>
 				<ReactPlayer
 					url={watchData.stream_trailer_url}
 					loop={true}
@@ -85,4 +92,4 @@ const WatchContent = ({ movie }) => {
 	);
 };
 
-export default WatchContent;
+export default MovieDetails;

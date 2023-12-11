@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "./ui/button";
 import logo from "../assets/movua-lt.png";
 import { useAuth } from "@/hooks/useAuth";
 import UserNav from "./UserNav";
-import SearchModal from "./SearchDrawer/SearchDrawer";
+import SearchDrawer from "./SearchDrawer/SearchDrawer";
 import AuthDrawer from "./AuthDrawer";
 import { ThemeToggleButton } from "./ThemeToggle";
 import { NotificationHoverCard } from "./NotificationHoverCard";
 import { SearchIcon } from "@/icons/SearchIcon";
-import { useTheme } from "./ThemeProvider";
+import { useTheme } from "../context/ThemeProvider";
 
 interface linkProps {
 	name: string;
@@ -40,6 +40,8 @@ const NavBar = () => {
 	const [loginDialogOpen, setLoginDialogOpen] = useState(false);
 	const [menus, setMenus] = useState(links);
 
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		if (session?.user) {
 			setMenus([
@@ -58,9 +60,14 @@ const NavBar = () => {
 		}
 	}, [session?.user]);
 
+	const handleSearchClick = () => {
+		setIsSearchModalOpen(true);
+		navigate("search")
+	}
+
 	return (
 		<>
-			<div className="w-full max-w-7xl mx-auto items-center justify-between px-5 sm:px-6 py-5 lg:px-8 flex backdrop-blur backdrop-brightness-150 dark:backdrop-brightness-75 h-16">
+			<div className="w-full max-w-7xl mx-auto items-center justify-between px-5 sm:px-6 py-5 lg:px-8 flex backdrop-blur backdrop-brightness-150 dark:backdrop-brightness-75 h-16 uw:rounded-b-md">
 				<div className="flex items-center">
 					<Link href="/home" className="w-32 flex flex-row items-center">
 						<img src={logo} alt="logo" className="w-20 mr-3" />
@@ -90,7 +97,7 @@ const NavBar = () => {
 						variant={theme === "dark" ? "ghost" : "secondary"}
 						className="rounded-full"
 						size="icon"
-						onClick={() => setIsSearchModalOpen(true)}
+						onClick={() => handleSearchClick(true)}
 					>
 						<SearchIcon className="w-5 h-5 cursor-pointer fill-foreground" />
 					</Button>
@@ -112,7 +119,7 @@ const NavBar = () => {
 					<ThemeToggleButton />
 				</div>
 			</div>
-			<SearchModal
+			<SearchDrawer
 				state={isSearchModalOpen}
 				changeState={setIsSearchModalOpen}
 			/>

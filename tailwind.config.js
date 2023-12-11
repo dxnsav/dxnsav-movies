@@ -19,6 +19,7 @@ module.exports = {
       screens: {
         "landscape": {"raw": "(orientation: landscape)"},
         "portrait": { "raw": "(orientation: portrait)" },
+        "uw": {"raw": "(min-aspect-ratio: 21/9) and (orientation: landscape)"}
       },
       colors: {
         border: "hsl(var(--border))",

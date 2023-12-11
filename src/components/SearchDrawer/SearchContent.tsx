@@ -2,11 +2,20 @@ import { supabase } from "../../supabase/supaClient.tsx";
 import { Input } from "../ui/input.tsx";
 import { Button } from "../ui/button.tsx";
 import { useDebounce } from "@uidotdev/usehooks";
-import { Separator } from "@radix-ui/react-dropdown-menu";
 import { ScrollArea } from "../ui/scroll-area.tsx";
 import { MovieHorizontalCard, MovieSkeleton } from "./MovieHorizontalCard.tsx";
 import React, { useEffect, useState, useRef } from "react";
 import { Drawer } from "vaul";
+import { useAuth } from "@/hooks/useAuth.tsx";
+import { Badge } from "../ui/badge.tsx";
+import { useLocation } from "react-router-dom";
+
+// TODO: handle search history from supabase
+const badgesData = [
+	{ id: 1, name: "Harry Potter", timestamp: 1631701800 },
+	{ id: 2, name: "Шоколадна", timestamp: 1631788200 },
+	{ id: 3, name: "Голод", timestamp: 1631874600 },
+];
 
 export const SearchContent = () => {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -15,6 +24,10 @@ export const SearchContent = () => {
 	const [error, setError] = useState(null);
 	const debouncedSearchTerm = useDebounce(searchTerm, 500);
 	const inputRef = useRef(null);
+	const userId = useAuth().user?.id;
+
+	const location = useLocation();
+	const navTitle = location.state?.title;
 
 	const fetchData = async (table, conditions) => {
 		let query = supabase.from(table).select("*");
@@ -78,10 +91,31 @@ export const SearchContent = () => {
 		}
 	};
 
+	useEffect(() => {
+		if (navTitle) {
+			setSearchTerm(navTitle);
+		}
+	}, [navTitle]);
+
+	useEffect(() => {
+		if (loading) setMovies([]);
+	}, [loading]);
+
 	// TODO: fix missing dependency warning
 	useEffect(() => {
 		if (debouncedSearchTerm && handleSearch && debouncedSearchTerm.length > 2) {
 			handleSearch();
+
+			if (userId) {
+				supabase.from("search_history").insert([
+					{
+						user_id: userId,
+						search_term: debouncedSearchTerm,
+					},
+				]);
+			} else {
+				localStorage.setItem("search_term", debouncedSearchTerm);
+			}
 		}
 	}, [debouncedSearchTerm]);
 
@@ -113,56 +147,72 @@ export const SearchContent = () => {
 		}
 	};
 
-	useEffect(() => {
-		if (loading) setMovies([]);
-	}, [loading]);
+	const handleBadgeClick = (badge) => {
+		setSearchTerm(badge);
+	};
 
 	return (
 		<>
-			<div className="p-4 rounded-t-20 flex-1">
-				<div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-zinc-300 mb-8" />
-				<div className="max-w-md mx-auto flex flex-col items-center">
-					<Drawer.Title className="font-medium mb-4">Пошук</Drawer.Title>
-					<Drawer.Description>
-						Введіть назву фільму, який ви хочете подивитися
-					</Drawer.Description>
-					<div className="flex flex-row gap-2 justify-between items-start w-full h-96 ">
-						<div className="flex flex-col w-full">
-							<div className="flex flex-row gap-2 mb-2">
-								<Input
-									minLength="3"
-									type="text"
-									placeholder="Знайди щось на вечір"
-									value={searchTerm}
-									onChange={(e) => onInputChanged(e)}
-									ref={inputRef}
-								/>
-								<Button
-									onClick={() => onSearchClicked()}
-									onKeyDown={(e) => handleKeyDown(e)}
-									disabled={loading}
-								>
-									{loading ? "Searching..." : "Пошук"}
-								</Button>
-							</div>
-							<ScrollArea
-								onScroll={handleScroll}
-								className="w-full rounded-md border p-4 h-80"
+			<div className="mx-auto flex flex-col items-center">
+				<Drawer.Title className="font-medium mb-4">Пошук</Drawer.Title>
+				<Drawer.Description>
+					Введіть назву фільму, який ви хочете подивитися
+				</Drawer.Description>
+				<div className="flex flex-row portrait:flex-col-reverse gap-2 justify-between items-start w-full h-full ">
+					<div className="flex flex-col w-full">
+						<div className="flex flex-row gap-2 mb-2">
+							<Input
+								minLength="3"
+								type="text"
+								placeholder="Знайди щось на вечір"
+								value={searchTerm}
+								onChange={(e) => onInputChanged(e)}
+								ref={inputRef}
+							/>
+							<Button
+								onClick={() => onSearchClicked()}
+								onKeyDown={(e) => handleKeyDown(e)}
+								disabled={loading}
 							>
-								{error && <div>Error: {error}</div>}
-								{loading
-									? Array.from({ length: 3 }).map((_, index) => (
-										<MovieSkeleton key={index} />
-									))
-									: null}
-
-								{movies.map((movie) => (
-									<MovieHorizontalCard movie={movie} />
-								))}
-							</ScrollArea>
+								{loading ? "Searching..." : "Пошук"}
+							</Button>
 						</div>
-						<Separator orientation="vertical" />
-						<div className="flex flex-col w-72">Останні пошуки</div>
+						<ScrollArea
+							onScroll={handleScroll}
+							className="w-full rounded-md border p-4 h-[60vh]"
+						>
+							{error && <div key="err">Error: {error}</div>}
+							{loading
+								? Array.from({ length: 3 }).map((_, index) => (
+									<MovieSkeleton key={index} />
+								))
+								: null}
+
+							{movies.map((movie) => (
+								<MovieHorizontalCard movie={movie} key={movie.id} />
+							))}
+						</ScrollArea>
+					</div>
+
+					<div className="flex flex-col w-72">
+						<h1>Остані пошуки</h1>
+						<div className="flex flex-col portrait:flex-row gap-1">
+							{badgesData
+								.sort(
+									(a, b) =>
+										new Date(a.timestamp * 1000) - new Date(b.timestamp * 1000),
+								)
+								.map((item) => (
+									<Badge
+										key={item.id}
+										variant="outline"
+										className="w-fit"
+										onClick={() => handleBadgeClick(item.name)}
+									>
+										{item.name}
+									</Badge>
+								))}
+						</div>
 					</div>
 				</div>
 			</div>
