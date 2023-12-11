@@ -144,7 +144,7 @@ export const SearchContent = () => {
 							disabled={loading}
 
 						>
-							{loading ? "Searching..." : "Search"}
+							{loading ? "Searching..." : "Пошук"}
 						</Button>
 					</div>
 					<ScrollArea onScroll={handleScroll} className="w-full rounded-md border p-4 h-80">
