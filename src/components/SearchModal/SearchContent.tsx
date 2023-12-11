@@ -4,7 +4,7 @@ import { Button } from "../ui/button.tsx";
 import { useDebounce } from "@uidotdev/usehooks";
 import { Separator } from "@radix-ui/react-dropdown-menu";
 import { ScrollArea } from "../ui/scroll-area.tsx";
-import { MovieHorizontalCard } from "./MovieHorizontalCard.tsx";
+import { MovieHorizontalCard, MovieSkeleton } from "./MovieHorizontalCard.tsx";
 import React, { useEffect, useState, useRef } from "react";
 import { Drawer } from "vaul";
 
@@ -98,6 +98,7 @@ export const SearchContent = () => {
 	};
 
 	const onInputChanged = (e) => {
+		setLoading(true);
 		setSearchTerm(e.target.value);
 	};
 
@@ -112,6 +113,11 @@ export const SearchContent = () => {
 			inputRef.current.blur();
 		}
 	};
+
+	useEffect(() => {
+		if (loading)
+			setMovies([]);
+	}, [loading]);
 
 
 	return (
@@ -145,6 +151,10 @@ export const SearchContent = () => {
 							</div>
 							<ScrollArea onScroll={handleScroll} className="w-full rounded-md border p-4 h-80">
 								{error && <div>Error: {error}</div>}
+								{loading ? (
+									Array.from({ length: 3 }).map((_, index) => <MovieSkeleton key={index} />)
+								) : null}
+
 
 								{movies.map((movie) => (
 									<MovieHorizontalCard movie={movie} />

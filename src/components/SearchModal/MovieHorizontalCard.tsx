@@ -1,4 +1,5 @@
 import { Button } from "../ui/button.tsx";
+import { Skeleton } from "../ui/skeleton.tsx";
 import { useContext, useState } from 'react';
 import { DialogContext } from "@/context/DialogContext.tsx";
 import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
@@ -33,3 +34,19 @@ export const MovieHorizontalCard = (movie) => {
 		</div>
 	);
 };
+
+export function MovieSkeleton() {
+	return (
+		<div className="flex flex-row gap-2 items-center">
+			<Skeleton className="w-32 flex-shrink-0 h-[9rem] rounded-sm" />
+			<div className="flex flex-col justify-between w-full items-start h-[100%]">
+				<Skeleton className="h-6 w-3/4 rounded-md" />
+				<Skeleton className="h-4 w-1/2 rounded-md" />
+				<div className="flex flex-row justify-start w-full items-center">
+					<Skeleton className="h-10 w-24 rounded-md" />
+					<Skeleton className="h-10 w-24 rounded-md ml-2" />
+				</div>
+			</div>
+		</div>
+	);
+}
