@@ -2,7 +2,8 @@ import MovieButtons from "./MovieButtons";
 
 export default function MovieVideo() {
 	const data = {
-		imageString: "https://image.tmdb.org/t/p/original/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
+		imageString:
+			"https://image.tmdb.org/t/p/original/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
 		overview:
 			"Following the events at home, the Abbott family now face the terrors of the outside world. Forced to venture into the unknown, they realize the creatures that hunt by sound are not the only threats lurking beyond the sand path.",
 		title: "A Quiet Place Part II",
@@ -12,7 +13,7 @@ export default function MovieVideo() {
 		id: 1,
 		age: 13,
 		youtubeString: "https://www.youtube.com/embed/XEMwSdne6UE",
-	}
+	};
 
 	return (
 		<div className="h-[70vh] lg:h-[70vh] w-full flex justify-start items-center">

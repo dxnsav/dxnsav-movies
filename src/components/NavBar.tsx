@@ -4,7 +4,7 @@ import { Button } from "./ui/button";
 import logo from "../assets/movua-lt.png";
 import { useAuth } from "@/hooks/useAuth";
 import UserNav from "./UserNav";
-import SearchModal from "./SearchModal/SearchModal";
+import SearchModal from "./SearchDrawer/SearchDrawer";
 import AuthDrawer from "./AuthDrawer";
 import { ThemeToggleButton } from "./ThemeToggle";
 import { NotificationHoverCard } from "./NotificationHoverCard";
@@ -30,7 +30,6 @@ const links: linkProps[] = [
 		path: "/genres",
 	},
 ];
-
 
 const NavBar = () => {
 	const pathName = window.location.pathname;
@@ -87,7 +86,12 @@ const NavBar = () => {
 					</ul>
 				</div>
 				<div className="flex items-center gap-x-4">
-					<Button variant={theme === "dark" ? "ghost" : "secondary"} className="rounded-full" size="icon" onClick={() => setIsSearchModalOpen(true)}>
+					<Button
+						variant={theme === "dark" ? "ghost" : "secondary"}
+						className="rounded-full"
+						size="icon"
+						onClick={() => setIsSearchModalOpen(true)}
+					>
 						<SearchIcon className="w-5 h-5 cursor-pointer fill-foreground" />
 					</Button>
 					{session?.user ? (
@@ -96,14 +100,18 @@ const NavBar = () => {
 							<UserNav />
 						</>
 					) : (
-						<Button onClick={() => setLoginDialogOpen(true)} size="sm" className="rounded-full flex flex-row gap-2">
+						<Button
+							onClick={() => setLoginDialogOpen(true)}
+							size="sm"
+							className="rounded-full flex flex-row gap-2"
+						>
 							<span>Увійти</span>
 							<div className="blob h-4 w-4" />
 						</Button>
 					)}
 					<ThemeToggleButton />
 				</div>
-			</div >
+			</div>
 			<SearchModal
 				state={isSearchModalOpen}
 				changeState={setIsSearchModalOpen}

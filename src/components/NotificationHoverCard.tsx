@@ -1,12 +1,14 @@
-import React, { useState, useEffect } from 'react'
-import { HoverCard, HoverCardContent, HoverCardTrigger } from './ui/hover-card'
-import { ScrollArea } from './ui/scroll-area';
+import React, { useState, useEffect } from "react";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
+import { ScrollArea } from "./ui/scroll-area";
 import { BellIcon } from "@radix-ui/react-icons";
-import { Separator } from './ui/separator';
+import { Separator } from "./ui/separator";
 
 // TODO: Add real data from supabase
 const getRandomDate = (start, end) => {
-	return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+	return new Date(
+		start.getTime() + Math.random() * (end.getTime() - start.getTime()),
+	);
 };
 
 const notifications = [
@@ -48,10 +50,12 @@ const getDaysCount = (timestamp: number) => {
 	} else {
 		return `${years} years ago`;
 	}
-}
+};
 
 export const NotificationHoverCard = () => {
-	const [numOfNotifications, setNumOfNotifications] = useState(notifications.length);
+	const [numOfNotifications, setNumOfNotifications] = useState(
+		notifications.length,
+	);
 	const [isHoverCardOpen, setIsHoverCardOpen] = useState(false);
 
 	useEffect(() => {
@@ -63,14 +67,16 @@ export const NotificationHoverCard = () => {
 	const onHoverCardOpen = () => {
 		// TODO: Push to subabase that user has seen notifications
 		setNumOfNotifications(0);
-	}
+	};
 
-	const sortedNotifications = notifications.sort((a, b) => b.timestamp - a.timestamp);
+	const sortedNotifications = notifications.sort(
+		(a, b) => b.timestamp - a.timestamp,
+	);
 
 	// TODO: Add onNotificationClick functionality to open movie modal
 	const onNotificationClick = (notification) => {
 		console.log(notification);
-	}
+	};
 
 	return (
 		<HoverCard onOpenChange={setIsHoverCardOpen}>
@@ -89,19 +95,30 @@ export const NotificationHoverCard = () => {
 					<div className="flex flex-col gap-2">
 						{sortedNotifications.map((notification, iterator) => (
 							<React.Fragment key={notification.id}>
-								<div className="flex flex-row gap-2" onClick={() => onNotificationClick(notification)} >
-									<img src={notification.movieBanner} alt="movie banner" className="w-24" />
+								<div
+									className="flex flex-row gap-2"
+									onClick={() => onNotificationClick(notification)}
+								>
+									<img
+										src={notification.movieBanner}
+										alt="movie banner"
+										className="w-24"
+									/>
 									<div className="mt-2">
 										<h2 className="text-md">{notification.title}</h2>
-										<p className="text-sm text-gray-500">{getDaysCount(notification.timestamp)}</p>
+										<p className="text-sm text-gray-500">
+											{getDaysCount(notification.timestamp)}
+										</p>
 									</div>
 								</div>
-								{(iterator < notifications.length - 1) && (<Separator className="w-[220px] mb-1" />)}
+								{iterator < notifications.length - 1 && (
+									<Separator className="w-[220px] mb-1" />
+								)}
 							</React.Fragment>
 						))}
 					</div>
 				</ScrollArea>
 			</HoverCardContent>
 		</HoverCard>
-	)
-}
+	);
+};

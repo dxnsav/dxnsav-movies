@@ -1,12 +1,11 @@
 //import Home from './components/Home'
-import MovieVideo from './components/MovieBg'
-import NavBar from './components/NavBar'
-import { AuthProvider } from './context/AuthContext'
+import MovieVideo from "./components/MovieBg";
+import NavBar from "./components/NavBar";
+import { AuthProvider } from "./context/AuthContext";
 
-import { DialogProvider } from './context/DialogContext'
+import { DialogProvider } from "./context/DialogContext";
 
 function App() {
-
   return (
     <AuthProvider>
       <DialogProvider>
@@ -15,12 +14,11 @@ function App() {
           <div className="p-5 lg:p-0">
             <MovieVideo />
             <h1 className="text-3xl font-bold ">Нещодавно добавлені</h1>
-
           </div>
         </main>
       </DialogProvider>
-    </AuthProvider >
-  )
+    </AuthProvider>
+  );
 }
 
-export default App
+export default App;

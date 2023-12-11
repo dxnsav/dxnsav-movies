@@ -8,7 +8,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 export async function signInWithDiscord() {
 	try {
 		const { data, error } = await supabase.auth.signInWithOAuth({
-			provider: 'discord',
+			provider: "discord",
 		});
 		if (error) throw error;
 		return data;
@@ -28,7 +28,7 @@ export async function signOut() {
 
 export async function signOutLocally() {
 	try {
-		const { error } = await supabase.auth.signOut({ scope: 'local' });
+		const { error } = await supabase.auth.signOut({ scope: "local" });
 		if (error) throw error;
 	} catch (err) {
 		console.error("Failed to sign out locally: ", err);

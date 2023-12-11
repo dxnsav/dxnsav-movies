@@ -1,6 +1,6 @@
 import { Button } from "../ui/button.tsx";
 import { Skeleton } from "../ui/skeleton.tsx";
-import { useContext, useState } from 'react';
+import { useContext, useState } from "react";
 import { DialogContext } from "@/context/DialogContext.tsx";
 import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
 import WatchContent from "./WatchContent.tsx";
@@ -11,7 +11,8 @@ export const MovieHorizontalCard = (movie) => {
 	const posterPath = "https://image.tmdb.org/t/p/w500" + poster_path;
 	const [isLiked, setIsLiked] = useState(false);
 
-	const description = overview.length > 100 ? overview.substring(0, 100) + "..." : overview;
+	const description =
+		overview.length > 100 ? overview.substring(0, 100) + "..." : overview;
 
 	return (
 		<div className="flex flex-row gap-2 items-center" key={id}>
@@ -22,14 +23,19 @@ export const MovieHorizontalCard = (movie) => {
 				<div className="text-lg font-bold text-white">{title}</div>
 				<div className="text-sm text-white">{description}</div>
 				<div className="flex flex-row justify-start w-full items-center">
-					<Button onClick={() => setContent(<WatchContent movie={movie.movie} />)}>
+					<Button
+						onClick={() => setContent(<WatchContent movie={movie.movie} />)}
+					>
 						Дивитись
 					</Button>
 					<Button variant="outline" onClick={() => setIsLiked(!isLiked)}>
-						{isLiked ? <HeartFilledIcon className="w-6" /> : <HeartIcon className="w-6" />}
+						{isLiked ? (
+							<HeartFilledIcon className="w-6" />
+						) : (
+							<HeartIcon className="w-6" />
+						)}
 					</Button>
 				</div>
-
 			</div>
 		</div>
 	);

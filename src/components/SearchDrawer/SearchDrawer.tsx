@@ -1,9 +1,9 @@
 import { useContext } from "react";
-import { DialogContext } from './../../context/DialogContext';
+import { DialogContext } from '../../context/DialogContext';
 import { Drawer } from "vaul";
 import { SearchContent } from "./SearchContent";
 
-export default function SearchModal({ state, changeState }) {
+export default function SearchDrawer({ state, changeState }) {
 	const { content, setContent } = useContext(DialogContext);
 
 	const onOpenChange = () => {

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 export default useMovies = () => {
 	const [movies, setMovies] = useState([]);
@@ -7,4 +7,4 @@ export default useMovies = () => {
 		movies,
 		setMovies,
 	};
-}
+};

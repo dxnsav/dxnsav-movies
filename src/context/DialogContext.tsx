@@ -1,5 +1,5 @@
 import { createContext, useState } from "react";
-import { SearchContent } from "@/components/SearchModal/SearchContent";
+import { SearchContent } from "@/components/SearchDrawer/SearchContent";
 
 export const DialogContext = createContext({
   content: null,

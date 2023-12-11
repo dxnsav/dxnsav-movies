@@ -56,21 +56,25 @@ export default function UserNav() {
 						{session?.user?.user_metadata?.full_name || session?.user?.email}
 					</div>
 				</DropdownMenuLabel>
-				<DropdownMenuItem>
-					Акаунт
-				</DropdownMenuItem>
-				<DropdownMenuItem>
-					Підтримка
-				</DropdownMenuItem>
+				<DropdownMenuItem>Акаунт</DropdownMenuItem>
+				<DropdownMenuItem>Підтримка</DropdownMenuItem>
 				<DropdownMenuSeparator />
 				<DropdownMenuSub>
 					<div className="flex flex-row space-x-1">
-						<Button onClick={() => signOutLocally()} variant="ghost" className="w-full rounded-sm" >
+						<Button
+							onClick={() => signOutLocally()}
+							variant="ghost"
+							className="w-full rounded-sm"
+						>
 							Вийти
 						</Button>
 						<DropdownMenuSubTrigger />
 						<DropdownMenuSubContent>
-							<Button onClick={() => signOut()} variant="ghost" className="w-full rounded-sm" >
+							<Button
+								onClick={() => signOut()}
+								variant="ghost"
+								className="w-full rounded-sm"
+							>
 								Вийти з усіх пристроїв
 							</Button>
 						</DropdownMenuSubContent>

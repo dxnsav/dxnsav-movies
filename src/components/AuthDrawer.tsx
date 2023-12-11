@@ -8,10 +8,7 @@ import { GoogleLogoIcon } from "@/icons/GoogleLogoIcon";
 
 const AuthDrawer = ({ isOpen, setIsOpen }) => {
 	return (
-		<Drawer.Root
-			open={isOpen}
-			onOpenChange={(state) => setIsOpen(state)}
-		>
+		<Drawer.Root open={isOpen} onOpenChange={(state) => setIsOpen(state)}>
 			<Drawer.Portal>
 				<Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm " />
 				<Drawer.Content className="bg-background flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0 h-[80vh]">
@@ -41,7 +38,11 @@ const AuthDrawer = ({ isOpen, setIsOpen }) => {
 									>
 										<DiscordLogoIcon className="w-5 h-5 fill-indigo-600" />
 									</Button>
-									<Button variant="outline" size="icon" className="rounded-full w-11 h-11">
+									<Button
+										variant="outline"
+										size="icon"
+										className="rounded-full w-11 h-11"
+									>
 										<GoogleLogoIcon className="w-5 h-5" />
 									</Button>
 								</div>

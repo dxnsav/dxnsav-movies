@@ -8,7 +8,6 @@ import { MovieHorizontalCard, MovieSkeleton } from "./MovieHorizontalCard.tsx";
 import React, { useEffect, useState, useRef } from "react";
 import { Drawer } from "vaul";
 
-
 export const SearchContent = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [movies, setMovies] = useState([]);
@@ -30,7 +29,7 @@ export const SearchContent = () => {
 			query = query.ilike(condition.field, `%${condition.term}%`);
 		}
 
-		query = query.order('release_date', { ascending: false });
+		query = query.order("release_date", { ascending: false });
 
 		const { data, error } = await query;
 
@@ -115,10 +114,8 @@ export const SearchContent = () => {
 	};
 
 	useEffect(() => {
-		if (loading)
-			setMovies([]);
+		if (loading) setMovies([]);
 	}, [loading]);
-
 
 	return (
 		<>
@@ -144,17 +141,20 @@ export const SearchContent = () => {
 									onClick={() => onSearchClicked()}
 									onKeyDown={(e) => handleKeyDown(e)}
 									disabled={loading}
-
 								>
 									{loading ? "Searching..." : "Пошук"}
 								</Button>
 							</div>
-							<ScrollArea onScroll={handleScroll} className="w-full rounded-md border p-4 h-80">
+							<ScrollArea
+								onScroll={handleScroll}
+								className="w-full rounded-md border p-4 h-80"
+							>
 								{error && <div>Error: {error}</div>}
-								{loading ? (
-									Array.from({ length: 3 }).map((_, index) => <MovieSkeleton key={index} />)
-								) : null}
-
+								{loading
+									? Array.from({ length: 3 }).map((_, index) => (
+										<MovieSkeleton key={index} />
+									))
+									: null}
 
 								{movies.map((movie) => (
 									<MovieHorizontalCard movie={movie} />
