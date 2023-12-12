@@ -1,11 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/supabase/supaClient";
 import {
-	CheckIcon,
 	ChevronLeftIcon,
-	PauseIcon,
-	PlayIcon,
-	PlusIcon,
 	RocketIcon,
 	SpeakerLoudIcon,
 	SpeakerOffIcon,
@@ -14,6 +10,7 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
 
+import { AddToWatchListButton } from "../AddToWatchListButton";
 import { Button } from "../ui/button";
 
 const MovieDetails = () => {
@@ -22,13 +19,11 @@ const MovieDetails = () => {
 	const navigate = useNavigate();
 	const movie = location.state.movie;
 	const [muted, setMuted] = useState(true);
-	const [playing, setPlaying] = useState(true);
 	const userId = useAuth().user?.id;
 	const [isInWatchlist, setIsInWatchlist] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			// Fetch movie details
 			const { data, error } = await supabase
 				.from("movie")
 				.select("*")
@@ -80,34 +75,6 @@ const MovieDetails = () => {
 		setMuted(!muted);
 	}
 
-	const handlePlaying = () => {
-		setPlaying(!playing);
-	}
-
-	const handleAddToWatchlist = async () => {
-		if (isInWatchlist) {
-			const { error } = await supabase
-				.from('watch_list')
-				.delete()
-				.match({ movie_id: movie.movie_id, user_id: userId });
-
-			if (error) {
-				console.error('Error removing from watchlist:', error);
-			} else {
-				setIsInWatchlist(false);
-			}
-		} else {
-			const { error } = await supabase
-				.from('watch_list')
-				.insert([{ movie_id: movie.movie_id, user_id: userId }]);
-
-			if (error) {
-				console.error('Error adding to watchlist:', error);
-			} else {
-				setIsInWatchlist(true);
-			}
-		}
-	};
 
 	return (
 		<>
@@ -116,16 +83,19 @@ const MovieDetails = () => {
 					<ChevronLeftIcon className="w-6 h-6" />
 				</Button>
 				<ReactPlayer
+					className="react-player"
 					fallback={
 						<img alt={watchData.title} src={fullData.poster_trailer_url} />
 					}
 					file={{
 						forceHLS: true,
 					}}
+					height='100%'
 					loop={true}
 					muted={muted}
-					playing={playing}
+					playing={true}
 					url={fullData.stream_trailer_url}
+					width='100%'
 				/>
 			</div>
 			<div className="absolute w-full mx-auto top-52 px-4">
@@ -138,9 +108,7 @@ const MovieDetails = () => {
 							<Button onClick={() => handlePlay()}>
 								Дивитись
 							</Button>
-							<Button className="w-10 h-10 p-0 rounded-full" onClick={() => handleAddToWatchlist()} variant="outline">
-								{isInWatchlist ? <CheckIcon className="w-5 h-5" /> : <PlusIcon className="w-5 h-5" />}
-							</Button>
+							<AddToWatchListButton isAdded={isInWatchlist} movie_id={movie.movie_id} />
 							<Button className="w-10 h-10 p-0 rounded-full" variant="outline">
 								<RocketIcon className="w-5 h-5" />
 							</Button>
@@ -148,9 +116,6 @@ const MovieDetails = () => {
 					</div>
 					<div className="flex flex-col gap-x-3 mt-4">
 						<div className="flex gap-x-3 mt-4">
-							<Button className="w-10 h-10 p-0 rounded-full" onClick={() => handlePlaying()} variant="outline">
-								{playing ? <PauseIcon className="w-5 h-5" /> : <PlayIcon className="w-5 h-5" />}
-							</Button>
 							<Button className="w-10 h-10 p-0 rounded-full" onClick={() => handleMute()} variant="outline" >
 								{muted ? <SpeakerLoudIcon className="w-5 h-5" /> : <SpeakerOffIcon className="w-5 h-5" />}
 							</Button>

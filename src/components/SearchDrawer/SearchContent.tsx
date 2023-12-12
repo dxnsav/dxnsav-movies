@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth.tsx";
 import { useDebounce } from "@uidotdev/usehooks";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "vaul";
 
@@ -20,6 +20,7 @@ const badgesData = [
 
 export const SearchContent = () => {
 	const [searchTerm, setSearchTerm] = useState("");
+	const [searchHistory, setSearchHistory] = useState([]);
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
@@ -53,7 +54,7 @@ export const SearchContent = () => {
 		return data;
 	};
 
-	const handleSearch = async () => {
+	const handleSearch = useCallback(async () => {
 		setLoading(true);
 		setError(null);
 
@@ -90,7 +91,7 @@ export const SearchContent = () => {
 		} finally {
 			setLoading(false);
 		}
-	};
+	}, [debouncedSearchTerm]);
 
 	useEffect(() => {
 		if (navTitle) {
@@ -102,23 +103,52 @@ export const SearchContent = () => {
 		if (loading) setMovies([]);
 	}, [loading]);
 
-	// TODO: fix missing dependency warning
 	useEffect(() => {
-		if (debouncedSearchTerm && handleSearch && debouncedSearchTerm.length > 2) {
-			handleSearch();
+		const updateSearchHistory = async () => {
+			if (debouncedSearchTerm && debouncedSearchTerm.length > 2) {
+				handleSearch();
 
-			if (userId) {
-				supabase.from("search_history").insert([
-					{
-						search_term: debouncedSearchTerm,
-						user_id: userId,
-					},
-				]);
-			} else {
-				localStorage.setItem("search_term", debouncedSearchTerm);
+				if (userId) {
+					const { error: insertError } = await supabase
+						.from("search_history")
+						.upsert(
+							[
+								{
+									search_term: debouncedSearchTerm,
+									user_id: userId,
+								},
+							],
+							{
+								onConflict: ["search_term", "user_id"],
+							},
+						);
+
+					if (insertError) {
+						console.error("Error adding to search history:", insertError);
+						return;
+					}
+				} else {
+					localStorage.setItem("search_term", debouncedSearchTerm);
+				}
+
+				const { data, error: fetchError } = await supabase
+					.from("search_history")
+					.select("*")
+					.eq("user_id", userId)
+					.limit(5)
+					.order("timestamp", { ascending: false });
+
+				if (fetchError) {
+					console.error("Error fetching search history:", fetchError);
+					return;
+				}
+
+				setSearchHistory(data);
 			}
-		}
-	}, [debouncedSearchTerm]);
+		};
+
+		updateSearchHistory();
+	}, [debouncedSearchTerm, userId, handleSearch]);
 
 	const handleKeyDown = (e) => {
 		if (
@@ -179,7 +209,7 @@ export const SearchContent = () => {
 							</Button>
 						</div>
 						<ScrollArea
-							className="w-full rounded-md border p-4 h-[60vh]"
+							className="w-full rounded-md border p-4 h-[85vh]"
 							onScroll={handleScroll}
 						>
 							{error && <div key="err">Error: {error}</div>}
