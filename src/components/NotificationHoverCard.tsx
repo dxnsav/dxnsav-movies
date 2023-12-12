@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { BellIcon } from "@radix-ui/react-icons";
+import React, { useEffect, useState } from "react";
+
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { ScrollArea } from "./ui/scroll-area";
-import { BellIcon } from "@radix-ui/react-icons";
 import { Separator } from "./ui/separator";
 
 // TODO: Add real data from supabase
@@ -15,20 +16,20 @@ const notifications = [
 	{
 		id: 1,
 		movieBanner: "https://placehold.co/112x63",
-		title: "Notification 1",
 		timestamp: getRandomDate(new Date(2023, 1, 1), new Date(2023, 11, 10)),
+		title: "Notification 1",
 	},
 	{
 		id: 2,
 		movieBanner: "https://placehold.co/112x63",
-		title: "Notification 2",
 		timestamp: getRandomDate(new Date(2023, 1, 1), new Date(2023, 11, 10)),
+		title: "Notification 2",
 	},
 	{
 		id: 3,
 		movieBanner: "https://placehold.co/112x63",
-		title: "Notification 3",
 		timestamp: getRandomDate(new Date(2023, 1, 1), new Date(2023, 11, 10)),
+		title: "Notification 3",
 	},
 ];
 
@@ -100,9 +101,9 @@ export const NotificationHoverCard = () => {
 									onClick={() => onNotificationClick(notification)}
 								>
 									<img
-										src={notification.movieBanner}
 										alt="movie banner"
 										className="w-24"
+										src={notification.movieBanner}
 									/>
 									<div className="mt-2">
 										<h2 className="text-md">{notification.title}</h2>

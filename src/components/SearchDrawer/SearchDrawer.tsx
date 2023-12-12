@@ -1,13 +1,13 @@
-import { Drawer } from "vaul";
 import { Outlet } from "react-router-dom";
+import { Drawer } from "vaul";
 
-export default function SearchDrawer({ state, changeState }) {
+export default function SearchDrawer({ changeState, state }) {
 	const onOpenChange = () => {
 		changeState(true)
 	};
 
 	return (
-		<Drawer.Root open={state} onOpenChange={() => onOpenChange()} >
+		<Drawer.Root onOpenChange={() => onOpenChange()} open={state} >
 			<Drawer.Portal>
 				<Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm " />
 				<Drawer.Content className="bg-background flex flex-col rounded-t-[10px] mt-24 fixed bottom-0 left-0 right-0 h-[80vh] landscape:w-[80vw] mx-auto">

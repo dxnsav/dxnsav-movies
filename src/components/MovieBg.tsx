@@ -3,17 +3,17 @@ import MovieButtons from "./MovieButtons";
 
 export default function MovieVideo() {
 	const data = {
-		imageString:
-			"https://image.tmdb.org/t/p/original/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
-		overview:
-			"Following the events at home, the Abbott family now face the terrors of the outside world. Forced to venture into the unknown, they realize the creatures that hunt by sound are not the only threats lurking beyond the sand path.",
-		title: "A Quiet Place Part II",
-		videoSource: "https://www.youtube.com/embed/XEMwSdne6UE",
-		release: 2021,
+		age: 13,
 		duration: 97,
 		id: 6000,
+		imageString:
+			"https://image.tmdb.org/t/p/original/9yBVqNruk6Ykrwc32qrK2TIE5xw.jpg",
 		movie_id: 6000,
-		age: 13,
+		overview:
+			"Following the events at home, the Abbott family now face the terrors of the outside world. Forced to venture into the unknown, they realize the creatures that hunt by sound are not the only threats lurking beyond the sand path.",
+		release: 2021,
+		title: "A Quiet Place Part II",
+		videoSource: "https://www.youtube.com/embed/XEMwSdne6UE",
 		youtubeString: "https://www.youtube.com/embed/XEMwSdne6UE",
 	};
 
@@ -24,11 +24,11 @@ export default function MovieVideo() {
 		<div className="h-[70vh] lg:h-[70vh] w-full flex justify-start items-center">
 			<video
 				autoPlay
-				muted
-				loop
-				src={data?.videoSource}
-				poster={data?.imageString}
 				className="w-full absolute top-0 left-0 h-[70vh] object-cover -z-10 brightness-[60%]"
+				loop
+				muted
+				poster={data?.imageString}
+				src={data?.videoSource}
 			/>
 
 			<div className="absolute w-[90%] lg:w-[40%] mx-auto">

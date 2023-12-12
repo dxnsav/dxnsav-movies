@@ -1,10 +1,11 @@
+import { useAuth } from "@/hooks/useAuth.tsx";
+import { supabase } from "@/supabase/supaClient.tsx";
+import { ChevronLeftIcon } from "@radix-ui/react-icons";
 import { useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { supabase } from "@/supabase/supaClient.tsx";
+
 import { Player, useScript } from "../lib/Player.ts";
-import { useAuth } from "@/hooks/useAuth.tsx";
 import { Button } from "./ui/button.tsx";
-import { ChevronLeftIcon } from "@radix-ui/react-icons";
 
 export const PlayerPage = () => {
 	useScript(`${import.meta.env.VITE_PUBLIC_URL}playerjs.js`);
@@ -27,9 +28,9 @@ export const PlayerPage = () => {
 				.from("watch_history")
 				.upsert([
 					{
-						user_id: userId,
 						movie_id: watchData.movie_id,
 						player_time: 0,
+						user_id: userId,
 					},
 				], { onConflict: ["user_id", "movie_id"] });
 
@@ -45,14 +46,14 @@ export const PlayerPage = () => {
 		<>
 			<div className="flex items-center justify-center h-screen">
 				<Player
-					id="player"
-					title={watchData?.title}
-					poster={backdropPath}
-					file={watchData?.stream_url}
 					autoPlay
+					file={watchData?.stream_url}
+					id="player"
+					poster={backdropPath}
+					title={watchData?.title}
 				/>
-				<div id="player" className="w-full" ref={playerRef} />
-				<Button onClick={() => navigate(-1)} variant="outline" size="icon" className="absolute top-6 left-4 rounded-full" >
+				<div className="w-full" id="player" ref={playerRef} />
+				<Button className="absolute top-6 left-4 rounded-full" onClick={() => navigate(-1)} size="icon" variant="outline" >
 					<ChevronLeftIcon className="w-6 h-6" />
 				</Button>
 			</div>

@@ -1,15 +1,16 @@
+import { useAuth } from "@/hooks/useAuth";
+import { SearchIcon } from "@/icons/SearchIcon";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Button } from "./ui/button";
+
 import logo from "../assets/movua-lt.png";
-import { useAuth } from "@/hooks/useAuth";
-import UserNav from "./UserNav";
-import SearchDrawer from "./SearchDrawer/SearchDrawer";
-import AuthDrawer from "./AuthDrawer";
-import { ThemeToggleButton } from "./ThemeToggle";
-import { NotificationHoverCard } from "./NotificationHoverCard";
-import { SearchIcon } from "@/icons/SearchIcon";
 import { useTheme } from "../context/ThemeProvider";
+import AuthDrawer from "./AuthDrawer";
+import { NotificationHoverCard } from "./NotificationHoverCard";
+import SearchDrawer from "./SearchDrawer/SearchDrawer";
+import { ThemeToggleButton } from "./ThemeToggle";
+import UserNav from "./UserNav";
+import { Button } from "./ui/button";
 
 interface linkProps {
 	name: string;
@@ -69,21 +70,21 @@ const NavBar = () => {
 		<>
 			<div className="w-full max-w-7xl mx-auto items-center justify-between px-5 sm:px-6 py-5 lg:px-8 flex backdrop-blur backdrop-brightness-150 dark:backdrop-brightness-75 h-16 uw:rounded-b-md">
 				<div className="flex items-center">
-					<Link href="/home" className="w-32 flex flex-row items-center">
-						<img src={logo} alt="logo" className="w-20 mr-3" />
+					<Link className="w-32 flex flex-row items-center" href="/home">
+						<img alt="logo" className="w-20 mr-3" src={logo} />
 					</Link>
 					<ul className="lg:flex gap-x-4 ml-14 hidden">
 						{menus.map((link, idx) => (
 							<div key={idx}>
 								<li>
 									<Link
-										href={link.path}
-										to={link.path}
 										className={
 											pathName === link.path
 												? "text-white font-semibold underline text-sm"
 												: "text-gray-300 font-normal text-sm"
 										}
+										href={link.path}
+										to={link.path}
 									>
 										{link.name}
 									</Link>
@@ -94,10 +95,10 @@ const NavBar = () => {
 				</div>
 				<div className="flex items-center gap-x-4">
 					<Button
-						variant={theme === "dark" ? "ghost" : "secondary"}
 						className="rounded-full"
-						size="icon"
 						onClick={() => handleSearchClick(true)}
+						size="icon"
+						variant={theme === "dark" ? "ghost" : "secondary"}
 					>
 						<SearchIcon className="w-5 h-5 cursor-pointer fill-foreground" />
 					</Button>
@@ -108,9 +109,9 @@ const NavBar = () => {
 						</>
 					) : (
 						<Button
+							className="rounded-full flex flex-row gap-2"
 							onClick={() => setLoginDialogOpen(true)}
 							size="sm"
-							className="rounded-full flex flex-row gap-2"
 						>
 							<span>Увійти</span>
 							<div className="blob h-4 w-4" />
@@ -120,8 +121,8 @@ const NavBar = () => {
 				</div>
 			</div>
 			<SearchDrawer
-				state={isSearchModalOpen}
 				changeState={setIsSearchModalOpen}
+				state={isSearchModalOpen}
 			/>
 			<AuthDrawer isOpen={loginDialogOpen} setIsOpen={setLoginDialogOpen} />
 		</>

@@ -1,4 +1,7 @@
+import { useAuth } from "@/hooks/useAuth.tsx";
 import { signOut, signOutLocally } from "@/supabase/supaClient.tsx";
+import { useEffect, useState } from "react";
+
 import { Avatar, AvatarFallback } from "./ui/avatar";
 import { Button } from "./ui/button";
 import {
@@ -8,12 +11,10 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuSub,
-	DropdownMenuTrigger,
-	DropdownMenuSubTrigger,
 	DropdownMenuSubContent,
+	DropdownMenuSubTrigger,
+	DropdownMenuTrigger,
 } from "./ui/dropdown-menu.tsx";
-import { useAuth } from "@/hooks/useAuth.tsx";
-import { useEffect, useState } from "react";
 
 export default function UserNav() {
 	const session = useAuth();
@@ -37,7 +38,7 @@ export default function UserNav() {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button variant="ghost" className="relative h-9 w-9 rounded-full">
+				<Button className="relative h-9 w-9 rounded-full" variant="ghost">
 					<Avatar className="h-8 w-8 rounded-full">
 						<AvatarFallback className="rounded-full uppercase bg-gradient-to-r from-sky-400 to-blue-500">
 							{fallback}
@@ -45,7 +46,7 @@ export default function UserNav() {
 					</Avatar>
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="w-56" align="end" forceMount>
+			<DropdownMenuContent align="end" className="w-56" forceMount>
 				<DropdownMenuLabel>
 					<div className="flex flex-row space-x-1 items-center gap-2">
 						<Avatar className="h-8 w-8 rounded-full">
@@ -62,18 +63,18 @@ export default function UserNav() {
 				<DropdownMenuSub>
 					<div className="flex flex-row space-x-1">
 						<Button
+							className="w-full rounded-sm"
 							onClick={() => signOutLocally()}
 							variant="ghost"
-							className="w-full rounded-sm"
 						>
 							Вийти
 						</Button>
 						<DropdownMenuSubTrigger />
 						<DropdownMenuSubContent>
 							<Button
+								className="w-full rounded-sm"
 								onClick={() => signOut()}
 								variant="ghost"
-								className="w-full rounded-sm"
 							>
 								Вийти з усіх пристроїв
 							</Button>

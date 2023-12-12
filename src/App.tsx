@@ -1,4 +1,3 @@
-//import Home from './components/Home'
 import MovieVideo from "./components/MovieBg";
 import NavBar from "./components/NavBar";
 import { DialogProvider } from "./context/DialogContext";

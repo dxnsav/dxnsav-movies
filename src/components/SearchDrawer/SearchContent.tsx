@@ -1,14 +1,15 @@
-import { supabase } from "../../supabase/supaClient.tsx";
-import { Input } from "../ui/input.tsx";
-import { Button } from "../ui/button.tsx";
+import { useAuth } from "@/hooks/useAuth.tsx";
 import { useDebounce } from "@uidotdev/usehooks";
+import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Drawer } from "vaul";
+
+import { supabase } from "../../supabase/supaClient.tsx";
+import { Badge } from "../ui/badge.tsx";
+import { Button } from "../ui/button.tsx";
+import { Input } from "../ui/input.tsx";
 import { ScrollArea } from "../ui/scroll-area.tsx";
 import { MovieHorizontalCard, MovieSkeleton } from "./MovieHorizontalCard.tsx";
-import React, { useEffect, useState, useRef } from "react";
-import { Drawer } from "vaul";
-import { useAuth } from "@/hooks/useAuth.tsx";
-import { Badge } from "../ui/badge.tsx";
-import { useLocation } from "react-router-dom";
 
 // TODO: handle search history from supabase
 const badgesData = [
@@ -109,8 +110,8 @@ export const SearchContent = () => {
 			if (userId) {
 				supabase.from("search_history").insert([
 					{
-						user_id: userId,
 						search_term: debouncedSearchTerm,
+						user_id: userId,
 					},
 				]);
 			} else {
@@ -163,23 +164,23 @@ export const SearchContent = () => {
 						<div className="flex flex-row gap-2 mb-2">
 							<Input
 								minLength="3"
-								type="text"
-								placeholder="Знайди щось на вечір"
-								value={searchTerm}
 								onChange={(e) => onInputChanged(e)}
+								placeholder="Знайди щось на вечір"
 								ref={inputRef}
+								type="text"
+								value={searchTerm}
 							/>
 							<Button
+								disabled={loading}
 								onClick={() => onSearchClicked()}
 								onKeyDown={(e) => handleKeyDown(e)}
-								disabled={loading}
 							>
 								{loading ? "Searching..." : "Пошук"}
 							</Button>
 						</div>
 						<ScrollArea
-							onScroll={handleScroll}
 							className="w-full rounded-md border p-4 h-[60vh]"
+							onScroll={handleScroll}
 						>
 							{error && <div key="err">Error: {error}</div>}
 							{loading
@@ -189,7 +190,7 @@ export const SearchContent = () => {
 								: null}
 
 							{movies.map((movie) => (
-								<MovieHorizontalCard movie={movie} key={movie.id} />
+								<MovieHorizontalCard key={movie.id} movie={movie} />
 							))}
 						</ScrollArea>
 					</div>
@@ -204,10 +205,10 @@ export const SearchContent = () => {
 								)
 								.map((item) => (
 									<Badge
-										key={item.id}
-										variant="outline"
 										className="w-fit"
+										key={item.id}
 										onClick={() => handleBadgeClick(item.name)}
+										variant="outline"
 									>
 										{item.name}
 									</Badge>

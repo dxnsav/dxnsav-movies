@@ -1,8 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { PlayIcon, InfoCircledIcon } from "@radix-ui/react-icons";
-import { useNavigate } from "react-router-dom";
-import SearchDrawer from "./SearchDrawer/SearchDrawer";
+import { InfoCircledIcon, PlayIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import SearchDrawer from "./SearchDrawer/SearchDrawer";
 
 export default function MovieButtons({ movie }) {
 	const navigate = useNavigate();
@@ -28,7 +29,7 @@ export default function MovieButtons({ movie }) {
 			>
 				<InfoCircledIcon className="mr-2 h-6 w-6" /> Детальніше
 			</Button>
-			<SearchDrawer state={open} changeState={setOpen} />
+			<SearchDrawer changeState={setOpen} state={open} />
 		</>
 	);
 }

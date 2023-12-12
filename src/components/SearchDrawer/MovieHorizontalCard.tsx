@@ -1,11 +1,12 @@
-import { Button } from "../ui/button.tsx";
-import { Skeleton } from "../ui/skeleton.tsx";
+import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-import { HeartIcon, HeartFilledIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 
+import { Button } from "../ui/button.tsx";
+import { Skeleton } from "../ui/skeleton.tsx";
+
 export const MovieHorizontalCard = (movie) => {
-	const { id, title, overview, poster_path, } = movie.movie;
+	const { id, overview, poster_path, title, } = movie.movie;
 	const posterPath = "https://image.tmdb.org/t/p/w500" + poster_path;
 	const [isLiked, setIsLiked] = useState(false);
 	const navigate = useNavigate();
@@ -20,7 +21,7 @@ export const MovieHorizontalCard = (movie) => {
 	return (
 		<div className="flex flex-row gap-2 items-center" key={id}>
 			<div className="w-32 flex-shrink-0">
-				<img src={posterPath} alt={title} className="rounded-sm object-cover" />
+				<img alt={title} className="rounded-sm object-cover" src={posterPath} />
 			</div>
 			<div className="flex flex-col justify-between w-full items-start h-[100%] ">
 				<div className="text-lg font-bold text-white">{title}</div>
@@ -31,7 +32,7 @@ export const MovieHorizontalCard = (movie) => {
 					>
 						Дивитись
 					</Button>
-					<Button variant="outline" onClick={() => setIsLiked(!isLiked)}>
+					<Button onClick={() => setIsLiked(!isLiked)} variant="outline">
 						{isLiked ? (
 							<HeartFilledIcon className="w-6" />
 						) : (

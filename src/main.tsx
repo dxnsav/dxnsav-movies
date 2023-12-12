@@ -1,31 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-
 import {
-  createBrowserRouter,
-  createRoutesFromElements,
   Route,
   RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
 } from "react-router-dom";
-import ErrorPage from "./routes/error-page.tsx";
-import { ThemeProvider } from "./context/ThemeProvider.tsx";
+
+import App from "./App.tsx";
 import { PlayerPage } from "./components/PlayerPage.tsx";
-import { SearchContent } from "./components/SearchDrawer/SearchContent.tsx";
 import MovieDetails from "./components/SearchDrawer/MovieDetails.tsx";
+import { SearchContent } from "./components/SearchDrawer/SearchContent.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";
+import { ThemeProvider } from "./context/ThemeProvider.tsx";
+import "./index.css";
+import ErrorPage from "./routes/error-page.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<App />}>
-        <Route path="*" element={<ErrorPage />} />
-        <Route path="search" element={<SearchContent />} />
-        <Route path="details" element={<MovieDetails />} />
+      <Route element={<App />} path="/">
+        <Route element={<ErrorPage />} path="*" />
+        <Route element={<SearchContent />} path="search" />
+        <Route element={<MovieDetails />} path="details" />
       </Route >
 
-      <Route path="watch" element={<PlayerPage />} />
+      <Route element={<PlayerPage />} path="watch" />
     </>
   ),
 );
