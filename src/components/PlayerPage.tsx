@@ -1,83 +1,61 @@
-import { useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Button } from "./ui/button";
-import { ArrowLeftIcon, DoubleArrowRightIcon } from "@radix-ui/react-icons";
-import "../assets/font-player.css";
-
+import { useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { supabase } from "@/supabase/supaClient.tsx";
 import { Player, useScript } from "../lib/Player.ts";
+import { useAuth } from "@/hooks/useAuth.tsx";
+import { Button } from "./ui/button.tsx";
+import { ChevronLeftIcon } from "@radix-ui/react-icons";
 
 export const PlayerPage = () => {
 	useScript(`${import.meta.env.VITE_PUBLIC_URL}playerjs.js`);
 
-	const [showDescription] = useState(false);
 	const playerRef = useRef(null);
-	//const [isInit, setIsInit] = useState(false);
-
 	const watchData = useLocation().state?.movie;
-	console.log(watchData);
 
 	const backdropPath = "https://image.tmdb.org/t/p/w500" + watchData.backdrop_path;
 
-	/*useEffect(() => {
-		const player = playerRef.current;
-		if (player) {
-			const handleUI = (event) => {
-				console.log(event.info, isInit);
+	const navigate = useNavigate();
 
-				setShowDescription(!!event.info);
-			};
+	// TODO: get time from player and update supabase on pause
+	// TODO: get time from supabase and update player on load
+	const userId = useAuth().user?.id;
+	useEffect(() => {
+		const upsertData = async () => {
+			if (!userId || !watchData.movie_id) return;
 
-			player.addEventListener("ui", handleUI);
-			player.addEventListener("ready", () => {
-				console.log("ready");
-				setIsInit(true);
-			});
+			const { error } = await supabase
+				.from("watch_history")
+				.upsert([
+					{
+						user_id: userId,
+						movie_id: watchData.movie_id,
+						player_time: 0,
+					},
+				], { onConflict: ["user_id", "movie_id"] });
 
-			return () => player.removeEventListener("ui", handleUI);
-		}
-	}, [isInit, playerRef]);/** */
+			if (error) {
+				console.error("Error in upsert operation:", error);
+			}
+		};
 
-	const handleQuit = () => {
-		if (window.pljssglobal.length > 0) window.pljssglobal[0].api("stop");
-	};
-
-	const handleClickRewindForward = () => {
-		if (window.pljssglobal.length > 0) {
-			window.pljssglobal[0].api("toggle");
-			console.log("click");
-		}
-	};
+		upsertData();
+	}, [watchData.movie_id, userId]);
 
 	return (
 		<>
-			<Player
-				id="player"
-				title={watchData?.title}
-				poster={backdropPath}
-				file={watchData?.stream_url}
-				autoPlay
-			/>
-			<div id="player" className="w-full h-screen" ref={playerRef}></div>
-			{showDescription ? (
-				<>
-					<Button
-						variant="ghost"
-						className="w-12 h-12 p-0 rounded-full absolute top-16"
-						onClick={() => handleQuit()}
-					>
-						<Link to="/">
-							<ArrowLeftIcon className="w-5 h-5" />
-						</Link>
-					</Button>
-					<Button
-						variant="ghost"
-						className="w-12 h-12 p-0 rounded-full absolute top-16 right-16"
-						onClick={() => handleClickRewindForward()}
-					>
-						<DoubleArrowRightIcon className="w-5 h-5" />
-					</Button>
-				</>
-			) : null}
+			<div className="flex items-center justify-center h-screen">
+				<Player
+					id="player"
+					title={watchData?.title}
+					poster={backdropPath}
+					file={watchData?.stream_url}
+					autoPlay
+				/>
+				<div id="player" className="w-full" ref={playerRef} />
+				<Button onClick={() => navigate(-1)} variant="outline" size="icon" className="absolute top-6 left-4 rounded-full" >
+					<ChevronLeftIcon className="w-6 h-6" />
+				</Button>
+			</div>
 		</>
 	);
 };

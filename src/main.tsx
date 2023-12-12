@@ -14,6 +14,7 @@ import { ThemeProvider } from "./context/ThemeProvider.tsx";
 import { PlayerPage } from "./components/PlayerPage.tsx";
 import { SearchContent } from "./components/SearchDrawer/SearchContent.tsx";
 import MovieDetails from "./components/SearchDrawer/MovieDetails.tsx";
+import { AuthProvider } from "./context/AuthContext.tsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,7 +33,9 @@ const router = createBrowserRouter(
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <RouterProvider router={router} />
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );
