@@ -1,10 +1,11 @@
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-export const SearchMovieInput = ({ handleKeyDown, loading, onInputChanged, onSearchClicked, searchTerm }) => {
+export const SearchMovieInput = ({ handleKeyDown, inputRef, loading, onInputChanged, onSearchClicked, searchTerm }) => {
 	return (
 		<div className="flex flex-row gap-2 mb-2">
 			<Input
+				className="h-10"
 				minLength="3"
 				onChange={(e) => onInputChanged(e)}
 				placeholder="Знайди щось на вечір"
@@ -13,11 +14,12 @@ export const SearchMovieInput = ({ handleKeyDown, loading, onInputChanged, onSea
 				value={searchTerm}
 			/>
 			<Button
+				className="h-10"
 				disabled={loading}
 				onClick={() => onSearchClicked()}
 				onKeyDown={(e) => handleKeyDown(e)}
 			>
-				{loading ? "Searching..." : "Пошук"}
+				Пошук
 			</Button>
 		</div>
 	);

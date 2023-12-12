@@ -1,4 +1,3 @@
-import { DrawerContext } from "@/context/DrawerContext";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/supabase/supaClient";
 import {
@@ -9,23 +8,22 @@ import {
 	SpeakerLoudIcon,
 	SpeakerOffIcon,
 } from "@radix-ui/react-icons";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { AddToWatchListButton } from "../AddToWatchListButton";
-import { Button } from "../ui/button";
+import { AddToWatchListButton } from "./AddToWatchListButton";
+import { Button } from "./ui/button";
 
 const MovieDetails = () => {
 	const [watchData, setWatchData] = useState(null);
 	const location = useLocation();
 	const navigate = useNavigate();
-	const movie = location.state.movie;
+	const { movie } = location.state;
 	const [muted, setMuted] = useState(true);
 	const userId = useAuth().user?.id;
 	const [isInWatchlist, setIsInWatchlist] = useState(false);
 
-	const { closeDrawer } = useContext(DrawerContext);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -65,26 +63,19 @@ const MovieDetails = () => {
 		checkWatchlist();
 	}, [movie.movie_id, userId]);
 
-
 	if (!watchData) {
 		return <div>Loading...</div>;
 	}
 
-	const fullData = { ...movie, ...watchData };
-
 	const handlePlay = () => {
-		navigate(`/watch`, { state: { movie: fullData } });
+		navigate(`/watch`, { state: { movie: { ...movie, ...watchData } } });
 	}
 
 	const handleMute = () => {
 		setMuted(!muted);
 	}
 
-	const handleClose = () => {
-		closeDrawer();
-		navigate("/");
-	}
-
+	const fullData = { ...movie, ...watchData };
 
 	return (
 		<>

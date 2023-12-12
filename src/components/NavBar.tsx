@@ -1,13 +1,13 @@
-import { DrawerContext } from "@/context/DrawerContext";
 import { useAuth } from "@/hooks/useAuth";
 import { SearchIcon } from "@/icons/SearchIcon";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../assets/movua-lt.png";
 import { useTheme } from "../context/ThemeProvider";
 import AuthDrawer from "./AuthDrawer";
 import { NotificationHoverCard } from "./NotificationHoverCard";
+import SearchDrawer from "./SearchDrawer/SearchDrawer";
 import { ThemeToggleButton } from "./ThemeToggle";
 import UserNav from "./UserNav";
 import { Button } from "./ui/button";
@@ -34,7 +34,7 @@ const links: linkProps[] = [
 
 const NavBar = () => {
 	const pathName = window.location.pathname;
-	const { openDrawer } = useContext(DrawerContext);
+	const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
 	const session = useAuth();
 	const theme = useTheme();
@@ -63,7 +63,7 @@ const NavBar = () => {
 	}, [session?.user]);
 
 	const handleSearchClick = () => {
-		openDrawer();
+		setIsSearchModalOpen(true);
 		navigate("search")
 	}
 
@@ -121,6 +121,7 @@ const NavBar = () => {
 					<ThemeToggleButton />
 				</div>
 			</div>
+			<SearchDrawer changeState={setIsSearchModalOpen} state={isSearchModalOpen} />
 			<AuthDrawer isOpen={loginDialogOpen} setIsOpen={setLoginDialogOpen} />
 		</>
 	);

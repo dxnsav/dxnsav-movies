@@ -162,6 +162,7 @@ export const SearchContent = () => {
 					<div className="flex flex-col w-full">
 						<SearchMovieInput
 							handleKeyDown={handleKeyDown}
+							inputRef={inputRef}
 							loading={loading}
 							onInputChanged={onInputChanged}
 							onSearchClicked={onSearchClicked}
