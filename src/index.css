@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -90,4 +92,5 @@
 .react-player video {
   border-top-right-radius: var(--radius);
   border-top-left-radius: var(--radius);
+  filter: brightness(70%);
 }

@@ -12,7 +12,6 @@ type Props = {
 }
 
 export const AddToWatchListButton = ({ isAdded = false, movie_id }: Props) => {
-
 	const [isInWatchlist, setIsInWatchlist] = useState(isAdded);
 	const user_id = useAuth().user?.id;
 
