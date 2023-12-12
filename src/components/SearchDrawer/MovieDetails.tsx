@@ -1,3 +1,4 @@
+import { DrawerContext } from "@/context/DrawerContext";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/supabase/supaClient";
 import {
@@ -8,7 +9,7 @@ import {
 	SpeakerLoudIcon,
 	SpeakerOffIcon,
 } from "@radix-ui/react-icons";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -23,6 +24,8 @@ const MovieDetails = () => {
 	const [muted, setMuted] = useState(true);
 	const userId = useAuth().user?.id;
 	const [isInWatchlist, setIsInWatchlist] = useState(false);
+
+	const { closeDrawer } = useContext(DrawerContext);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -77,6 +80,11 @@ const MovieDetails = () => {
 		setMuted(!muted);
 	}
 
+	const handleClose = () => {
+		closeDrawer();
+		navigate("/");
+	}
+
 
 	return (
 		<>
@@ -85,7 +93,7 @@ const MovieDetails = () => {
 				<Button className="absolute left-4 rounded-full z-50 top-8" onClick={() => navigate("/search", { state: { title: movie.title } })} size="icon" variant="secondary">
 					<ArrowLeftIcon className="w-6 h-6" />
 				</Button>
-				<Button className="absolute right-4 rounded-full z-50 top-8" onClick={() => navigate("/")} size="icon" variant="secondary">
+				<Button className="absolute right-4 rounded-full z-50 top-8" onClick={() => handleClose()} size="icon" variant="secondary">
 					<Cross2Icon className="w-6 h-6" />
 				</Button>
 				<ReactPlayer

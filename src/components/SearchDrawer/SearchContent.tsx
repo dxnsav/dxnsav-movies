@@ -1,22 +1,14 @@
 import { useAuth } from "@/hooks/useAuth.tsx";
+import { fetchSearchData } from "@/lib/fetchSearchData.ts";
 import { useDebounce } from "@uidotdev/usehooks";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "vaul";
 
 import { supabase } from "../../supabase/supaClient.tsx";
-import { Badge } from "../ui/badge.tsx";
-import { Button } from "../ui/button.tsx";
-import { Input } from "../ui/input.tsx";
-import { ScrollArea } from "../ui/scroll-area.tsx";
-import { MovieHorizontalCard, MovieSkeleton } from "./MovieHorizontalCard.tsx";
-
-// TODO: handle search history from supabase
-const badgesData = [
-	{ id: 1, name: "Harry Potter", timestamp: 1631701800 },
-	{ id: 2, name: "Шоколадна", timestamp: 1631788200 },
-	{ id: 3, name: "Голод", timestamp: 1631874600 },
-];
+import { MovieList } from "./MovieList.tsx";
+import { SearchHistory } from "./SearchHistory.tsx";
+import { SearchMovieInput } from "./SearchMovieInput.tsx";
 
 export const SearchContent = () => {
 	const [searchTerm, setSearchTerm] = useState("");
@@ -31,41 +23,18 @@ export const SearchContent = () => {
 	const location = useLocation();
 	const navTitle = location.state?.title;
 
-	const fetchData = async (table, conditions) => {
-		let query = supabase.from(table).select("*");
-
-		if (conditions.length > 1) {
-			const orCondition = conditions
-				.map((cond) => `${cond.field}.ilike.%${cond.term}%`)
-				.join(",");
-			query = query.or(orCondition);
-		} else {
-			const condition = conditions[0];
-			query = query.ilike(condition.field, `%${condition.term}%`);
-		}
-
-		query = query.order("release_date", { ascending: false });
-
-		const { data, error } = await query;
-
-		if (error) {
-			throw error;
-		}
-		return data;
-	};
-
 	const handleSearch = useCallback(async () => {
 		setLoading(true);
 		setError(null);
 
 		try {
-			const tmdbData = await fetchData("tmdb_data", [
+			const tmdbData = await fetchSearchData("tmdb_data", [
 				{ field: "title", term: debouncedSearchTerm },
 				{ field: "original_title", term: debouncedSearchTerm },
 			]);
 
 			// TODO: Update search algo to search in both tabled and filter correctly
-			//const movieData = await fetchData('movie', [{ field: 'title', term: debouncedSearchTerm }]);
+			//const movieData = await fetchSearchData('movie', [{ field: 'title', term: debouncedSearchTerm }]);
 
 			const movieData = [];
 
@@ -191,60 +160,24 @@ export const SearchContent = () => {
 				</Drawer.Description>
 				<div className="flex flex-row portrait:flex-col-reverse gap-2 justify-between items-start w-full h-full ">
 					<div className="flex flex-col w-full">
-						<div className="flex flex-row gap-2 mb-2">
-							<Input
-								minLength="3"
-								onChange={(e) => onInputChanged(e)}
-								placeholder="Знайди щось на вечір"
-								ref={inputRef}
-								type="text"
-								value={searchTerm}
-							/>
-							<Button
-								disabled={loading}
-								onClick={() => onSearchClicked()}
-								onKeyDown={(e) => handleKeyDown(e)}
-							>
-								{loading ? "Searching..." : "Пошук"}
-							</Button>
-						</div>
-						<ScrollArea
-							className="w-full rounded-md border p-4 h-[85vh]"
-							onScroll={handleScroll}
-						>
-							{error && <div key="err">Error: {error}</div>}
-							{loading
-								? Array.from({ length: 3 }).map((_, index) => (
-									<MovieSkeleton key={index} />
-								))
-								: null}
-
-							{movies.map((movie) => (
-								<MovieHorizontalCard key={movie.id} movie={movie} />
-							))}
-						</ScrollArea>
+						<SearchMovieInput
+							handleKeyDown={handleKeyDown}
+							loading={loading}
+							onInputChanged={onInputChanged}
+							onSearchClicked={onSearchClicked}
+							searchTerm={searchTerm}
+						/>
+						<MovieList
+							error={error}
+							handleScroll={handleScroll}
+							loading={loading}
+							movies={movies}
+						/>
 					</div>
-
-					<div className="flex flex-col w-72">
-						<h1>Остані пошуки</h1>
-						<div className="flex flex-col portrait:flex-row gap-1">
-							{badgesData
-								.sort(
-									(a, b) =>
-										new Date(a.timestamp * 1000) - new Date(b.timestamp * 1000),
-								)
-								.map((item) => (
-									<Badge
-										className="w-fit"
-										key={item.id}
-										onClick={() => handleBadgeClick(item.name)}
-										variant="outline"
-									>
-										{item.name}
-									</Badge>
-								))}
-						</div>
-					</div>
+					<SearchHistory
+						badgesData={searchHistory}
+						onBadgeClick={handleBadgeClick}
+					/>
 				</div>
 			</div>
 		</>

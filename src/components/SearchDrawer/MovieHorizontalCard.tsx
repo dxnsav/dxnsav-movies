@@ -2,13 +2,13 @@ import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { AddToWatchListButton } from "../AddToWatchListButton.tsx";
 import { Button } from "../ui/button.tsx";
 import { Skeleton } from "../ui/skeleton.tsx";
 
 export const MovieHorizontalCard = (movie) => {
 	const { id, overview, poster_path, title, } = movie.movie;
 	const posterPath = "https://image.tmdb.org/t/p/w500" + poster_path;
-	const [isLiked, setIsLiked] = useState(false);
 	const navigate = useNavigate();
 
 	const description =
@@ -17,6 +17,8 @@ export const MovieHorizontalCard = (movie) => {
 	const handleOpenMovieDetails = () => {
 		navigate(`/details`, { state: { movie: movie.movie } });
 	}
+
+	// TODO: get setted to watchlist in searchContent and provide here data
 
 	return (
 		<div className="flex flex-row gap-2 items-center" key={id}>
@@ -32,13 +34,7 @@ export const MovieHorizontalCard = (movie) => {
 					>
 						Дивитись
 					</Button>
-					<Button onClick={() => setIsLiked(!isLiked)} variant="outline">
-						{isLiked ? (
-							<HeartFilledIcon className="w-6" />
-						) : (
-							<HeartIcon className="w-6" />
-						)}
-					</Button>
+					<AddToWatchListButton movie={id} />
 				</div>
 			</div>
 		</div >
