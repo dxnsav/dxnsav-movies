@@ -2,6 +2,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/supabase/supaClient";
 import {
 	ChevronLeftIcon,
+	Cross1Icon,
 	RocketIcon,
 	SpeakerLoudIcon,
 	SpeakerOffIcon,
@@ -79,8 +80,12 @@ const MovieDetails = () => {
 	return (
 		<>
 			<div className="w-full h-fit object-cover brightness-[60%] rounded-t-lg">
+				<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 left-0 right-0 m-auto" />
 				<Button className="absolute left-4 rounded-full z-50" onClick={() => navigate("/search", { state: { title: movie.title } })} size="icon" variant="outline">
 					<ChevronLeftIcon className="w-6 h-6" />
+				</Button>
+				<Button className="absolute right-4 rounded-full z-50" onClick={() => navigate("/")} size="icon" variant="outline">
+					<Cross1Icon className="w-6 h-6" />
 				</Button>
 				<ReactPlayer
 					className="react-player"

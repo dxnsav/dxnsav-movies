@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { supabase } from '../supabase/supaClient';
 import { Button } from './ui/button';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 type Props = {
 	isAdded: boolean;
@@ -40,8 +41,17 @@ export const AddToWatchListButton = ({ isAdded = false, movie_id }: Props) => {
 		}
 	};
 	return (
-		<Button className="w-10 h-10 p-0 rounded-full" onClick={() => handleAddToWatchlist()} variant="outline">
-			{isInWatchlist ? <CheckIcon className="w-5 h-5" /> : <PlusIcon className="w-5 h-5" />}
-		</Button>
+		<TooltipProvider>
+			<Tooltip>
+				<TooltipTrigger asChild>
+					<Button className="w-10 h-10 p-0 rounded-full" onClick={() => handleAddToWatchlist()} variant="outline">
+						{isInWatchlist ? <CheckIcon className="w-5 h-5" /> : <PlusIcon className="w-5 h-5" />}
+					</Button>
+				</TooltipTrigger>
+				<TooltipContent className="bg-secondary">
+					<p>{isInWatchlist ? 'Видалити із списку' : 'Додати у список'}</p>
+				</TooltipContent>
+			</Tooltip>
+		</TooltipProvider>
 	)
 }
