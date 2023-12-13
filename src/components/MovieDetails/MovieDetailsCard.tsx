@@ -15,7 +15,7 @@ export const MovieDetailsCard = (movie) => {
 		isAdded,
 		matchPercentage,
 		movie_id,
-		releaseYear,
+		release_year,
 		seasons,
 		title,
 	} = movie;
@@ -55,7 +55,7 @@ export const MovieDetailsCard = (movie) => {
 						<AgeRestriction
 							data={{ age: ageRating }}
 						/>
-						<p className="text-sm">{releaseYear}</p>
+						<p className="text-sm">{release_year}</p>
 					</div>
 				</div>
 				<div className="flex flex-col items-center">

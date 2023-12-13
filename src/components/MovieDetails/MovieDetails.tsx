@@ -91,8 +91,8 @@ const MovieDetails = () => {
 	const fullData = { ...movie, ...watchData };
 
 	return (
-		<>
-			<div className="w-full h-fit object-cover rounded-t-lg relative shadow-md">
+		<ScrollArea className="w-full rounded-md h-[90vh]" type="scroll"  >
+			<div className="w-full min-h-max object-cover rounded-t-lg relative shadow-md">
 				<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 top-4 left-0 right-0 m-auto" />
 				<Button
 					className="absolute left-4 rounded-full z-50 top-8"
@@ -198,22 +198,20 @@ const MovieDetails = () => {
 
 			<div className="flex flex-col gap-4 m-6">
 				<h3 className="text-lg font-semibold">Схожі</h3>
-				<ScrollArea className="w-full rounded-md pr-4 h-[55vh]">
-					<div className="grid xs:grid-cols-1 sm:grid-cols-2 landscape:grid-cols-3 gap-4 overflow-x-auto">
-						{[...Array(10)].map((_, index) => (
-							<MovieDetailsCard
-								ageRating="16"
-								description="Сімейний відпочинок у розкішному орендованому особняку йде навперекій, коли кібератака відключає всі мобільні пристрої і на порозі з'являються два незнайомці."
-								duration={141}
-								key={index}
-								matchPercentage="98%"
-								year="2023"
-							/>
-						))}
-					</div>
-				</ScrollArea>
+				<div className="grid xs:grid-cols-1 sm:grid-cols-2 landscape:grid-cols-3 gap-4 overflow-x-auto">
+					{[...Array(10)].map((_, index) => (
+						<MovieDetailsCard
+							ageRating="16"
+							description="Сімейний відпочинок у розкішному орендованому особняку йде навперекій, коли кібератака відключає всі мобільні пристрої і на порозі з'являються два незнайомці."
+							duration={141}
+							key={index}
+							matchPercentage="98%"
+							year="2023"
+						/>
+					))}
+				</div>
 			</div>
-		</>
+		</ScrollArea>
 	);
 };
 
