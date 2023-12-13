@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
-import { TopTenIcon } from "@/icons/TopTenIcon";
+import { formatDuration } from "@/lib/formatDuration.ts";
 import { supabase } from "@/supabase/supaClient";
 import {
 	ArrowLeftIcon,
@@ -13,11 +13,21 @@ import { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
 
-import { AddToWatchListButton } from "./AddToWatchListButton";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { Card, CardContent, CardFooter, CardHeader } from "./ui/card";
-import { ScrollArea } from "./ui/scroll-area";
+import { AddToWatchListButton } from "../AddToWatchListButton";
+import { Button } from "../ui/button";
+import { ScrollArea } from "../ui/scroll-area";
+import { MovieDetailsBlock } from "./MovieDetailsBlock";
+import { MovieDetailsCard } from "./MovieDetailsCard";
+import { AgeRestriction, NewMovieTag, PopularityTag, QualityBadge } from "./MovieDetailsUtils";
+
+const actors = [
+	"Джулія Робертс",
+	"Махершала Алі",
+	"Ітан Гоук",
+	"Додатковий актор",
+];
+const genres = ["Драматичні фільми", "Трилери", "Фільми на основі книг"];
+const description = ["Лякаючий", "Зловісний"];
 
 const MovieDetails = () => {
 	const [watchData, setWatchData] = useState(null);
@@ -180,9 +190,9 @@ const MovieDetails = () => {
 					<p className="mt-4 text-sm">{fullData.overview}</p>
 				</div>
 				<div className="flex flex-col">
-					<DetailsBlock content={actors} isActors={true} title="В ролях" />
-					<DetailsBlock content={genres.join(", ")} title="Жанри" />
-					<DetailsBlock content={description.join(", ")} title="Про фільм" />
+					<MovieDetailsBlock content={actors} isActors={true} title="В ролях" />
+					<MovieDetailsBlock content={genres.join(", ")} title="Жанри" />
+					<MovieDetailsBlock content={description.join(", ")} title="Про фільм" />
 				</div>
 			</div>
 
@@ -192,7 +202,7 @@ const MovieDetails = () => {
 					<div className="grid xs:grid-cols-1 sm:grid-cols-2 landscape:grid-cols-3 gap-4 overflow-x-auto">
 						{[...Array(10)].map((_, index) => (
 							<MovieDetailsCard
-								ageRating="16+"
+								ageRating="16"
 								description="Сімейний відпочинок у розкішному орендованому особняку йде навперекій, коли кібератака відключає всі мобільні пристрої і на порозі з'являються два незнайомці."
 								duration={141}
 								key={index}
@@ -204,155 +214,6 @@ const MovieDetails = () => {
 				</ScrollArea>
 			</div>
 		</>
-	);
-};
-
-const actors = [
-	"Джулія Робертс",
-	"Махершала Алі",
-	"Ітан Гоук",
-	"Додатковий актор",
-];
-const genres = ["Драматичні фільми", "Трилери", "Фільми на основі книг"];
-const description = ["Лякаючий", "Зловісний"];
-
-const formatDuration = (duration) => {
-	const hours = Math.floor(duration / 60);
-	const minutes = duration % 60;
-	return `${hours} г. ${minutes} хв.`;
-};
-
-const NewMovieTag = () => (
-	<h4 className="font-semibold tracking-tight text-green-400">Новинка</h4>
-);
-
-const QualityBadge = ({ quality }) => (
-	<Badge className="h-5 p-2" variant="outline">
-		{quality}
-	</Badge>
-);
-
-const AgeRestriction = ({ data }) => (
-	<>
-		<Badge
-			className="rounded-2 text-sm p-2 h-6 items-center border-foreground"
-			variant="outline"
-		>
-			{data.age}+
-		</Badge>
-		{data.details ? <p className="text-sm">{data.details}</p> : null}
-	</>
-);
-
-const PopularityTag = ({ rating }) => (
-	<>
-		<TopTenIcon className="w-7 h-7" />
-		<h3 className="text-xl font-semibold tracking-tight">
-			Фільм №{rating} сьогодні
-		</h3>
-	</>
-);
-
-const DetailsBlock = ({ content, isActors, onMoreClick, title }) => {
-	return (
-		<div className="mb-4 flex">
-			<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
-				{title}:
-			</h3>
-			{isActors ? (
-				<div className="flex">
-					<p className="text-sm font-semibold">
-						{content.slice(0, 3).map((actor, index) => (
-							<>
-								<span className="hover:underline" key={index}>
-									{actor}
-								</span>
-								<span key={index + "comma"}>
-									{index !== content.slice(0, 3).length - 1 && ", "}
-								</span>
-							</>
-						))}
-						{content.length > 3 && (
-							<>
-								,&nbsp;
-								<span
-									className=" font-semibold text-sm cursor-pointer"
-									onClick={onMoreClick}
-								>
-									ще
-								</span>
-							</>
-						)}
-					</p>
-				</div>
-			) : (
-				<p className="text-sm font-semibold">{content}</p>
-			)}
-		</div>
-	);
-};
-
-const MovieDetailsCard = (movie) => {
-	const {
-		ageRating,
-		backdrop_url,
-		description,
-		duration,
-		isAdded,
-		matchPercentage,
-		movie_id,
-		releaseYear,
-		seasons,
-		title,
-	} = movie;
-	const navigate = useNavigate();
-
-	const handleMovieDetailsCardClick = () => {
-		navigate(`/details`, { state: { movie } });
-	}
-
-	const backdropPath = "https://image.tmdb.org/t/p/w500" + backdrop_url;
-
-	// TODO: get setted to watchlist in searchContent and provide here data
-	// TODO: add tags added recently, new season, etc.
-
-	return (
-		<Card className="relative cursor-pointer group" onClick={() => handleMovieDetailsCardClick()}>
-			<CardHeader className="relative w-full p-0">
-				<img
-					alt={title}
-					className="w-full"
-					src={backdropPath}
-				/>
-				<PlayIcon className="absolute w-12 h-12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100" />
-				<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">
-					<span className="inline-block bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold text-white mb-2">
-						Нещодавно додано
-					</span>
-				</div>
-				<div className="absolute top-0 right-0 font-semibold text-foreground px-4 py-2">
-					{duration ? formatDuration(duration) : seasons}
-				</div>
-			</CardHeader>
-			<CardContent className="px-6 py-4 flex flex-row justify-between bg-zinc-900">
-				<div className="flex flex-col gap-2">
-					<h4 className="font-semibold text-sm text-green-400">Співпадіння: {matchPercentage}%</h4>
-					<div className="flex flex-row gap-2 items-center">
-						<AgeRestriction
-							data={{ age: ageRating }}
-						/>
-						<p className="text-sm">{releaseYear}</p>
-					</div>
-				</div>
-				<div className="flex flex-col items-center">
-					<AddToWatchListButton className="w-8 h-8" isAdded={isAdded} movie_id={movie_id} />
-				</div>
-			</CardContent>
-			<CardFooter className="px-6 pb-2 bg-zinc-900">
-				<p className="text-sm font-bold">{title}</p>
-				<p className="text-sm">{description}</p>
-			</CardFooter>
-		</Card>
 	);
 };
 

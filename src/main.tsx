@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 
 import App from "./App.tsx";
-import MovieDetails from "./components/MovieDetails.tsx";
+import MovieDetails from "./components/MovieDetails/MovieDetails.tsx";
 import { PlayerPage } from "./components/PlayerPage.tsx";
 import { SearchContent } from "./components/SearchDrawer/SearchContent.tsx";
 import { AuthProvider } from "./context/AuthContext.tsx";

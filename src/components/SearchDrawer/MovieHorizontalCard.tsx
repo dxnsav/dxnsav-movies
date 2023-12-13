@@ -1,5 +1,3 @@
-import { HeartFilledIcon, HeartIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AddToWatchListButton } from "../AddToWatchListButton.tsx";
