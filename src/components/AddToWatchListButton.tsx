@@ -2,16 +2,18 @@ import { CheckIcon, PlusIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 
 import { useAuth } from '../hooks/useAuth';
+import { cn } from '../lib/utils.ts'
 import { supabase } from '../supabase/supaClient';
 import { Button } from './ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
 type Props = {
+	className: string;
 	isAdded: boolean;
 	movie_id: number;
 }
 
-export const AddToWatchListButton = ({ isAdded = false, movie_id }: Props) => {
+export const AddToWatchListButton = ({ className, isAdded = false, movie_id }: Props) => {
 	const [isInWatchlist, setIsInWatchlist] = useState(isAdded);
 	const user_id = useAuth().user?.id;
 
@@ -43,7 +45,7 @@ export const AddToWatchListButton = ({ isAdded = false, movie_id }: Props) => {
 		<TooltipProvider>
 			<Tooltip>
 				<TooltipTrigger asChild>
-					<Button className="w-10 h-10 p-0 rounded-full" onClick={() => handleAddToWatchlist()} variant="outline">
+					<Button className={cn("w-10 h-10 p-0 rounded-full border-2", className)} onClick={() => handleAddToWatchlist()} variant="outline">
 						{isInWatchlist ? <CheckIcon className="w-5 h-5" /> : <PlusIcon className="w-5 h-5" />}
 					</Button>
 				</TooltipTrigger>
