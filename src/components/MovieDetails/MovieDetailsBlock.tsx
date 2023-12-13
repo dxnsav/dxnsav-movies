@@ -13,7 +13,7 @@ export const MovieDetailsBlock = ({ content, isActors, onMoreClick, title }) => 
 								<span className="hover:underline" key={index}>
 									{actor}
 								</span>
-								<span key={index + "comma"}>
+								<span key={`${index}-comma`}>
 									{index !== content.slice(0, 3).length - 1 && ", "}
 								</span>
 							</>
@@ -23,6 +23,7 @@ export const MovieDetailsBlock = ({ content, isActors, onMoreClick, title }) => 
 								,&nbsp;
 								<span
 									className=" font-semibold text-sm cursor-pointer"
+									key={"more-actors"}
 									onClick={onMoreClick}
 								>
 									ще
