@@ -17,7 +17,9 @@ export const AddToWatchListButton = ({ className, isAdded = false, movie_id }: P
 	const [isInWatchlist, setIsInWatchlist] = useState(isAdded);
 	const user_id = useAuth().user?.id;
 
-	const handleAddToWatchlist = async () => {
+	const handleAddToWatchlist = async (event) => {
+		event.stopPropagation();
+
 		if (isInWatchlist) {
 			const { error } = await supabase
 				.from('watch_list')
@@ -45,7 +47,7 @@ export const AddToWatchListButton = ({ className, isAdded = false, movie_id }: P
 		<TooltipProvider>
 			<Tooltip>
 				<TooltipTrigger asChild>
-					<Button className={cn("w-10 h-10 p-0 rounded-full border-2", className)} onClick={() => handleAddToWatchlist()} variant="outline">
+					<Button className={cn("w-10 h-10 p-0 rounded-full border-2", className)} onClick={(event) => handleAddToWatchlist(event)} variant="outline">
 						{isInWatchlist ? <CheckIcon className="w-5 h-5" /> : <PlusIcon className="w-5 h-5" />}
 					</Button>
 				</TooltipTrigger>

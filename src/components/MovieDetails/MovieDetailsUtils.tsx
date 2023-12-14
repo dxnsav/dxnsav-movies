@@ -33,3 +33,19 @@ export const PopularityTag = ({ rating }) => (
 	</>
 );
 
+export const MovieNewTag = () => (
+	<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">
+		<span className="inline-block bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold text-white mb-2">
+			Нещодавно додано
+		</span>
+	</div>
+);
+
+export const MovieNewSeasonTag = () => (
+	<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">
+		<span className="inline-block bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold text-white mb-2">
+			Новий сезон
+		</span>
+	</div>
+);
+

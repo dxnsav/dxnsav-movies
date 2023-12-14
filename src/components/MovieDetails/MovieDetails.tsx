@@ -9,7 +9,7 @@ import {
 	SpeakerLoudIcon,
 	SpeakerOffIcon,
 } from "@radix-ui/react-icons";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -37,6 +37,85 @@ const MovieDetails = () => {
 	const [muted, setMuted] = useState(true);
 	const userId = useAuth().user?.id;
 	const [isInWatchlist, setIsInWatchlist] = useState(false);
+	const [similarMovies, setSimilarMovies] = useState([]);
+	const playerRef = useRef(null);
+
+
+	// FIX: Check if movie is in watchlist
+	const checkWatchlist = useCallback(async () => {
+
+		const { data, error } = await supabase
+			.from("watch_list")
+			.select("*")
+			.eq("movie_id", movie.movie_id)
+			.eq("user_id", userId)
+			.single();
+
+		if (error) {
+			return;
+		}
+		setIsInWatchlist(!!data);
+
+	}, [movie.movie_id, userId]);
+
+	useEffect(() => {
+		const fetchData = async () => {
+			const { data: preFilterData, error } = await supabase
+				.from("movie")
+				.select("*")
+				.neq("id", movie.movie_id)
+				.limit(11)
+				.order("id", { ascending: true });
+
+			if (error) {
+				console.error("Error fetching movie:", error);
+				return;
+			}
+
+			// check if movie is recomended the same as is on page and return only 10
+			const data = preFilterData.filter(movie => movie.id !== movie.movie_id);
+			if (data.length > 10) {
+				data.length = 10;
+			}
+
+			const movieIds = data.map((movie) => movie.id);
+
+			const { data: watchlistSimilarMovies, error: watchlistSimilarMoviesError } = await supabase
+				.from('watch_list')
+				.select('movie_id')
+				.in('movie_id', movieIds)
+				.eq('user_id', userId);
+
+			if (watchlistSimilarMoviesError) {
+				console.error('Error fetching watchlist movies:', error);
+				return;
+			}
+
+			const { data: similarMoviesData, error: similarMoviesError } =
+				await supabase
+					.from("tmdb_data")
+					.select("*")
+					.in("movie_id", movieIds);
+
+			if (similarMoviesError) {
+				console.error("Error fetching movie:", similarMoviesError);
+				return;
+			}
+
+			const fullData = similarMoviesData.map((movie) => {
+				const movieData = {
+					...data.find((dataMovie) => dataMovie.movie_id === movie.movie_id),
+					...movie,
+					isAdded: !!watchlistSimilarMovies.find((watchlistMovie) => watchlistMovie.movie_id === movie.movie_id),
+				};
+				return movieData;
+			});
+
+			setSimilarMovies(fullData);
+		};
+
+		fetchData();
+	}, [userId, movie.movie_id]);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -57,24 +136,13 @@ const MovieDetails = () => {
 			fetchData();
 		}
 
-		const checkWatchlist = async () => {
-			if (movie.movie_id && userId) {
-				const { data, error } = await supabase
-					.from("watch_list")
-					.select("*")
-					.eq("movie_id", movie.movie_id)
-					.eq("user_id", userId)
-					.single();
-
-				if (error) {
-					return;
-				}
-				setIsInWatchlist(!!data);
-			}
-		};
-
 		checkWatchlist();
-	}, [movie.movie_id, userId]);
+	}, [movie.movie_id, userId, checkWatchlist]);
+
+
+	const onStateChange = () => {
+		checkWatchlist();
+	}
 
 	if (!watchData) {
 		return <div>Loading...</div>;
@@ -90,9 +158,16 @@ const MovieDetails = () => {
 
 	const fullData = { ...movie, ...watchData };
 
+	const scrollToPlayer = () => {
+		playerRef.current?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+	};
+
 	return (
-		<ScrollArea className="w-full rounded-md h-[90vh]" type="scroll"  >
-			<div className="w-full min-h-max object-cover rounded-t-lg relative shadow-md">
+		<ScrollArea className="w-full rounded-md h-[90vh]" type="scroll">
+			<div className="w-full min-h-max object-cover rounded-t-lg relative shadow-md" ref={playerRef}>
 				<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 top-4 left-0 right-0 m-auto" />
 				<Button
 					className="absolute left-4 rounded-full z-50 top-8"
@@ -190,23 +265,25 @@ const MovieDetails = () => {
 					<p className="mt-4 text-sm">{fullData.overview}</p>
 				</div>
 				<div className="flex flex-col">
-					<MovieDetailsBlock content={actors} isActors={true} title="В ролях" />
-					<MovieDetailsBlock content={genres.join(", ")} title="Жанри" />
-					<MovieDetailsBlock content={description.join(", ")} title="Про фільм" />
+					<MovieDetailsBlock content={actors} title="В ролях" />
+					<MovieDetailsBlock content={genres} title="Жанри" />
+					<MovieDetailsBlock content={description} title="Про фільм" />
 				</div>
 			</div>
 
 			<div className="flex flex-col gap-4 m-6">
 				<h3 className="text-lg font-semibold">Схожі</h3>
 				<div className="grid xs:grid-cols-1 sm:grid-cols-2 landscape:grid-cols-3 gap-4 overflow-x-auto">
-					{[...Array(10)].map((_, index) => (
+					{similarMovies.map((_, index) => (
 						<MovieDetailsCard
 							ageRating="16"
-							description="Сімейний відпочинок у розкішному орендованому особняку йде навперекій, коли кібератака відключає всі мобільні пристрої і на порозі з'являються два незнайомці."
 							duration={141}
 							key={index}
-							matchPercentage="98%"
-							year="2023"
+							matchPercentage="98"
+							onStateChange={onStateChange}
+							scroll={scrollToPlayer}
+							{..._}
+
 						/>
 					))}
 				</div>

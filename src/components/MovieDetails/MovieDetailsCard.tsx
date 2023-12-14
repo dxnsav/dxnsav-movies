@@ -5,30 +5,45 @@ import { useNavigate } from "react-router-dom";
 import { AddToWatchListButton } from "../AddToWatchListButton";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { AgeRestriction } from "./MovieDetailsUtils";
+import { MovieNewTag } from "./MovieDetailsUtils";
 
 export const MovieDetailsCard = (movie) => {
 	const {
 		ageRating,
-		backdrop_url,
-		description,
+		backdrop_path,
 		duration,
 		isAdded,
 		matchPercentage,
 		movie_id,
-		release_year,
+		onStateChange,
+		overview,
+		release_date,
 		seasons,
 		title,
 	} = movie;
+
+	const scrollToPlayer = movie.scroll;
+
 	const navigate = useNavigate();
 
 	const handleMovieDetailsCardClick = () => {
-		navigate(`/details`, { state: { movie } });
+		const dataToProvide = { ...movie };
+		delete dataToProvide.scroll;
+		delete dataToProvide.onStateChange;
+
+		scrollToPlayer();
+		navigate(`/details`, { state: { movie: dataToProvide } });
+		onStateChange();
 	}
 
-	const backdropPath = "https://image.tmdb.org/t/p/w500" + backdrop_url;
+	const release_year = release_date.split("-")[0];
+
+	const isRecent = new Date().getFullYear() - release_year < 2;
+
+	const backdropPath = "https://image.tmdb.org/t/p/w500" + backdrop_path;
 
 	// TODO: get setted to watchlist in searchContent and provide here data
-	// TODO: add tags added recently, new season, etc.
+	// TODO: make handle click on card excluding add to watchlist button
 
 	return (
 		<Card className="relative cursor-pointer group" onClick={() => handleMovieDetailsCardClick()}>
@@ -39,11 +54,7 @@ export const MovieDetailsCard = (movie) => {
 					src={backdropPath}
 				/>
 				<PlayIcon className="absolute w-12 h-12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100" />
-				<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">
-					<span className="inline-block bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold text-white mb-2">
-						Нещодавно додано
-					</span>
-				</div>
+				{isRecent && <MovieNewTag />}
 				<div className="absolute top-0 right-0 font-semibold text-foreground px-4 py-2">
 					{duration ? formatDuration(duration) : seasons}
 				</div>
@@ -62,10 +73,11 @@ export const MovieDetailsCard = (movie) => {
 					<AddToWatchListButton className="w-8 h-8" isAdded={isAdded} movie_id={movie_id} />
 				</div>
 			</CardContent>
-			<CardFooter className="px-6 pb-2 bg-zinc-900">
+			<CardFooter className="px-6 pb-2 bg-zinc-900 flex flex-col items-start">
 				<p className="text-sm font-bold">{title}</p>
-				<p className="text-sm">{description}</p>
+				<p className="text-sm">{overview.substring(0, 150) + "..."}</p>
 			</CardFooter>
 		</Card>
 	);
 };
+
