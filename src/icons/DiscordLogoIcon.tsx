@@ -1,6 +1,11 @@
 import React, { forwardRef } from "react";
 
-export const DiscordLogoIcon = forwardRef(
+type Props = SVGProps<SVGSVGElement> & {
+	className?: string;
+	color?: string;
+};
+
+export const DiscordLogoIcon = forwardRef<SVGSVGElement, Props>(
 	({ className, color = "currentColor", ...props }, forwardedRef) => {
 		return (
 			<svg

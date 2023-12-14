@@ -2,6 +2,7 @@ import { useAuth } from "@/hooks/useAuth.tsx";
 import { fetchSearchData } from "@/lib/fetchSearchData.ts";
 import { useDebounce } from "@uidotdev/usehooks";
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { ChangeEvent, KeyboardEvent } from "react";
 import { useLocation } from "react-router-dom";
 import { Drawer } from "vaul";
 
@@ -12,16 +13,18 @@ import { SearchMovieInput } from "./SearchMovieInput.tsx";
 
 export const SearchContent = () => {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [searchHistory, setSearchHistory] = useState([]);
+	const [searchHistory, setSearchHistory] = useState<string[]>([]);
 	const [movies, setMovies] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const debouncedSearchTerm = useDebounce(searchTerm, 500);
-	const inputRef = useRef(null);
+	const inputRef = useRef<HTMLInputElement>(null);
 	const userId = useAuth().user?.id;
 
 	const location = useLocation();
 	const navTitle = location.state?.title;
+
+	type Badge = string;
 
 	const handleSearch = useCallback(async () => {
 		setLoading(true);
@@ -119,7 +122,7 @@ export const SearchContent = () => {
 		updateSearchHistory();
 	}, [debouncedSearchTerm, userId, handleSearch]);
 
-	const handleKeyDown = (e) => {
+	const handleKeyDown = (e: KeyboardEvent) => {
 		if (
 			e.key === "Enter" &&
 			debouncedSearchTerm &&
@@ -130,7 +133,7 @@ export const SearchContent = () => {
 		}
 	};
 
-	const onInputChanged = (e) => {
+	const onInputChanged = (e: ChangeEvent<HTMLInputElement>) => {
 		setLoading(true);
 		setSearchTerm(e.target.value);
 	};
@@ -147,7 +150,7 @@ export const SearchContent = () => {
 		}
 	};
 
-	const handleBadgeClick = (badge) => {
+	const handleBadgeClick = (badge: Badge) => {
 		setSearchTerm(badge);
 	};
 

@@ -1,6 +1,10 @@
 import React, { forwardRef } from "react";
 
-export const GoogleLogoIcon = forwardRef(
+type Props = SVGProps<SVGSVGElement> & {
+	className?: string;
+};
+
+export const GoogleLogoIcon = forwardRef<SVGSVGElement, Props>(
 	({ className, ...props }, forwardedRef) => {
 		return (
 			<svg

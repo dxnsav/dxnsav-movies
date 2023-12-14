@@ -17,7 +17,7 @@ export const AddToWatchListButton = ({ className, isAdded = false, movie_id }: P
 	const [isInWatchlist, setIsInWatchlist] = useState(isAdded);
 	const user_id = useAuth().user?.id;
 
-	const handleAddToWatchlist = async (event) => {
+	const handleAddToWatchlist = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 
 		if (isInWatchlist) {

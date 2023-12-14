@@ -1,13 +1,17 @@
 import { DiscordLogoIcon } from "@/icons/DiscordLogoIcon";
 import { GoogleLogoIcon } from "@/icons/GoogleLogoIcon";
 import { signInWithDiscord } from "@/supabase/supaClient";
-import React from "react";
 import { Drawer } from "vaul";
 
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 
-const AuthDrawer = ({ isOpen, setIsOpen }) => {
+interface AuthDrawerProps {
+	isOpen: boolean;
+	setIsOpen: (state: boolean) => void;
+}
+
+const AuthDrawer: React.FC<AuthDrawerProps> = ({ isOpen, setIsOpen }) => {
 	return (
 		<Drawer.Root onOpenChange={(state) => setIsOpen(state)} open={isOpen}>
 			<Drawer.Portal>
