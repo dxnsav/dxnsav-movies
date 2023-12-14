@@ -8,7 +8,7 @@ import { Player, useScript } from "../lib/Player.ts";
 import { Button } from "./ui/button.tsx";
 
 export const PlayerPage = () => {
-	useScript(`${import.meta.env.VITE_PUBLIC_URL}playerjs.js`);
+	useScript(`${window.location.origin}/playerjs.js`);
 
 	const playerRef = useRef(null);
 	const watchData = useLocation().state?.movie;
