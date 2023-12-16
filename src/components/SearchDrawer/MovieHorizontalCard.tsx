@@ -16,8 +16,6 @@ export const MovieHorizontalCard = (movie) => {
 		navigate(`/details`, { state: { movie: movie.movie } });
 	}
 
-	// TODO: get setted to watchlist in searchContent and provide here data
-
 	return (
 		<div className="flex flex-row gap-2 items-center" key={id}>
 			<div className="w-32 flex-shrink-0">

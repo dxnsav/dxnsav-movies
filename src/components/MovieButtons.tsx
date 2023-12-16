@@ -12,8 +12,6 @@ export default function MovieButtons({ movie }) {
 		navigate(`/watch`, { state: { movie } });
 	};
 
-
-	// TODO: Make global context to open SearchDrawer
 	const onHandleClickDetails = () => {
 		setOpen(true);
 		navigate(`/details`, { state: { movie } });

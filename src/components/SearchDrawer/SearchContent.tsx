@@ -36,7 +36,6 @@ export const SearchContent = () => {
 				{ field: "original_title", term: debouncedSearchTerm },
 			]);
 
-			// TODO: Update search algo to search in both tabled and filter correctly
 			//const movieData = await fetchSearchData('movie', [{ field: 'title', term: debouncedSearchTerm }]);
 
 			const movieData = [];

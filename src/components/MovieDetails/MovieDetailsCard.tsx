@@ -42,9 +42,6 @@ export const MovieDetailsCard = (movie) => {
 
 	const backdropPath = "https://image.tmdb.org/t/p/w500" + backdrop_path;
 
-	// TODO: get setted to watchlist in searchContent and provide here data
-	// TODO: make handle click on card excluding add to watchlist button
-
 	return (
 		<Card className="relative cursor-pointer group" onClick={() => handleMovieDetailsCardClick()}>
 			<CardHeader className="relative w-full p-0">

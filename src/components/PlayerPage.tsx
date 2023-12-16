@@ -17,8 +17,6 @@ export const PlayerPage = () => {
 
 	const navigate = useNavigate();
 
-	// TODO: get time from player and update supabase on pause
-	// TODO: get time from supabase and update player on load
 	const userId = useAuth().user?.id;
 	useEffect(() => {
 		const upsertData = async () => {

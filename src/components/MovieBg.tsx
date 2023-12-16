@@ -17,7 +17,6 @@ export default function MovieVideo() {
 		youtubeString: "https://www.youtube.com/embed/XEMwSdne6UE",
 	};
 
-	// TODO: Use weekly movie from supabase
 	// const weeklyMovie = supabase.from("weekly_movie").select("*").single();
 
 	return (

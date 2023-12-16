@@ -5,7 +5,6 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import { ScrollArea } from "./ui/scroll-area";
 import { Separator } from "./ui/separator";
 
-// TODO: Add real data from supabase
 const getRandomDate = (start, end) => {
 	return new Date(
 		start.getTime() + Math.random() * (end.getTime() - start.getTime()),
@@ -66,7 +65,6 @@ export const NotificationHoverCard = () => {
 	}, [isHoverCardOpen]);
 
 	const onHoverCardOpen = () => {
-		// TODO: Push to subabase that user has seen notifications
 		setNumOfNotifications(0);
 	};
 
@@ -74,7 +72,6 @@ export const NotificationHoverCard = () => {
 		(a, b) => b.timestamp - a.timestamp,
 	);
 
-	// TODO: Add onNotificationClick functionality to open movie modal
 	const onNotificationClick = (notification) => {
 		console.log(notification);
 	};
