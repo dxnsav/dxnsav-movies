@@ -1,0 +1,831 @@
+  {
+    "id": 24793,
+    "title": "Корона",
+    "release_year": 2016,
+    "title_en": "The Crown",
+    "genres": [
+      "драма",
+      "історія"
+    ],
+    "roles": [
+      "Claire Foy",
+      "Matt Smith",
+      "Vanessa Kirby",
+      "Victoria Hamilton",
+      "John Lithgow",
+      "Jared Harris",
+      "Jeremy Northam"
+    ],
+    "age_restriction": "18",
+    "age_restriction_details": "глядачам від 18 років",
+    "duration": 3600,
+    "sound": [
+      {
+        "soundProd": "DontStopProd",
+        "soundType": "MVO"
+      },
+      {
+        "soundProd": "Цікава ідея",
+        "soundType": "MVO"
+      },
+      {
+        "soundProd": "Так Треба Продакшн",
+        "soundType": "DUB"
+      }
+    ],
+    "subtitles": "Форсовані",
+    "imdbId": "",
+    "description": "Відмінна історико-біографічна драма присвячена королеві Єлизаветі IІ, а також стрімким змінам в Британії та світі, які відбувались після Другої світової війни.  Події беруть початок у 1947 році, коли двадцятирічна принцеса Єлизавета одружується з принцем датським і грецьким Філіпом. Але молоді мали небагато часу аби насолодитись коханням та рутинним життям, адже хворий король Георг VI помирає та передає корону дочці. Дівчина з мовчазної принцеси, тихої та непомітної, належить перетворитися в одну з найбільш шанованих і улюблених королев в історії людства… Серіал «Корона» (2016) буде цікаво дивитись наживо усім шанувальникам байопіків. Тим більше, що насолоджуватись якісною історичною драмою можна в доброму українському перекладі.",
+    "poster": "/uploads/posts/2023-12/1702567696.jpg",
+    "images": [
+      "https://eneyida.tv/uploads/posts/2019-10/1572523429_1.jpg",
+      "https://eneyida.tv/uploads/posts/2019-10/1572523442_2.jpg",
+      "https://eneyida.tv/uploads/posts/2019-10/1572523427_3.jpg",
+      "https://eneyida.tv/uploads/posts/2019-10/1572523489_4.jpg",
+      "https://eneyida.tv/uploads/posts/2019-10/1572523498_5.jpg",
+      "https://eneyida.tv/uploads/posts/2019-10/1572523439_6.jpg",
+      "https://eneyida.tv/uploads/posts/2019-10/1572523501_7.jpg",
+      "https://eneyida.tv/uploads/posts/2019-10/1572523461_8.jpg",
+      "https://eneyida.tv/uploads/posts/2023-11/1700132226_1.jpg",
+      "https://eneyida.tv/uploads/posts/2023-11/1700132228_2.jpg",
+      "https://eneyida.tv/uploads/posts/2023-11/1700132229_3.jpg",
+      "https://eneyida.tv/uploads/posts/2023-11/1700132231_4.jpg"
+    ],
+    "movie_url": "",
+    "movie_subtitle": "",
+    "movie_backdrop": "",
+    "trailer_url": "https://blackpearl.tortuga.wtf/hls/trailers/the_crown_2016_3418/hls/index.m3u8",
+    "trailer_subtitle": "",
+    "trailer_backdrop": "https://blackpearl.tortuga.wtf/content/stream/trailers/the_crown_2016_3418/screen.jpg",
+    "serial_data": [
+      {
+        "title": "DontStopProd",
+        "folder": [
+          {
+            "title": " Сезон 1",
+            "folder": [
+              {
+                "id": "3408",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e01.dontstopprod.mvo_3408/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e01.dontstopprod.mvo_3408/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3409",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e02.dontstopprod.mvo_3409/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e02.dontstopprod.mvo_3409/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3410",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e03.dontstopprod.mvo_3410/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e03.dontstopprod.mvo_3410/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3411",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e04.dontstopprod.mvo_3411/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e04.dontstopprod.mvo_3411/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3412",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e05.dontstopprod.mvo_3412/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e05.dontstopprod.mvo_3412/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3413",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e06.dontstopprod.mvo_3413/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e06.dontstopprod.mvo_3413/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3414",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e07.dontstopprod.mvo_3414/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e07.dontstopprod.mvo_3414/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3415",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e08.dontstopprod.mvo_3415/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e08.dontstopprod.mvo_3415/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3416",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e09.dontstopprod.mvo_3416/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e09.dontstopprod.mvo_3416/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3417",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s01e10.dontstopprod.mvo_3417/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s01e10.dontstopprod.mvo_3417/screen.jpg",
+                "subtitle": ""
+              }
+            ]
+          },
+          {
+            "title": " Сезон 2",
+            "folder": [
+              {
+                "id": "3419",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e01.dontstopprod.mvo_3419/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e01.dontstopprod.mvo_3419/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3420",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e02.dontstopprod.mvo_3420/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e02.dontstopprod.mvo_3420/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3421",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e03.dontstopprod.mvo_3421/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e03.dontstopprod.mvo_3421/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3422",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e04.dontstopprod.mvo_3422/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e04.dontstopprod.mvo_3422/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3423",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e05.dontstopprod.mvo_3423/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e05.dontstopprod.mvo_3423/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3424",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e06.dontstopprod.mvo_3424/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e06.dontstopprod.mvo_3424/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3425",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e07.dontstopprod.mvo_3425/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e07.dontstopprod.mvo_3425/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3426",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e08.dontstopprod.mvo_3426/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e08.dontstopprod.mvo_3426/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3427",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e09.dontstopprod.mvo_3427/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e09.dontstopprod.mvo_3427/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "3428",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s02e10.dontstopprod.mvo_3428/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s02e10.dontstopprod.mvo_3428/screen.jpg",
+                "subtitle": ""
+              }
+            ]
+          },
+          {
+            "title": " Сезон 3",
+            "folder": [
+              {
+                "id": "16688",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e01.dontstopprod.mvo_16688/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e01.dontstopprod.mvo_16688/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "16689",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e02.dontstopprod.mvo_16689/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e02.dontstopprod.mvo_16689/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "16974",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e03.dontstopprod.mvo_16974/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e03.dontstopprod.mvo_16974/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "16973",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e04.dontstopprod.mvo_16973/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e04.dontstopprod.mvo_16973/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "17116",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e05.dontstopprod.mvo_17116/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e05.dontstopprod.mvo_17116/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "17122",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e06.dontstopprod.mvo_17122/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e06.dontstopprod.mvo_17122/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "17282",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e07.dontstopprod.mvo.mkv_17282/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e07.dontstopprod.mvo.mkv_17282/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "17281",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e08.dontstopprod.mvo_17281/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e08.dontstopprod.mvo_17281/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "17644",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e09.dontstopprod.mvo_17644/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e09.dontstopprod.mvo_17644/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "17643",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s03e10.dontstopprod.mvo_17643/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s03e10.dontstopprod.mvo_17643/screen.jpg",
+                "subtitle": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "ТакТребаПродакшн",
+        "folder": [
+          {
+            "title": " Сезон 1",
+            "folder": [
+              {
+                "id": "67051",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e01.ttp.dub_67051/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e01.ttp.dub_67051/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67051_ua.vtt"
+              },
+              {
+                "id": "67042",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e02.ttp.dub_67042/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e02.ttp.dub_67042/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67042_ua.vtt"
+              },
+              {
+                "id": "67043",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e03.ttp.dub_67043/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e03.ttp.dub_67043/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67043_ua.vtt"
+              },
+              {
+                "id": "67044",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e04.ttp.dub_67044/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e04.ttp.dub_67044/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67044_ua.vtt"
+              },
+              {
+                "id": "67045",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e05.ttp.dub_67045/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e05.ttp.dub_67045/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67045_ua.vtt"
+              },
+              {
+                "id": "67046",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e06.ttp.dub_67046/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e06.ttp.dub_67046/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67046_ua.vtt"
+              },
+              {
+                "id": "67047",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e07.ttp.dub_67047/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e07.ttp.dub_67047/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67047_ua.vtt"
+              },
+              {
+                "id": "67048",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e08.ttp.dub_67048/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e08.ttp.dub_67048/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67048_ua.vtt"
+              },
+              {
+                "id": "67049",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e09.ttp.dub_67049/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e09.ttp.dub_67049/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67049_ua.vtt"
+              },
+              {
+                "id": "67050",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s01e10.ttp.dub_67050/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s01e10.ttp.dub_67050/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67050_ua.vtt"
+              }
+            ]
+          },
+          {
+            "title": " Сезон 2",
+            "folder": [
+              {
+                "id": "67052",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e01.ttp.dub_67052/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e01.ttp.dub_67052/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67052_ua.vtt"
+              },
+              {
+                "id": "67053",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e02.ttp.dub_67053/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e02.ttp.dub_67053/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67053_ua.vtt"
+              },
+              {
+                "id": "67054",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e03.ttp.dub_67054/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e03.ttp.dub_67054/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67054_ua.vtt"
+              },
+              {
+                "id": "67055",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e04.ttp.dub_67055/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e04.ttp.dub_67055/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67055_ua.vtt"
+              },
+              {
+                "id": "67056",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e05.ttp.dub_67056/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e05.ttp.dub_67056/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67056_ua.vtt"
+              },
+              {
+                "id": "67057",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e06.ttp.dub_67057/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e06.ttp.dub_67057/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67057_ua.vtt"
+              },
+              {
+                "id": "67058",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e07.ttp.dub_67058/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e07.ttp.dub_67058/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67058_ua.vtt"
+              },
+              {
+                "id": "67059",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e08.ttp.dub_67059/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e08.ttp.dub_67059/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67059_ua.vtt"
+              },
+              {
+                "id": "67060",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e09.ttp.dub_67060/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e09.ttp.dub_67060/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67060_ua.vtt"
+              },
+              {
+                "id": "67061",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s02e10.ttp.dub_67061/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s02e10.ttp.dub_67061/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67061_ua.vtt"
+              }
+            ]
+          },
+          {
+            "title": " Сезон 3",
+            "folder": [
+              {
+                "id": "67062",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e01.ttp.dub_67062/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e01.ttp.dub_67062/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67062_ua.vtt"
+              },
+              {
+                "id": "67063",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e02.ttp.dub_67063/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e02.ttp.dub_67063/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67063_ua.vtt"
+              },
+              {
+                "id": "67064",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e03.ttp.dub_67064/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e03.ttp.dub_67064/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67064_ua.vtt"
+              },
+              {
+                "id": "67065",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e04.ttp.dub_67065/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e04.ttp.dub_67065/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67065_ua.vtt"
+              },
+              {
+                "id": "67066",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e05.ttp.dub_67066/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e05.ttp.dub_67066/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67066_ua.vtt"
+              },
+              {
+                "id": "67067",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e06.ttp.dub_67067/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e06.ttp.dub_67067/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67067_ua.vtt"
+              },
+              {
+                "id": "67068",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e07.ttp.dub_67068/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e07.ttp.dub_67068/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67068_ua.vtt"
+              },
+              {
+                "id": "67069",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e08.ttp.dub_67069/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e08.ttp.dub_67069/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67069_ua.vtt"
+              },
+              {
+                "id": "67070",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e09.ttp.dub_67070/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e09.ttp.dub_67070/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67070_ua.vtt"
+              },
+              {
+                "id": "67071",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s03e10.ttp.dub_67071/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s03e10.ttp.dub_67071/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67071_ua.vtt"
+              }
+            ]
+          },
+          {
+            "title": " Сезон 4",
+            "folder": [
+              {
+                "id": "67072",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e01.ttp.dub_67072/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e01.ttp.dub_67072/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "67073",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e02.ttp.dub_67073/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e02.ttp.dub_67073/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "67074",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e03.ttp.dub_67074/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e03.ttp.dub_67074/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "67075",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e04.ttp.dub_67075/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e04.ttp.dub_67075/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67075_ua.vtt"
+              },
+              {
+                "id": "67076",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e05.ttp.dub_67076/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e05.ttp.dub_67076/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67076_ua.vtt"
+              },
+              {
+                "id": "67077",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e06.ttp.dub_67077/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e06.ttp.dub_67077/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67077_ua.vtt"
+              },
+              {
+                "id": "67078",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e07.ttp.dub_67078/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e07.ttp.dub_67078/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67078_ua.vtt"
+              },
+              {
+                "id": "67079",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e08.ttp.dub_67079/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e08.ttp.dub_67079/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67079_ua.vtt"
+              },
+              {
+                "id": "67080",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e09.ttp.dub_67080/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e09.ttp.dub_67080/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67080_ua.vtt"
+              },
+              {
+                "id": "67081",
+                "file": "https://sparrow.tortuga.wtf/hls/chest/crown.s04e10.ttp.dub_67081/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/chest/crown.s04e10.ttp.dub_67081/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/67081_ua.vtt"
+              }
+            ]
+          },
+          {
+            "title": " Сезон 5",
+            "folder": [
+              {
+                "id": "83583",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s05e01.ttp.dub_83583/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s05e01.ttp.dub_83583/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83583_ua.vtt"
+              },
+              {
+                "id": "83584",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s05e02.ttp.dub_83584/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s05e02.ttp.dub_83584/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83584_ua.vtt"
+              },
+              {
+                "id": "83585",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s05e03.ttp.dub_83585/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s05e03.ttp.dub_83585/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83585_ua.vtt"
+              },
+              {
+                "id": "83586",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s05e04.ttp.dub_83586/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s05e04.ttp.dub_83586/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83586_ua.vtt"
+              },
+              {
+                "id": "83587",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s05e05.ttp.dub_83587/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s05e05.ttp.dub_83587/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83587_ua.vtt"
+              },
+              {
+                "id": "83588",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s05e06.ttp.dub_83588/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s05e06.ttp.dub_83588/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83588_ua.vtt"
+              },
+              {
+                "id": "83589",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s05e07.ttp.dub_83589/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s05e07.ttp.dub_83589/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83589_ua.vtt"
+              },
+              {
+                "id": "83590",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s05e08.ttp.dub_83590/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s05e08.ttp.dub_83590/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83590_ua.vtt"
+              },
+              {
+                "id": "83591",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s05e09.ttp.dub_83591/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s05e09.ttp.dub_83591/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83591_ua.vtt"
+              },
+              {
+                "id": "83592",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s05e10.ttp.dub_83592/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s05e10.ttp.dub_83592/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/83592_ua.vtt"
+              }
+            ]
+          },
+          {
+            "title": " Сезон 6",
+            "folder": [
+              {
+                "id": "92830",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s06e01.ttp.dub_92830/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s06e01.ttp.dub_92830/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/92830_ua.vtt"
+              },
+              {
+                "id": "92831",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s06e02.ttp.dub_92831/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s06e02.ttp.dub_92831/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/92831_ua.vtt"
+              },
+              {
+                "id": "92832",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s06e03.ttp.dub_92832/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s06e03.ttp.dub_92832/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/92832_ua.vtt"
+              },
+              {
+                "id": "92833",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s06e04.ttp.dub_92833/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s06e04.ttp.dub_92833/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/92833_ua.vtt"
+              },
+              {
+                "id": "93414",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s06e05.ttp.dub_93414/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s06e05.ttp.dub_93414/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/93414_ua.vtt"
+              },
+              {
+                "id": "93415",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s06e06.ttp.dub_93415/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s06e06.ttp.dub_93415/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/93415_ua.vtt"
+              },
+              {
+                "id": "93416",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s06e07.ttp.dub_93416/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s06e07.ttp.dub_93416/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/93416_ua.vtt"
+              },
+              {
+                "id": "93417",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s06e08.ttp.dub_93417/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s06e08.ttp.dub_93417/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/93417_ua.vtt"
+              },
+              {
+                "id": "93418",
+                "file": "https://sparrow.tortuga.wtf/hls/serials/the.crown.s06e09.ttp.dub_93418/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/serials/the.crown.s06e09.ttp.dub_93418/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/93418_ua.vtt"
+              },
+              {
+                "id": "93419",
+                "file": "https://kraken.tortuga.wtf/hls/serials/the.crown.s06e10.ttp.dub_93419/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://kraken.tortuga.wtf/content/stream/serials/the.crown.s06e10.ttp.dub_93419/screen.jpg",
+                "subtitle": "[Українські]https://tortuga.wtf/player/subtitle/93419_ua.vtt"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Цікава ідея",
+        "folder": [
+          {
+            "title": " Сезон 4",
+            "folder": [
+              {
+                "id": "51733",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e01.ci.mvo_51733/hls/index.m3u8",
+                "title": "Серія 1",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e01.ci.mvo_51733/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51734",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e02.ci.mvo_51734/hls/index.m3u8",
+                "title": "Серія 2",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e02.ci.mvo_51734/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51736",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e03.ci.mvo_51736/hls/index.m3u8",
+                "title": "Серія 3",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e03.ci.mvo_51736/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51737",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e04.ci.mvo_51737/hls/index.m3u8",
+                "title": "Серія 4",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e04.ci.mvo_51737/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51738",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s04e05.ci.mvo_51738/hls/index.m3u8",
+                "title": "Серія 5",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s04e05.ci.mvo_51738/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51852",
+                "file": "https://blackpearl.tortuga.wtf/hls/serials/the.crown.s04e06.ci.mvo_51852/hls/index.m3u8",
+                "title": "Серія 6",
+                "poster": "https://blackpearl.tortuga.wtf/content/stream/serials/the.crown.s04e06.ci.mvo_51852/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51854",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e07.ci.mvo_51854/hls/index.m3u8",
+                "title": "Серія 7",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e07.ci.mvo_51854/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51855",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e08.ci.mvo_51855/hls/index.m3u8",
+                "title": "Серія 8",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e08.ci.mvo_51855/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51856",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e09.ci.mvo_51856/hls/index.m3u8",
+                "title": "Серія 9",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e09.ci.mvo_51856/screen.jpg",
+                "subtitle": ""
+              },
+              {
+                "id": "51857",
+                "file": "https://sparrow.tortuga.wtf/hls/new/the.crown.s04e10.ci.mvo_51857/hls/index.m3u8",
+                "title": "Серія 10",
+                "poster": "https://sparrow.tortuga.wtf/content/stream/new/the.crown.s04e10.ci.mvo_51857/screen.jpg",
+                "subtitle": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "movie_type": "serial",
+    "updated_at": "2023-12-17 23:08:43.290957+00",
+    "tortuga": "https://tortuga.wtf/embed/65",
+    "tortuga_trailer": "https://tortuga.wtf/vod/3418"
+  }

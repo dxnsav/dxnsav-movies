@@ -24,14 +24,37 @@ export const AgeRestriction = ({ data }) => (
 	</>
 );
 
-export const PopularityTag = ({ rating }) => (
-	<>
-		<TopTenIcon className="w-7 h-7" />
-		<h3 className="text-xl font-semibold tracking-tight">
-			Фільм №{rating} сьогодні
-		</h3>
-	</>
-);
+export const PopularityTag = ({ movie_type, rating }) => {
+	let type = null;
+	switch (movie_type) {
+		case "movie":
+			type = "Фільм";
+			break;
+		case "serial":
+			type = "Серіал";
+			break;
+		case "anime":
+			type = "Аніме";
+			break;
+		case "cartoon":
+			type = "Мультфільм";
+			break;
+		case "cartoonSerial":
+			type = "Мультсеріал";
+			break;
+		default:
+			type = "Фільм";
+	}
+
+	return (
+		<>
+			<TopTenIcon className="w-7 h-7" />
+			<h3 className="text-xl font-semibold tracking-tight">
+				{type} №{rating} сьогодні
+			</h3>
+		</>
+	)
+};
 
 export const MovieNewTag = () => (
 	<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">

@@ -12,9 +12,9 @@ export const MovieDetailsCard = (movie) => {
 		ageRating,
 		backdrop_path,
 		duration,
+		id,
 		isAdded,
 		matchPercentage,
-		movie_id,
 		onStateChange,
 		overview,
 		release_date,
@@ -67,7 +67,7 @@ export const MovieDetailsCard = (movie) => {
 					</div>
 				</div>
 				<div className="flex flex-col items-center">
-					<AddToWatchListButton className="w-8 h-8" isAdded={isAdded} movie_id={movie_id} />
+					<AddToWatchListButton className="w-8 h-8" id={id} isAdded={isAdded} />
 				</div>
 			</CardContent>
 			<CardFooter className="px-6 pb-2 bg-zinc-900 flex flex-col items-start">

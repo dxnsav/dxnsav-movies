@@ -13,24 +13,22 @@ export const PlayerPage = () => {
 	const playerRef = useRef(null);
 	const watchData = useLocation().state?.movie;
 
-	const backdropPath = "https://image.tmdb.org/t/p/w500" + watchData.backdrop_path;
-
 	const navigate = useNavigate();
 
 	const userId = useAuth().user?.id;
 	useEffect(() => {
 		const upsertData = async () => {
-			if (!userId || !watchData.movie_id) return;
+			if (!userId || !watchData.id) return;
 
 			const { error } = await supabase
 				.from("watch_history")
 				.upsert([
 					{
-						movie_id: watchData.movie_id,
+						id: watchData.id,
 						player_time: 0,
 						user_id: userId,
 					},
-				], { onConflict: ["user_id", "movie_id"] });
+				], { onConflict: ["user_id", "id"] });
 
 			if (error) {
 				console.error("Error in upsert operation:", error);
@@ -38,14 +36,19 @@ export const PlayerPage = () => {
 		};
 
 		upsertData();
-	}, [watchData.movie_id, userId]);
+	}, [watchData.id, userId]);
+
+	const file = watchData?.movie_url || watchData?.serial_data;
+	const backdropPath = watchData.movie_backdrop ? "https://image.tmdb.org/t/p/w500" + watchData.movie_backdrop : null;
+
+	console.log(file);
 
 	return (
 		<>
 			<div className="flex items-center justify-center h-screen">
 				<Player
 					autoPlay
-					file={watchData?.stream_url}
+					file={watchData.serial_data}
 					id="player"
 					poster={backdropPath}
 					title={watchData?.title}
