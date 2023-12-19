@@ -6,7 +6,7 @@ interface DialogState {
 	open: boolean;
 }
 
-export const useDialogState = create<DialogState>((set) => ({
+export const useDrawerStore = create<DialogState>((set) => ({
 	checkRouteState: (pathname: string) => {
 		if (pathname === '/search' || pathname === '/details') {
 			set({ open: true });

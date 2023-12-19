@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { useDrawerStore } from "@/hooks/useDrawerStore";
 import { formatDuration } from "@/lib/formatDuration.ts";
 import { supabase } from "@/supabase/supaClient";
 import {
@@ -31,6 +32,8 @@ const MovieDetails = () => {
 	const [similarMovies, setSimilarMovies] = useState([]);
 	const playerRef = useRef(null);
 	const detailsRef = useRef(null);
+	const playButtonRef = useRef(null);
+	const { onOpenChange } = useDrawerStore();
 
 	const checkWatchlist = async () => {
 		const { data, error } = await supabase
@@ -49,6 +52,9 @@ const MovieDetails = () => {
 	useEffect(() => {
 		if (userId && movie.id)
 			checkWatchlist();
+
+		if (playButtonRef.current)
+			playButtonRef.current.focus();
 	})
 
 	useEffect(() => {
@@ -137,6 +143,10 @@ const MovieDetails = () => {
 		});
 	}
 
+	const handleClose = () => {
+		onOpenChange(false);
+	}
+
 	return (
 		<ScrollArea className="w-full rounded-md h-[90vh]" type="scroll">
 			<div className="w-full min-h-max object-cover rounded-t-lg relative shadow-md" ref={playerRef}>
@@ -182,6 +192,7 @@ const MovieDetails = () => {
 								<Button
 									className="bg-foreground text-background h-8 hover:bg-foreground hover:brightness-90"
 									onClick={() => handlePlay()}
+									ref={playButtonRef}
 									variant="default"
 								>
 									<PlayIcon className="w-5 h-5 mr-2" />

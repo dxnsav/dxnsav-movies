@@ -1,4 +1,4 @@
-import { useDialogState } from "@/hooks/useDrawerStore";
+import { useDrawerStore } from "@/hooks/useDrawerStore";
 import { useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Drawer } from "vaul";
@@ -6,7 +6,7 @@ import { Drawer } from "vaul";
 export default function SearchDrawer() {
 	const navigate = useNavigate();
 
-	const { checkRouteState, onOpenChange, open } = useDialogState();
+	const { checkRouteState, onOpenChange, open } = useDrawerStore();
 	const location = useLocation();
 
 	useEffect(() => {

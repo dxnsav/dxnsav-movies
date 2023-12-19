@@ -13,6 +13,8 @@ export const PlayerPage = () => {
 	const playerRef = useRef(null);
 	const watchData = useLocation().state?.movie;
 
+	console.log(useLocation())
+
 	const navigate = useNavigate();
 
 	const userId = useAuth().user?.id;
@@ -51,7 +53,7 @@ export const PlayerPage = () => {
 					title={watchData?.title}
 				/>
 				<div className="w-full" id="player" ref={playerRef} />
-				<Button className="absolute top-6 left-4 rounded-full" onClick={() => navigate(-1)} size="icon" variant="outline" >
+				<Button className="absolute top-6 left-4 rounded-full" onClick={() => navigate()} size="icon" variant="outline" >
 					<ChevronLeftIcon className="w-6 h-6" />
 				</Button>
 			</div>

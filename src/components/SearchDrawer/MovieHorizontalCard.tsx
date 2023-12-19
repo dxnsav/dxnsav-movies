@@ -11,25 +11,30 @@ export const MovieHorizontalCard = ({ movie }) => {
 	const navigate = useNavigate();
 
 	const overview =
-		description.length > 100 ? description.substring(0, 100) + "..." : description;
+		description?.length > 100 ? description.substring(0, 100) + "..." : description;
 
-	const handleOpenMovieDetails = () => {
+	const handleOpenMovieDetails = (e) => {
 		navigate(`/details`, { state: { movie } });
+		e.stopPropagation();
+	}
+
+	const handlePlayMovie = () => {
+		navigate(`/watch`, { state: { movie } });
 	}
 
 	return (
-		<div className="flex flex-row gap-2 items-center" key={id}>
+		<div className="flex flex-row gap-2 items-center cursor-pointer" key={id} onClick={() => handlePlayMovie()}>
 			<div className="w-32 flex-shrink-0">
 				<img alt={title} className="rounded-sm object-cover" src={posterPath} />
 			</div>
 			<div className="flex flex-col justify-between w-full items-start h-[100%] ">
 				<div className="text-lg font-bold text-white">{title}</div>
 				<div className="text-sm text-white">{overview}</div>
-				<div className="flex flex-row justify-start w-full items-center">
+				<div className="flex flex-row justify-start w-full items-center gap-2">
 					<Button
-						onClick={() => handleOpenMovieDetails()}
+						onClick={(e) => handleOpenMovieDetails(e)}
 					>
-						Дивитись
+						Детальніше
 					</Button>
 					<AddToWatchListButton movie={id} />
 				</div>

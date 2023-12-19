@@ -22,7 +22,7 @@ export const SearchContent = () => {
 	const userId = useAuth().user?.id;
 
 	const location = useLocation();
-	const navTitle = location.state?.title;
+	const navTitle = location.state?.movie.title;
 
 	type Badge = string;
 
@@ -147,6 +147,12 @@ export const SearchContent = () => {
 	const handleBadgeClick = (badge: Badge) => {
 		setSearchTerm(badge);
 	};
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
 	return (
 		<>
