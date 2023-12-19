@@ -12,26 +12,59 @@ export const QualityBadge = ({ quality }) => (
 	</Badge>
 );
 
-export const AgeRestriction = ({ data }) => (
-	<>
-		<Badge
-			className="rounded-2 text-sm p-2 h-6 items-center border-foreground"
-			variant="outline"
-		>
-			{data.age}+
-		</Badge>
-		{data.details ? <p className="text-sm">{data.details}</p> : null}
-	</>
+export const SoundQualityBadge = ({ quality }) => (
+	<Badge className="h-5 p-2" variant="outline">
+		{quality}
+	</Badge>
 );
 
-export const PopularityTag = ({ rating }) => (
-	<>
-		<TopTenIcon className="w-7 h-7" />
-		<h3 className="text-xl font-semibold tracking-tight">
-			Фільм №{rating} сьогодні
-		</h3>
-	</>
-);
+export const AgeRestriction = ({ data }) => {
+	const age = data?.age || parseInt(data.details.match(/\d+/), 10);
+
+	return (
+		<div className="flex flex-row gap-2 items-center">
+			<Badge
+				className="rounded-2 text-sm p-2 h-6 items-center border-foreground"
+				variant="outline"
+			>
+				{age}+
+			</Badge>
+			{data.details ? <p className="text-sm">{data.details}</p> : null}
+		</div>
+	)
+};
+
+export const PopularityTag = ({ movie_type, rating }) => {
+	let type = null;
+	switch (movie_type) {
+		case "movie":
+			type = "Фільм";
+			break;
+		case "serial":
+			type = "Серіал";
+			break;
+		case "anime":
+			type = "Аніме";
+			break;
+		case "cartoon":
+			type = "Мультфільм";
+			break;
+		case "cartoonSerial":
+			type = "Мультсеріал";
+			break;
+		default:
+			type = "Фільм";
+	}
+
+	return (
+		<>
+			<TopTenIcon className="w-7 h-7" />
+			<h3 className="text-xl font-semibold tracking-tight">
+				{type} №{rating} сьогодні
+			</h3>
+		</>
+	)
+};
 
 export const MovieNewTag = () => (
 	<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">

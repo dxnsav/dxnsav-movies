@@ -9,11 +9,11 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/t
 
 type Props = {
 	className: string;
+	id: number;
 	isAdded: boolean;
-	movie_id: number;
 }
 
-export const AddToWatchListButton = ({ className, isAdded = false, movie_id }: Props) => {
+export const AddToWatchListButton = ({ className, id, isAdded = false }: Props) => {
 	const [isInWatchlist, setIsInWatchlist] = useState(isAdded);
 	const user_id = useAuth().user?.id;
 
@@ -24,7 +24,7 @@ export const AddToWatchListButton = ({ className, isAdded = false, movie_id }: P
 			const { error } = await supabase
 				.from('watch_list')
 				.delete()
-				.match({ movie_id, user_id });
+				.match({ id, user_id });
 
 			if (error) {
 				console.error('Error removing from watchlist:', error);
@@ -34,7 +34,7 @@ export const AddToWatchListButton = ({ className, isAdded = false, movie_id }: P
 		} else {
 			const { error } = await supabase
 				.from('watch_list')
-				.insert([{ movie_id, user_id }]);
+				.insert([{ id, user_id }]);
 
 			if (error) {
 				console.error('Error adding to watchlist:', error);

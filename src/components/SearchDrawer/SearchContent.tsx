@@ -22,7 +22,7 @@ export const SearchContent = () => {
 	const userId = useAuth().user?.id;
 
 	const location = useLocation();
-	const navTitle = location.state?.title;
+	const navTitle = location.state?.movie.title;
 
 	type Badge = string;
 
@@ -31,19 +31,15 @@ export const SearchContent = () => {
 		setError(null);
 
 		try {
-			const tmdbData = await fetchSearchData("tmdb_data", [
+			const movieData = await fetchSearchData("movie", [
 				{ field: "title", term: debouncedSearchTerm },
-				{ field: "original_title", term: debouncedSearchTerm },
+				{ field: "title_en", term: debouncedSearchTerm },
 			]);
-
-			//const movieData = await fetchSearchData('movie', [{ field: 'title', term: debouncedSearchTerm }]);
-
-			const movieData = [];
 
 			const seenMovieIds = new Map();
 
 			const processMovie = (movie) => {
-				const id = movie.movie_id || movie.id;
+				const id = movie.id || movie.id;
 				if (!seenMovieIds.has(id)) {
 					seenMovieIds.set(id, true);
 					return movie;
@@ -51,12 +47,11 @@ export const SearchContent = () => {
 				return null;
 			};
 
-			const combinedResults = [
-				...tmdbData.map(processMovie),
-				...movieData.map(processMovie),
-			].filter((movie) => movie !== null);
-
-			setMovies(combinedResults);
+			setMovies(
+				movieData
+					.map(processMovie)
+					.filter(movie => movie !== null)
+			);
 		} catch (error) {
 			setError(error.message);
 		} finally {
@@ -152,6 +147,12 @@ export const SearchContent = () => {
 	const handleBadgeClick = (badge: Badge) => {
 		setSearchTerm(badge);
 	};
+
+	useEffect(() => {
+		if (inputRef.current) {
+			inputRef.current.focus();
+		}
+	});
 
 	return (
 		<>

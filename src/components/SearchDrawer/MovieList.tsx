@@ -8,15 +8,17 @@ export const MovieList = ({ error, handleScroll, loading, movies }) => {
 			onScroll={handleScroll}
 		>
 			{error && <div key="err">Error: {error}</div>}
-			{loading
-				? Array.from({ length: 3 }).map((_, index) => (
-					<MovieSkeleton key={index} />
-				))
-				: null}
+			<div className="flex flex-col gap-2">
+				{loading
+					? Array.from({ length: 3 }).map((_, index) => (
+						<MovieSkeleton key={index} />
+					))
+					: null}
 
-			{movies.map((movie) => (
-				<MovieHorizontalCard key={movie.id} movie={movie} />
-			))}
+				{movies.map((movie) => (
+					<MovieHorizontalCard key={movie.id} movie={movie} />
+				))}
+			</div>
 		</ScrollArea>
 	);
 };

@@ -1,4 +1,5 @@
 import { useAuth } from "@/hooks/useAuth";
+import { useDrawerStore } from "@/hooks/useDrawerStore";
 import { formatDuration } from "@/lib/formatDuration.ts";
 import { supabase } from "@/supabase/supaClient";
 import {
@@ -9,7 +10,8 @@ import {
 	SpeakerLoudIcon,
 	SpeakerOffIcon,
 } from "@radix-ui/react-icons";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -18,19 +20,9 @@ import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { MovieDetailsBlock } from "./MovieDetailsBlock";
 import { MovieDetailsCard } from "./MovieDetailsCard";
-import { AgeRestriction, NewMovieTag, PopularityTag, QualityBadge } from "./MovieDetailsUtils";
-
-const actors = [
-	"Джулія Робертс",
-	"Махершала Алі",
-	"Ітан Гоук",
-	"Додатковий актор",
-];
-const genres = ["Драматичні фільми", "Трилери", "Фільми на основі книг"];
-const description = ["Лякаючий", "Зловісний"];
+import { AgeRestriction, NewMovieTag, PopularityTag, QualityBadge, SoundQualityBadge } from "./MovieDetailsUtils";
 
 const MovieDetails = () => {
-	const [watchData, setWatchData] = useState(null);
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { movie } = location.state;
@@ -39,15 +31,15 @@ const MovieDetails = () => {
 	const [isInWatchlist, setIsInWatchlist] = useState(false);
 	const [similarMovies, setSimilarMovies] = useState([]);
 	const playerRef = useRef(null);
+	const detailsRef = useRef(null);
+	const playButtonRef = useRef(null);
+	const { onOpenChange } = useDrawerStore();
 
-
-	// FIX: Check if movie is in watchlist
-	const checkWatchlist = useCallback(async () => {
-
+	const checkWatchlist = async () => {
 		const { data, error } = await supabase
 			.from("watch_list")
 			.select("*")
-			.eq("movie_id", movie.movie_id)
+			.eq("id", movie.id)
 			.eq("user_id", userId)
 			.single();
 
@@ -55,15 +47,22 @@ const MovieDetails = () => {
 			return;
 		}
 		setIsInWatchlist(!!data);
+	};
 
-	}, [movie.movie_id, userId]);
+	useEffect(() => {
+		if (userId && movie.id)
+			checkWatchlist();
+
+		if (playButtonRef.current)
+			playButtonRef.current.focus();
+	})
 
 	useEffect(() => {
 		const fetchData = async () => {
 			const { data: preFilterData, error } = await supabase
 				.from("movie")
 				.select("*")
-				.neq("id", movie.movie_id)
+				.neq("id", movie.id)
 				.limit(11)
 				.order("id", { ascending: true });
 
@@ -73,7 +72,7 @@ const MovieDetails = () => {
 			}
 
 			// check if movie is recomended the same as is on page and return only 10
-			const data = preFilterData.filter(movie => movie.id !== movie.movie_id);
+			const data = preFilterData.filter(movie => movie.id !== movie.id);
 			if (data.length > 10) {
 				data.length = 10;
 			}
@@ -82,8 +81,8 @@ const MovieDetails = () => {
 
 			const { data: watchlistSimilarMovies, error: watchlistSimilarMoviesError } = await supabase
 				.from('watch_list')
-				.select('movie_id')
-				.in('movie_id', movieIds)
+				.select('id')
+				.in('id', movieIds)
 				.eq('user_id', userId);
 
 			if (watchlistSimilarMoviesError) {
@@ -93,9 +92,9 @@ const MovieDetails = () => {
 
 			const { data: similarMoviesData, error: similarMoviesError } =
 				await supabase
-					.from("tmdb_data")
+					.from("movie")
 					.select("*")
-					.in("movie_id", movieIds);
+					.in("id", movieIds);
 
 			if (similarMoviesError) {
 				console.error("Error fetching movie:", similarMoviesError);
@@ -104,9 +103,9 @@ const MovieDetails = () => {
 
 			const fullData = similarMoviesData.map((movie) => {
 				const movieData = {
-					...data.find((dataMovie) => dataMovie.movie_id === movie.movie_id),
+					...data.find((dataMovie) => dataMovie.id === movie.id),
 					...movie,
-					isAdded: !!watchlistSimilarMovies.find((watchlistMovie) => watchlistMovie.movie_id === movie.movie_id),
+					isAdded: !!watchlistSimilarMovies.find((watchlistMovie) => watchlistMovie.id === movie.id),
 				};
 				return movieData;
 			});
@@ -115,48 +114,20 @@ const MovieDetails = () => {
 		};
 
 		fetchData();
-	}, [userId, movie.movie_id]);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data, error } = await supabase
-				.from("movie")
-				.select("*")
-				.eq("id", movie.movie_id)
-				.single();
-
-			if (error) {
-				console.error("Error fetching movie:", error);
-				return;
-			}
-			setWatchData(data);
-		};
-
-		if (movie.movie_id) {
-			fetchData();
-		}
-
-		checkWatchlist();
-	}, [movie.movie_id, userId, checkWatchlist]);
+	}, [userId, movie.id]);
 
 
 	const onStateChange = () => {
 		checkWatchlist();
 	}
 
-	if (!watchData) {
-		return <div>Loading...</div>;
-	}
-
 	const handlePlay = () => {
-		navigate(`/watch`, { state: { movie: { ...movie, ...watchData } } });
+		navigate(`/watch`, { state: { movie } });
 	};
 
 	const handleMute = () => {
 		setMuted(!muted);
 	};
-
-	const fullData = { ...movie, ...watchData };
 
 	const scrollToPlayer = () => {
 		playerRef.current?.scrollIntoView({
@@ -165,13 +136,24 @@ const MovieDetails = () => {
 		});
 	};
 
+	const scrollToFullDetails = () => {
+		detailsRef.current?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+	}
+
+	const handleClose = () => {
+		onOpenChange(false);
+	}
+
 	return (
 		<ScrollArea className="w-full rounded-md h-[90vh]" type="scroll">
 			<div className="w-full min-h-max object-cover rounded-t-lg relative shadow-md" ref={playerRef}>
 				<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 top-4 left-0 right-0 m-auto" />
 				<Button
 					className="absolute left-4 rounded-full z-50 top-8"
-					onClick={() => navigate("/search", { state: { title: movie.title } })}
+					onClick={() => navigate("/search", { state: { movie } })}
 					size="icon"
 					variant="secondary"
 				>
@@ -188,7 +170,7 @@ const MovieDetails = () => {
 				<ReactPlayer
 					className="react-player"
 					fallback={
-						<img alt={watchData.title} src={fullData.poster_trailer_url} />
+						<img alt={movie.title} src={movie.trailer_backdrop} />
 					}
 					file={{
 						forceHLS: true,
@@ -197,7 +179,7 @@ const MovieDetails = () => {
 					loop={true}
 					muted={muted}
 					playing={true}
-					url={fullData.stream_trailer_url}
+					url={movie.trailer_url}
 					width="100%"
 				/>
 				<div className="absolute w-full mx-auto bottom-[10%] px-4 z-50">
@@ -210,14 +192,15 @@ const MovieDetails = () => {
 								<Button
 									className="bg-foreground text-background h-8 hover:bg-foreground hover:brightness-90"
 									onClick={() => handlePlay()}
+									ref={playButtonRef}
 									variant="default"
 								>
 									<PlayIcon className="w-5 h-5 mr-2" />
 									Дивитись
 								</Button>
 								<AddToWatchListButton
+									id={movie.id}
 									isAdded={isInWatchlist}
-									movie_id={movie.movie_id}
 								/>
 								<Button
 									className="w-10 h-10 p-0 rounded-full border-2"
@@ -250,24 +233,21 @@ const MovieDetails = () => {
 				<div className="flex flex-col w-full gap-3">
 					<div className="flex flex-row gap-2">
 						<NewMovieTag />
-						<p>{fullData.release_year}</p>
-						<p>{formatDuration(fullData.duration)}</p>
-						<QualityBadge quality="4K" />
+						<p>{movie.release_year}</p>
+						<p>{formatDuration(movie.duration)}</p>
+						<QualityBadge quality="HD" />
 					</div>
+					<AgeRestriction
+						data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
+					/>
 					<div className="flex flex-row gap-2 items-center">
-						<AgeRestriction
-							data={{ age: "16", details: "глядачам від 16 років" }}
-						/>
+						<PopularityTag movie_type={movie.movie_type} rating="1" />
 					</div>
-					<div className="flex flex-row gap-2 items-center">
-						<PopularityTag rating="1" />
-					</div>
-					<p className="mt-4 text-sm">{fullData.overview}</p>
+					<p className="mt-4 text-sm">{movie.description}</p>
 				</div>
 				<div className="flex flex-col">
-					<MovieDetailsBlock content={actors} title="В ролях" />
-					<MovieDetailsBlock content={genres} title="Жанри" />
-					<MovieDetailsBlock content={description} title="Про фільм" />
+					<MovieDetailsBlock content={movie.roles} onMoreClick={scrollToFullDetails} title="В ролях" />
+					<MovieDetailsBlock content={movie.genres} onMoreClick={scrollToFullDetails} title="Жанри" />
 				</div>
 			</div>
 
@@ -283,10 +263,43 @@ const MovieDetails = () => {
 							onStateChange={onStateChange}
 							scroll={scrollToPlayer}
 							{..._}
-
 						/>
 					))}
 				</div>
+			</div>
+			<div className="flex flex-col gap-1 m-6" ref={detailsRef}>
+				<h3 className="text-lg font-semibold">{movie.title}: відомості</h3>
+				<MovieDetailsBlock content={movie.roles} isFull title="В ролях" />
+				<MovieDetailsBlock content={movie.genres} isFull title="Жанри" />
+				<div className="flex">
+					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
+						Вікова категорія:
+					</h3>
+					<AgeRestriction
+						data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
+					/>
+				</div>
+				<div className="flex">
+					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
+						Озвучення:
+					</h3>
+					<p className="text-sm font-semibold flex flex-row gap-2">
+						{movie.sound.map((sound, index) => (
+							<React.Fragment key={index}>
+								<SoundQualityBadge quality={sound.soundType} />
+								{sound.soundProd}
+							</React.Fragment>
+						))}
+					</p>
+				</div>
+				{movie.subttitles ? (<div className="flex">
+					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
+						Субтитри:
+					</h3>
+					<p className="text-sm font-semibold">
+						{movie.subtitles}
+					</p>
+				</div>) : null}
 			</div>
 		</ScrollArea>
 	);

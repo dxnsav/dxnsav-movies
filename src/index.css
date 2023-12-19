@@ -94,3 +94,9 @@
   border-top-left-radius: var(--radius);
   filter: brightness(70%);
 }
+
+pjsdiv:has(pjsdiv#player_playlist) {
+  /* Стили для pjsdiv, у которого есть дочерний pjsdiv с id "player_playlist" */
+  left: auto !important;
+  right: 0 !important;
+}

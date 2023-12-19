@@ -4,31 +4,37 @@ import { AddToWatchListButton } from "../AddToWatchListButton.tsx";
 import { Button } from "../ui/button.tsx";
 import { Skeleton } from "../ui/skeleton.tsx";
 
-export const MovieHorizontalCard = (movie) => {
-	const { id, overview, poster_path, title, } = movie.movie;
-	const posterPath = "https://image.tmdb.org/t/p/w500" + poster_path;
+export const MovieHorizontalCard = ({ movie }) => {
+	const { description, id, poster, title } = movie;
+
+	const posterPath = "https://eneyida.tv" + poster;
 	const navigate = useNavigate();
 
-	const description =
-		overview.length > 100 ? overview.substring(0, 100) + "..." : overview;
+	const overview =
+		description?.length > 100 ? description.substring(0, 100) + "..." : description;
 
-	const handleOpenMovieDetails = () => {
-		navigate(`/details`, { state: { movie: movie.movie } });
+	const handleOpenMovieDetails = (e) => {
+		navigate(`/details`, { state: { movie } });
+		e.stopPropagation();
+	}
+
+	const handlePlayMovie = () => {
+		navigate(`/watch`, { state: { movie } });
 	}
 
 	return (
-		<div className="flex flex-row gap-2 items-center" key={id}>
+		<div className="flex flex-row gap-2 items-center cursor-pointer" key={id} onClick={() => handlePlayMovie()}>
 			<div className="w-32 flex-shrink-0">
 				<img alt={title} className="rounded-sm object-cover" src={posterPath} />
 			</div>
 			<div className="flex flex-col justify-between w-full items-start h-[100%] ">
 				<div className="text-lg font-bold text-white">{title}</div>
-				<div className="text-sm text-white">{description}</div>
-				<div className="flex flex-row justify-start w-full items-center">
+				<div className="text-sm text-white">{overview}</div>
+				<div className="flex flex-row justify-start w-full items-center gap-2">
 					<Button
-						onClick={() => handleOpenMovieDetails()}
+						onClick={(e) => handleOpenMovieDetails(e)}
 					>
-						Дивитись
+						Детальніше
 					</Button>
 					<AddToWatchListButton movie={id} />
 				</div>
