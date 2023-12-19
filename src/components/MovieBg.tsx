@@ -21,6 +21,7 @@ export default function MovieVideo() {
 					muted={true}
 					playing={true}
 					poster={data?.imageString}
+					props={{ playsinline: true }}
 					url="https://blackpearl.tortuga.wtf/hls/trailers/the_crown_2016_3418/hls/index.m3u8"
 					width="100%"
 				/>

@@ -35,6 +35,8 @@ const MovieDetails = () => {
 	const playButtonRef = useRef(null);
 	const { onOpenChange } = useDrawerStore();
 
+	const movieDetailsShown = false;
+
 	const checkWatchlist = async () => {
 		const { data, error } = await supabase
 			.from("watch_list")
@@ -179,6 +181,7 @@ const MovieDetails = () => {
 					loop={true}
 					muted={muted}
 					playing={true}
+					props={{ playsinline: true }}
 					url={movie.trailer_url}
 					width="100%"
 				/>
@@ -277,13 +280,14 @@ const MovieDetails = () => {
 					</h3>
 					<AgeRestriction
 						data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
+						style
 					/>
 				</div>
 				<div className="flex">
 					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
 						Озвучення:
 					</h3>
-					<p className="text-sm font-semibold flex flex-row gap-2">
+					<p className="text-sm flex flex-row gap-2">
 						{movie.sound.map((sound, index) => (
 							<React.Fragment key={index}>
 								<SoundQualityBadge quality={sound.soundType} />
@@ -296,7 +300,7 @@ const MovieDetails = () => {
 					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
 						Субтитри:
 					</h3>
-					<p className="text-sm font-semibold">
+					<p className="text-sm">
 						{movie.subtitles}
 					</p>
 				</div>) : null}

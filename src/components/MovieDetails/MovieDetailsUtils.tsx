@@ -1,4 +1,5 @@
 import { TopTenIcon } from "@/icons/TopTenIcon";
+import { cn } from "@/lib/utils";
 
 import { Badge } from "../ui/badge";
 
@@ -18,13 +19,13 @@ export const SoundQualityBadge = ({ quality }) => (
 	</Badge>
 );
 
-export const AgeRestriction = ({ data }) => {
+export const AgeRestriction = ({ data, style }) => {
 	const age = data?.age || parseInt(data.details.match(/\d+/), 10);
 
 	return (
 		<div className="flex flex-row gap-2 items-center">
 			<Badge
-				className="rounded-2 text-sm p-2 h-6 items-center border-foreground"
+				className={cn("text-sm p-2 h-5 items-center", !style && "border-foreground h-6")}
 				variant="outline"
 			>
 				{age}+

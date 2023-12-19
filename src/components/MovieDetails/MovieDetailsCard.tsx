@@ -18,11 +18,10 @@ export const MovieDetailsCard = (movie) => {
 		onStateChange,
 		overview,
 		release_year,
+		scroll: scrollToPlayer,
 		seasons,
 		title,
 	} = movie;
-
-	const scrollToPlayer = movie.scroll;
 
 	const navigate = useNavigate();
 
