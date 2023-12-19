@@ -38,16 +38,13 @@ export const PlayerPage = () => {
 		upsertData();
 	}, [watchData.id, userId]);
 
-	const file = watchData?.movie_url || watchData?.serial_data;
+	//const file = watchData?.movie_url || watchData?.serial_data;
 	const backdropPath = watchData.movie_backdrop ? "https://image.tmdb.org/t/p/w500" + watchData.movie_backdrop : null;
-
-	console.log(file);
 
 	return (
 		<>
 			<div className="flex items-center justify-center h-screen">
 				<Player
-					autoPlay
 					file={watchData.serial_data}
 					id="player"
 					poster={backdropPath}

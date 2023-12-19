@@ -9,7 +9,8 @@ import {
 	SpeakerLoudIcon,
 	SpeakerOffIcon,
 } from "@radix-ui/react-icons";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import React from "react";
 import ReactPlayer from "react-player";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -18,7 +19,7 @@ import { Button } from "../ui/button";
 import { ScrollArea } from "../ui/scroll-area";
 import { MovieDetailsBlock } from "./MovieDetailsBlock";
 import { MovieDetailsCard } from "./MovieDetailsCard";
-import { AgeRestriction, NewMovieTag, PopularityTag, QualityBadge } from "./MovieDetailsUtils";
+import { AgeRestriction, NewMovieTag, PopularityTag, QualityBadge, SoundQualityBadge } from "./MovieDetailsUtils";
 
 const MovieDetails = () => {
 	const location = useLocation();
@@ -29,14 +30,9 @@ const MovieDetails = () => {
 	const [isInWatchlist, setIsInWatchlist] = useState(false);
 	const [similarMovies, setSimilarMovies] = useState([]);
 	const playerRef = useRef(null);
+	const detailsRef = useRef(null);
 
-	useEffect(() => {
-		if (userId)
-			checkWatchlist();
-	})
-
-	const checkWatchlist = useCallback(async () => {
-
+	const checkWatchlist = async () => {
 		const { data, error } = await supabase
 			.from("watch_list")
 			.select("*")
@@ -48,8 +44,12 @@ const MovieDetails = () => {
 			return;
 		}
 		setIsInWatchlist(!!data);
+	};
 
-	}, [movie.id, userId]);
+	useEffect(() => {
+		if (userId && movie.id)
+			checkWatchlist();
+	})
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -130,13 +130,20 @@ const MovieDetails = () => {
 		});
 	};
 
+	const scrollToFullDetails = () => {
+		detailsRef.current?.scrollIntoView({
+			behavior: 'smooth',
+			block: 'start'
+		});
+	}
+
 	return (
 		<ScrollArea className="w-full rounded-md h-[90vh]" type="scroll">
 			<div className="w-full min-h-max object-cover rounded-t-lg relative shadow-md" ref={playerRef}>
 				<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 top-4 left-0 right-0 m-auto" />
 				<Button
 					className="absolute left-4 rounded-full z-50 top-8"
-					onClick={() => navigate("/search", { state: { title: movie.title } })}
+					onClick={() => navigate("/search", { state: { movie } })}
 					size="icon"
 					variant="secondary"
 				>
@@ -219,19 +226,17 @@ const MovieDetails = () => {
 						<p>{formatDuration(movie.duration)}</p>
 						<QualityBadge quality="HD" />
 					</div>
-					<div className="flex flex-row gap-2 items-center">
-						<AgeRestriction
-							data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
-						/>
-					</div>
+					<AgeRestriction
+						data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
+					/>
 					<div className="flex flex-row gap-2 items-center">
 						<PopularityTag movie_type={movie.movie_type} rating="1" />
 					</div>
 					<p className="mt-4 text-sm">{movie.description}</p>
 				</div>
 				<div className="flex flex-col">
-					<MovieDetailsBlock content={movie.roles} title="В ролях" />
-					<MovieDetailsBlock content={movie.genres} title="Жанри" />
+					<MovieDetailsBlock content={movie.roles} onMoreClick={scrollToFullDetails} title="В ролях" />
+					<MovieDetailsBlock content={movie.genres} onMoreClick={scrollToFullDetails} title="Жанри" />
 				</div>
 			</div>
 
@@ -250,6 +255,40 @@ const MovieDetails = () => {
 						/>
 					))}
 				</div>
+			</div>
+			<div className="flex flex-col gap-1 m-6" ref={detailsRef}>
+				<h3 className="text-lg font-semibold">{movie.title}: відомості</h3>
+				<MovieDetailsBlock content={movie.roles} isFull title="В ролях" />
+				<MovieDetailsBlock content={movie.genres} isFull title="Жанри" />
+				<div className="flex">
+					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
+						Вікова категорія:
+					</h3>
+					<AgeRestriction
+						data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
+					/>
+				</div>
+				<div className="flex">
+					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
+						Озвучення:
+					</h3>
+					<p className="text-sm font-semibold flex flex-row gap-2">
+						{movie.sound.map((sound, index) => (
+							<React.Fragment key={index}>
+								<SoundQualityBadge quality={sound.soundType} />
+								{sound.soundProd}
+							</React.Fragment>
+						))}
+					</p>
+				</div>
+				{movie.subttitles ? (<div className="flex">
+					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
+						Субтитри:
+					</h3>
+					<p className="text-sm font-semibold">
+						{movie.subtitles}
+					</p>
+				</div>) : null}
 			</div>
 		</ScrollArea>
 	);

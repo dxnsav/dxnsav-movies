@@ -12,17 +12,27 @@ export const QualityBadge = ({ quality }) => (
 	</Badge>
 );
 
-export const AgeRestriction = ({ data }) => (
-	<>
-		<Badge
-			className="rounded-2 text-sm p-2 h-6 items-center border-foreground"
-			variant="outline"
-		>
-			{data.age}+
-		</Badge>
-		{data.details ? <p className="text-sm">{data.details}</p> : null}
-	</>
+export const SoundQualityBadge = ({ quality }) => (
+	<Badge className="h-5 p-2" variant="outline">
+		{quality}
+	</Badge>
 );
+
+export const AgeRestriction = ({ data }) => {
+	const age = data?.age || parseInt(data.details.match(/\d+/), 10);
+
+	return (
+		<div className="flex flex-row gap-2 items-center">
+			<Badge
+				className="rounded-2 text-sm p-2 h-6 items-center border-foreground"
+				variant="outline"
+			>
+				{age}+
+			</Badge>
+			{data.details ? <p className="text-sm">{data.details}</p> : null}
+		</div>
+	)
+};
 
 export const PopularityTag = ({ movie_type, rating }) => {
 	let type = null;

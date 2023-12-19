@@ -13,7 +13,7 @@ export const fetchSearchData = async (table, conditions) => {
 		query = query.ilike(condition.field, `%${condition.term}%`);
 	}
 
-	query = query.order("release_date", { ascending: false });
+	query = query.order("release_year", { ascending: false });
 
 	const { data, error } = await query;
 

@@ -17,7 +17,7 @@ export const MovieDetailsCard = (movie) => {
 		matchPercentage,
 		onStateChange,
 		overview,
-		release_date,
+		release_year,
 		seasons,
 		title,
 	} = movie;
@@ -36,10 +36,8 @@ export const MovieDetailsCard = (movie) => {
 		onStateChange();
 	}
 
-	const release_year = release_date.split("-")[0];
-
-	const isRecent = new Date().getFullYear() - release_year < 2;
-
+	const releaseYear = release_year.split("-")[0];
+	const isRecent = new Date().getFullYear() - releaseYear < 1;
 	const backdropPath = "https://image.tmdb.org/t/p/w500" + backdrop_path;
 
 	return (
@@ -61,9 +59,9 @@ export const MovieDetailsCard = (movie) => {
 					<h4 className="font-semibold text-sm text-green-400">Співпадіння: {matchPercentage}%</h4>
 					<div className="flex flex-row gap-2 items-center">
 						<AgeRestriction
-							data={{ age: ageRating }}
+							data={ageRating}
 						/>
-						<p className="text-sm">{release_year}</p>
+						<p className="text-sm">{releaseYear}</p>
 					</div>
 				</div>
 				<div className="flex flex-col items-center">
