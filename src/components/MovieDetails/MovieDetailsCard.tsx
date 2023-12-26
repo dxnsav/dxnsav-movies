@@ -1,5 +1,6 @@
 import { useDrawerStore } from "@/hooks/useDrawerStore";
 import { formatDuration } from "@/lib/formatDuration";
+import { IMovie } from "@/types/movie";
 import { PlayIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 
@@ -8,7 +9,20 @@ import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { AgeRestriction } from "./MovieDetailsUtils";
 import { MovieNewTag } from "./MovieDetailsUtils";
 
-export const MovieDetailsCard = (movie, isMain = false) => {
+interface IMovieDetails extends IMovie {
+	isAdded?: boolean;
+	matchPercentage?: number;
+	onStateChange?: () => void;
+	scroll?: () => void;
+	seasons?: number;
+}
+
+interface IMovieDetailsCardProps {
+	isMain?: boolean;
+	movie: IMovieDetails;
+}
+
+export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) => {
 	const {
 		age_restriction,
 		age_restriction_details,
@@ -34,7 +48,6 @@ export const MovieDetailsCard = (movie, isMain = false) => {
 			onOpenChange(true);
 			navigate(`/details`, { state: { movie } });
 		} else {
-
 			const dataToProvide = { ...movie };
 			delete dataToProvide.scroll;
 			delete dataToProvide.onStateChange;
@@ -86,7 +99,7 @@ export const MovieDetailsCard = (movie, isMain = false) => {
 			</CardContent>
 			<CardFooter className="px-6 pb-2 bg-zinc-900 flex flex-col items-start">
 				<p className="text-sm font-bold">{title}</p>
-				<p className="text-sm">{overview.substring(0, 150) + "..."}</p>
+				<p className="text-sm">{overview?.substring(0, 150) + "..."}</p>
 			</CardFooter>
 		</Card>
 	);

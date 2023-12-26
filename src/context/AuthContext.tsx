@@ -2,11 +2,17 @@ import { supabase } from "@/supabase/supaClient";
 import { Session, User } from "@supabase/supabase-js";
 import { createContext, useEffect, useState } from "react";
 
-export const AuthContext = createContext<{
+export interface AuthContextType {
 	session: Session | null | undefined;
 	signOut: () => void;
 	user: User | null | undefined;
-}>({ session: null, signOut: () => { }, user: null });
+}
+
+export const AuthContext = createContext<AuthContextType>({
+	session: null,
+	signOut: () => { },
+	user: null
+});
 
 export const AuthProvider = ({ children }: unknown) => {
 	const [user, setUser] = useState<User>();

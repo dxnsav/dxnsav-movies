@@ -1,6 +1,7 @@
-import React, { forwardRef } from "react";
+import { IconProps } from "@/types/icon";
+import React, { ForwardRefExoticComponent, forwardRef } from "react";
 
-export const TopTenIcon = forwardRef(
+export const TopTenIcon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>> = forwardRef(
 	({ className, color = "currentColor", ...props }, forwardedRef) => {
 		return (
 			<svg

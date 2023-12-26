@@ -1,11 +1,9 @@
-// import { supabase } from "@/supabase/supaClient";
 import ReactPlayer from "react-player";
 
-import data from "../lib/mock-weekly.json"
 import MovieButtons from "./MovieButtons";
 
-export default function MovieVideo() {
-	// const weeklyMovie = supabase.from("weekly_movie").select("*").single();
+export default function MovieVideo({ data }) {
+
 
 	return (
 		<div className="h-[70vh] lg:h-[70vh] w-full flex justify-start items-center">
@@ -20,9 +18,9 @@ export default function MovieVideo() {
 					loop={true}
 					muted={true}
 					playing={true}
-					poster={data?.imageString}
+					poster={data?.trailer_backdrop}
 					props={{ playsinline: true }}
-					url="https://blackpearl.tortuga.wtf/hls/trailers/the_crown_2016_3418/hls/index.m3u8"
+					url={data?.trailer_url}
 					width="100%"
 				/>
 			</div>
