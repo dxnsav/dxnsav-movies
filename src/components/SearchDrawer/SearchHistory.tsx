@@ -1,33 +1,33 @@
 import { Badge } from "../ui/badge";
 
-type BadgeType = {
-	id: string;
-	name: string;
-	timestamp: number;
-};
+interface Badge {
+	id: number
+	search_term: string
+	timestamp: number
+}
 
 type SearchHistoryProps = {
-	badgesData: BadgeType[];
+	badgesData: Badge[];
 	onBadgeClick: (name: string) => void;
 };
 
 export const SearchHistory = ({ badgesData, onBadgeClick }: SearchHistoryProps) => {
 	return (
-		<div className="flex flex-col w-72">
+		<div className="flex flex-col max-w-[30%]">
 			<h1>Остані пошуки</h1>
 			<div className="flex flex-col portrait:flex-row gap-1">
 				{badgesData
-					.sort((a: BadgeType, b: BadgeType) =>
+					.sort((a: Badge, b: Badge) =>
 						new Date(a.timestamp * 1000).valueOf() - new Date(b.timestamp * 1000).valueOf(),
 					)
-					.map((item: BadgeType) => (
+					.map((item: Badge) => (
 						<Badge
-							className="w-fit"
+							className="w-full"
 							key={item.id}
-							onClick={() => onBadgeClick(item.name)}
-							variant="outline"
+							onClick={() => onBadgeClick(item.search_term)}
+							variant="secondary"
 						>
-							{item.name}
+							{item.search_term}
 						</Badge>
 					))}
 			</div>

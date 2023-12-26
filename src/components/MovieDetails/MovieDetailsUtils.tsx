@@ -1,5 +1,4 @@
 import { TopTenIcon } from "@/icons/TopTenIcon";
-import { cn } from "@/lib/utils";
 
 import { Badge } from "../ui/badge";
 
@@ -7,8 +6,8 @@ export const NewMovieTag = () => (
 	<h4 className="font-semibold tracking-tight text-green-400">Новинка</h4>
 );
 
-export const QualityBadge = ({ quality }) => (
-	<Badge className="h-5 p-2" variant="outline">
+export const QualityBadge = ({ quality, secondary = false }) => (
+	<Badge className="h-5 p-2" variant={secondary ? "secondary" : "outline"}>
 		{quality}
 	</Badge>
 );
@@ -19,21 +18,22 @@ export const SoundQualityBadge = ({ quality }) => (
 	</Badge>
 );
 
-export const AgeRestriction = ({ data, style }) => {
-	const age = data?.age || parseInt(data.details.match(/\d+/), 10);
+export const AgeRestriction = ({ data, isShort = false }) => {
+	const age = data?.age || parseInt(data.details?.match(/\d+/), 10);
 
 	return (
 		<div className="flex flex-row gap-2 items-center">
 			<Badge
-				className={cn("text-sm p-2 h-5 items-center", !style && "border-foreground h-6")}
+				className="text-sm p-2 h-5 items-center"
 				variant="outline"
 			>
 				{age}+
 			</Badge>
-			{data.details ? <p className="text-sm">{data.details}</p> : null}
+			{!isShort && data.details ? <p className="text-sm">{data.details}</p> : null}
 		</div>
 	)
 };
+
 
 export const PopularityTag = ({ movie_type, rating }) => {
 	let type = null;

@@ -1,11 +1,10 @@
 import { useDrawerStore } from "@/hooks/useDrawerStore";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { Drawer } from "vaul";
 
-export default function SearchDrawer() {
+const SearchDrawer: FC = () => {
 	const navigate = useNavigate();
-
 	const { checkRouteState, onOpenChange, open } = useDrawerStore();
 	const location = useLocation();
 
@@ -19,7 +18,7 @@ export default function SearchDrawer() {
 	};
 
 	return (
-		<Drawer.Root onClose={handleClose} onOpenChange={onOpenChange} open={open} >
+		<Drawer.Root onClose={handleClose} onOpenChange={onOpenChange} open={open}>
 			<Drawer.Portal>
 				<Drawer.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm " />
 				<Drawer.Content className="bg-background flex flex-col rounded-t-lg mt-24 fixed bottom-0 left-0 right-0 h-[95vh] portrait:w-[95vw] landscape:w-[80vw] mx-auto">
@@ -28,5 +27,6 @@ export default function SearchDrawer() {
 			</Drawer.Portal>
 		</Drawer.Root>
 	);
-}
+};
 
+export default SearchDrawer;

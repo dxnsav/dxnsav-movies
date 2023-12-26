@@ -11,6 +11,8 @@ import { MovieList } from "./MovieList.tsx";
 import { SearchHistory } from "./SearchHistory.tsx";
 import { SearchMovieInput } from "./SearchMovieInput.tsx";
 
+type Badge = string;
+
 export const SearchContent = () => {
 	const [searchTerm, setSearchTerm] = useState("");
 	const [searchHistory, setSearchHistory] = useState<string[]>([]);
@@ -23,8 +25,6 @@ export const SearchContent = () => {
 
 	const location = useLocation();
 	const navTitle = location.state?.movie.title;
-
-	type Badge = string;
 
 	const handleSearch = useCallback(async () => {
 		setLoading(true);
@@ -116,6 +116,33 @@ export const SearchContent = () => {
 		updateSearchHistory();
 	}, [debouncedSearchTerm, userId, handleSearch]);
 
+	useEffect(() => {
+		const getSearchHistory = async () => {
+			if (userId) {
+				const { data, error } = await supabase
+					.from("search_history")
+					.select("search_term, id")
+					.eq("user_id", userId)
+					.limit(5)
+					.order("timestamp", { ascending: false });
+
+				if (error) {
+					console.error("Error fetching search history:", error);
+					return;
+				}
+
+				setSearchHistory(data);
+			} else {
+				const searchTerm = localStorage.getItem("search_term");
+				if (searchTerm) {
+					setSearchTerm(searchTerm);
+				}
+			}
+		};
+
+		getSearchHistory();
+	}, [userId]);
+
 	const handleKeyDown = (e: KeyboardEvent) => {
 		if (
 			e.key === "Enter" &&
@@ -156,10 +183,10 @@ export const SearchContent = () => {
 
 	return (
 		<>
-			<div className="mx-auto flex flex-col items-center">
-				<Drawer.Title className="font-medium mb-4">Пошук</Drawer.Title>
-				<Drawer.Description>
-					Введіть назву фільму, який ви хочете подивитися
+			<div className="px-4 flex flex-col items-center w-full">
+				<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 top-4 m-auto" />
+				<Drawer.Description className="mt-8 mb-2">
+					Знайдіть фільм, який ви хочете подивитися
 				</Drawer.Description>
 				<div className="flex flex-row portrait:flex-col-reverse gap-2 justify-between items-start w-full h-full ">
 					<div className="flex flex-col w-full">

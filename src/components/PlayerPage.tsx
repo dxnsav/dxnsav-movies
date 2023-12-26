@@ -13,8 +13,6 @@ export const PlayerPage = () => {
 	const playerRef = useRef(null);
 	const watchData = useLocation().state?.movie;
 
-	console.log(useLocation())
-
 	const navigate = useNavigate();
 
 	const userId = useAuth().user?.id;

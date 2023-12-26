@@ -17,7 +17,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { AddToWatchListButton } from "../AddToWatchListButton";
 import { Button } from "../ui/button";
-import { ScrollArea } from "../ui/scroll-area";
+import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { MovieDetailsBlock } from "./MovieDetailsBlock";
 import { MovieDetailsCard } from "./MovieDetailsCard";
 import { AgeRestriction, NewMovieTag, PopularityTag, QualityBadge, SoundQualityBadge } from "./MovieDetailsUtils";
@@ -34,8 +34,7 @@ const MovieDetails = () => {
 	const detailsRef = useRef(null);
 	const playButtonRef = useRef(null);
 	const { onOpenChange } = useDrawerStore();
-
-	const movieDetailsShown = false;
+	const isRecent = new Date().getFullYear() - movie.release_year < 1;
 
 	const checkWatchlist = async () => {
 		const { data, error } = await supabase
@@ -151,6 +150,7 @@ const MovieDetails = () => {
 
 	return (
 		<ScrollArea className="w-full rounded-md h-[90vh]" type="scroll">
+			<ScrollBar orientation="vertical" />
 			<div className="w-full min-h-max object-cover rounded-t-lg relative shadow-md" ref={playerRef}>
 				<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 top-4 left-0 right-0 m-auto" />
 				<Button
@@ -185,7 +185,7 @@ const MovieDetails = () => {
 					url={movie.trailer_url}
 					width="100%"
 				/>
-				<div className="absolute w-full mx-auto bottom-[10%] px-4 z-50">
+				<div className="absolute w-full mx-auto bottom-[10%] px-4 z-50 portrait:hidden">
 					<div className="w-full flex flex-col justify-center">
 						<h1 className="text-[2em] font-unbounded w-[60%]">{movie.title}</h1>
 					</div>
@@ -231,22 +231,28 @@ const MovieDetails = () => {
 					</div>
 				</div>
 			</div>
-
-			<div className="flex flex-row m-6 justify-between gap-2">
+			<div className="flex flex-row portrait:flex-col m-6 justify-between gap-2">
+				<h1 className="text-sm font-unbounded w-full landscape:hidden">{movie.title}</h1>
 				<div className="flex flex-col w-full gap-3">
-					<div className="flex flex-row gap-2">
-						<NewMovieTag />
-						<p>{movie.release_year}</p>
-						<p>{formatDuration(movie.duration)}</p>
-						<QualityBadge quality="HD" />
+					<div className="flex flex-col w-full gap-3 portrait:flex-row portrait:gap-2">
+						<div className="flex flex-row gap-2 items-center">
+							{isRecent ? <NewMovieTag /> : null}
+							<p>{movie.release_year}</p>
+							<p>{formatDuration(movie.duration)}</p>
+							<QualityBadge quality="HD" />
+						</div>
+						{(movie.age_restriction || movie.age_restriction_details) &&
+							<AgeRestriction
+								data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
+								isShort
+							/>
+						}
+
 					</div>
-					<AgeRestriction
-						data={{ age: movie.age_restriction, details: movie.age_restriction_details }}
-					/>
 					<div className="flex flex-row gap-2 items-center">
 						<PopularityTag movie_type={movie.movie_type} rating="1" />
 					</div>
-					<p className="mt-4 text-sm">{movie.description}</p>
+					<p className="my-4 text-sm">{movie.description}</p>
 				</div>
 				<div className="flex flex-col">
 					<MovieDetailsBlock content={movie.roles} onMoreClick={scrollToFullDetails} title="В ролях" />
