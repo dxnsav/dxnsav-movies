@@ -70,7 +70,7 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 
 
 	return (
-		<Card className="relative cursor-pointer group w-[320px]" onClick={() => handleMovieDetailsCardClick()}>
+		<Card className="relative cursor-pointer group w-[320px]" key={`movie-details-card-${movie.id}`} onClick={() => handleMovieDetailsCardClick()}>
 			<CardHeader className="relative w-full p-0">
 				<AspectRatio ratio={16 / 9} >
 					<img
