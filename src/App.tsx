@@ -1,7 +1,20 @@
+import { FC, useEffect } from "react";
+
 import HomePage from "./components/HomePage/HomePage";
 import NavBar from "./components/NavBar";
+import { useAuth } from "./hooks/useAuth";
+import { useWatchListStore } from "./hooks/useWatchListStore";
 
-function App() {
+const App = (): FC => {
+  const getWatchList = useWatchListStore((state) => state.getWatchList);
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (user) {
+      getWatchList(user.id);
+    }
+  }, [getWatchList, user]);
+
   return (
     <>
       <NavBar />

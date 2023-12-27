@@ -1,8 +1,8 @@
-import { useWatchListStore } from '@/hooks/useWatchListStore.tsx';
+//import { useWatchListStore } from '@/hooks/useWatchListStore.tsx';
 import { CheckIcon, PlusIcon } from '@radix-ui/react-icons';
-import { FC, useEffect } from 'react';
+import { FC, /*useEffect*/ } from 'react';
 
-import { useAuth } from '../hooks/useAuth';
+// import { useAuth } from '../hooks/useAuth';
 import { cn } from '../lib/utils.ts';
 import { Button } from './ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
@@ -13,23 +13,24 @@ interface AddToWatchListButtonProps {
 	isAdded: boolean;
 }
 
-export const AddToWatchListButton = ({ className, id }: AddToWatchListButtonProps): FC => {
-	const user_id = useAuth().user?.id;
-	const isInWatchList = useWatchListStore(state => state.isInWatchList);
-	const watchList = useWatchListStore(state => state.watchList);
+export const AddToWatchListButton = ({ className }: AddToWatchListButtonProps): FC => {
+	//const user_id = useAuth().user?.id;
+	const isInWatchList = false;
+	//const isInWatchList = useWatchListStore(state => state.isInWatchList);
+	//const watchList = useWatchListStore(state => state.watchList);
 
-	useEffect(() => {
+	/*useEffect(() => {
 		isInWatchList(id, user_id);
 	}, [isInWatchList, id, user_id]);
-
+/** */
 	const handleAddToWatchlist = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 
-		if (watchList.has(id)) {
+		/**if (watchList.has(id)) {
 			await removeFromWatchList(id, user_id);
 		} else {
 			await addToWatchList(id, user_id)
-		}
+		}/** */
 	};
 
 	return (

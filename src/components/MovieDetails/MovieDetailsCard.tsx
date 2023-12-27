@@ -31,7 +31,6 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 		description: overview,
 		duration,
 		id,
-		isAdded,
 		matchPercentage,
 		movie_backdrop,
 		onStateChange,
@@ -67,6 +66,8 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 		age: age_restriction,
 		details: age_restriction_details,
 	};
+
+	const isAdded = false;
 
 
 	return (
