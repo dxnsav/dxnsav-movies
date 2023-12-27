@@ -5,6 +5,7 @@ import { PlayIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
 
 import { AddToWatchListButton } from "../AddToWatchListButton";
+import { AspectRatio } from "../ui/aspect-ratio";
 import { Card, CardContent, CardFooter, CardHeader } from "../ui/card";
 import { AgeRestriction } from "./MovieDetailsUtils";
 import { MovieNewTag } from "./MovieDetailsUtils";
@@ -71,11 +72,13 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 	return (
 		<Card className="relative cursor-pointer group w-[320px]" onClick={() => handleMovieDetailsCardClick()}>
 			<CardHeader className="relative w-full p-0">
-				<img
-					alt={title}
-					className="w-full brightness-[70%] rounded-t-md"
-					src={movieBackdrop}
-				/>
+				<AspectRatio ratio={16 / 9} >
+					<img
+						alt={title}
+						className="object-cover brightness-[70%] rounded-t-md h-full w-auto"
+						src={movieBackdrop}
+					/>
+				</AspectRatio>
 				<PlayIcon className="absolute w-12 h-12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100" />
 				{isRecent && <MovieNewTag />}
 				<div className="absolute top-0 right-0 font-semibold text-foreground px-4 py-2">

@@ -56,6 +56,7 @@ const MovieDetails = () => {
 			playButtonRef.current.focus();
 	})
 
+	// fix watchlist add with zustand
 	const onStateChange = () => {
 		isInWatchlist();
 	}
@@ -200,6 +201,7 @@ const MovieDetails = () => {
 				<div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-x-auto">
 					{similarMovies.map((_) => (
 						<MovieDetailsCard
+							isAdded
 							movie={_}
 							onStateChange={onStateChange}
 							scroll={scrollToPlayer}

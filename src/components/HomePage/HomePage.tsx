@@ -27,8 +27,10 @@ const HomePage = (): FC => {
 						<CarouselItem className='md:basis-1/2 lg:basis-1/3' key={index}>
 							<div className='p-1'>
 								<MovieDetailsCard
+									isMain={true}
 									key={index}
-									movie={_} />
+									movie={_}
+								/>
 							</div>
 						</CarouselItem>
 					))}
@@ -43,6 +45,7 @@ const HomePage = (): FC => {
 						<CarouselItem className='md:basis-1/2 lg:basis-1/3' key={index}>
 							<div className='p-1'>
 								<MovieDetailsCard
+									isMain={true}
 									isSerial={true}
 									key={index}
 									movie={_}
