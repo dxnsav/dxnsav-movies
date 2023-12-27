@@ -23,20 +23,23 @@ interface IMovieDetailsCardProps {
 }
 
 export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) => {
+	const {
+		age_restriction,
+		age_restriction_details,
+		backdrop,
+		description: overview,
+		duration,
+		id,
+		isAdded,
+		matchPercentage,
+		movie_backdrop,
+		onStateChange,
+		release_year: releaseYear,
+		seasons,
+		title
+	} = movie || {};
 
-
-	const age_restriction = movie?.age_restriction || null;
-	const age_restriction_details = movie?.age_restriction_details || null;
-	const movieBackdrop = movie?.backdrop || movie?.movie_backdrop || null;
-	const overview = movie?.description || null;
-	const duration = movie?.duration || null;
-	const id = movie?.id || null;
-	const isAdded = movie?.isAdded || null;
-	const matchPercentage = movie?.matchPercentage || null;
-	const onStateChange = movie?.onStateChange || null;
-	const releaseYear = movie?.release_year || null;
-	const seasons = movie?.seasons || null;
-	const title = movie?.title || null;
+	const movieBackdrop = backdrop || movie_backdrop;
 
 	const navigate = useNavigate();
 	const { onOpenChange } = useDrawerStore();
@@ -70,7 +73,7 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 			<CardHeader className="relative w-full p-0">
 				<img
 					alt={title}
-					className="w-full ratio-16/9 brightness-[70%] rounded-t-md"
+					className="w-full brightness-[70%] rounded-t-md"
 					src={movieBackdrop}
 				/>
 				<PlayIcon className="absolute w-12 h-12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100" />
@@ -83,9 +86,9 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 				<div className="flex flex-col gap-2">
 					{matchPercentage ? <h4 className="font-semibold text-sm text-green-400">Співпадіння: {matchPercentage}%</h4> : null}
 					<div className="flex flex-row gap-2 items-center">
-						<AgeRestriction
+						{ageRating ? <AgeRestriction
 							data={ageRating}
-						/>
+						/> : null}
 						<p className="text-sm">{releaseYear}</p>
 					</div>
 				</div>

@@ -1,8 +1,11 @@
 import ReactPlayer from "react-player";
+import { useLocation } from "react-router-dom";
 
 import MovieButtons from "./MovieButtons";
 
 export default function MovieVideo({ data }) {
+	const isMainPage = useLocation().pathname === "/";
+
 	return (
 		<div className="h-[70vh] lg:h-[70vh] w-full flex justify-start items-center">
 			<div className="w-full absolute top-0 left-0 object-cover -z-10 brightness-[60%]">
@@ -15,7 +18,7 @@ export default function MovieVideo({ data }) {
 					height="100%"
 					loop={true}
 					muted={true}
-					playing={true}
+					playing={isMainPage ? true : false}
 					poster={data?.trailer_backdrop}
 					props={{ playsinline: true }}
 					url={data?.trailer_url}

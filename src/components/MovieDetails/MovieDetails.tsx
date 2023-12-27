@@ -27,12 +27,13 @@ const MovieDetails = () => {
 	const location = useLocation();
 	const navigate = useNavigate();
 	const { movie } = location.state;
-	const [muted, setMuted] = useState(true);
+	const [muted, setMuted] = useState<boolean>(true);
 	const userId = useAuth().user?.id;
 
-	const playerRef = useRef(null);
-	const detailsRef = useRef(null);
-	const playButtonRef = useRef(null);
+	const playerRef = useRef<HTMLDivElement>(null);
+	const detailsRef = useRef<HTMLDivElement>(null);
+	const playButtonRef = useRef<HTMLDivElement>(null);
+
 	const { onOpenChange } = useDrawerStore();
 	const isRecent = new Date().getFullYear() - movie.release_year < 1;
 
@@ -108,9 +109,6 @@ const MovieDetails = () => {
 				</Button>
 				<ReactPlayer
 					className="react-player"
-					fallback={
-						<img alt={movie.title} src={movie.trailer_backdrop} />
-					}
 					file={{
 						forceHLS: true,
 					}}
@@ -199,10 +197,9 @@ const MovieDetails = () => {
 
 			<div className="flex flex-col gap-4 m-6">
 				<h3 className="text-lg font-semibold">Схожі</h3>
-				<div className="grid xs:grid-cols-1 sm:grid-cols-2 landscape:grid-cols-3 gap-4 overflow-x-auto">
+				<div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 overflow-x-auto">
 					{similarMovies.map((_) => (
 						<MovieDetailsCard
-							matchPercentage="98"
 							movie={_}
 							onStateChange={onStateChange}
 							scroll={scrollToPlayer}
