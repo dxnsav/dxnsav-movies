@@ -1,11 +1,22 @@
-import { createClient } from "@supabase/supabase-js";
+import { SupabaseClient, createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string;
+const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string;
 
-export const supabase = createClient(supabaseUrl, supabaseKey);
+export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
-export async function signInWithDiscord() {
+export async function signInWithDiscord(): Promise<{
+	app_metadata: { provider: string };
+	aud: string;
+	confirmed_at: string;
+	created_at: string;
+	email: string;
+	id: string;
+	last_sign_in_at: string;
+	role: string;
+	updated_at: string;
+	user_metadata: null;
+} | void> {
 	try {
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: "discord",
@@ -17,7 +28,7 @@ export async function signInWithDiscord() {
 	}
 }
 
-export async function signOut() {
+export async function signOut(): Promise<void> {
 	try {
 		const { error } = await supabase.auth.signOut();
 		if (error) throw error;
@@ -26,7 +37,7 @@ export async function signOut() {
 	}
 }
 
-export async function signOutLocally() {
+export async function signOutLocally(): Promise<void> {
 	try {
 		const { error } = await supabase.auth.signOut({ scope: "local" });
 		if (error) throw error;

@@ -1,23 +1,24 @@
 import { useAuth } from "@/hooks/useAuth.tsx";
 import { supabase } from "@/supabase/supaClient.tsx";
+import { IMovie } from '@/types/movie';
 import { ChevronLeftIcon } from "@radix-ui/react-icons";
-import { useEffect, useRef } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import { Player, useScript } from "../lib/Player.ts";
 import { Button } from "./ui/button.tsx";
 
-export const PlayerPage = () => {
+interface WatchData extends IMovie {
+}
+
+export const PlayerPage: FC = () => {
 	useScript(`${window.location.origin}/playerjs.js`);
 
 	const playerRef = useRef(null);
-	const watchData = useLocation().state?.movie;
-
-	console.log(useLocation())
-
+	const watchData = useLocation().state?.movie as WatchData;
 	const navigate = useNavigate();
-
 	const userId = useAuth().user?.id;
+
 	useEffect(() => {
 		const upsertData = async () => {
 			if (!userId || !watchData.id) return;

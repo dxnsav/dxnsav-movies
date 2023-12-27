@@ -73,7 +73,7 @@ export const NotificationHoverCard = () => {
 	);
 
 	const onNotificationClick = (notification) => {
-		console.log(notification);
+		//console.log(notification);
 	};
 
 	return (

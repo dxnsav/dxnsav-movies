@@ -1,7 +1,16 @@
+import { IMovie } from "@/types/movie";
+
 import { ScrollArea } from "../ui/scroll-area";
 import { MovieHorizontalCard, MovieSkeleton } from "./MovieHorizontalCard";
 
-export const MovieList = ({ error, handleScroll, loading, movies }) => {
+interface MovieListProps {
+	error: null | string;
+	handleScroll: (event: React.UIEvent<HTMLDivElement>) => void;
+	loading: boolean;
+	movies: IMovie[];
+}
+
+export const MovieList: React.FC<MovieListProps> = ({ error, handleScroll, loading, movies }) => {
 	return (
 		<ScrollArea
 			className="w-full rounded-md border p-4 h-[85vh]"

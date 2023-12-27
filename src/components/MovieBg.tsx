@@ -1,11 +1,10 @@
-// import { supabase } from "@/supabase/supaClient";
 import ReactPlayer from "react-player";
+import { useLocation } from "react-router-dom";
 
-import data from "../lib/mock-weekly.json"
 import MovieButtons from "./MovieButtons";
 
-export default function MovieVideo() {
-	// const weeklyMovie = supabase.from("weekly_movie").select("*").single();
+export default function MovieVideo({ data }) {
+	const isMainPage = useLocation().pathname === "/";
 
 	return (
 		<div className="h-[70vh] lg:h-[70vh] w-full flex justify-start items-center">
@@ -19,9 +18,10 @@ export default function MovieVideo() {
 					height="100%"
 					loop={true}
 					muted={true}
-					playing={true}
-					poster={data?.imageString}
-					url="https://blackpearl.tortuga.wtf/hls/trailers/the_crown_2016_3418/hls/index.m3u8"
+					playing={isMainPage ? true : false}
+					poster={data?.trailer_backdrop}
+					props={{ playsinline: true }}
+					url={data?.trailer_url}
 					width="100%"
 				/>
 			</div>

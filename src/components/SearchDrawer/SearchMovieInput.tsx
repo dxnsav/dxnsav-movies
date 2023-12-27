@@ -1,13 +1,24 @@
+import { FC } from "react";
+
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 
-export const SearchMovieInput = ({ handleKeyDown, inputRef, loading, onInputChanged, onSearchClicked, searchTerm }) => {
+interface SearchMovieInputProps {
+	handleKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => void;
+	inputRef: React.MutableRefObject<HTMLInputElement | null>;
+	loading: boolean;
+	onInputChanged: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	onSearchClicked: () => void;
+	searchTerm: string;
+}
+
+export const SearchMovieInput: FC<SearchMovieInputProps> = ({ handleKeyDown, inputRef, loading, onInputChanged, onSearchClicked, searchTerm }) => {
 	return (
 		<div className="flex flex-row gap-2 mb-2">
 			<Input
 				className="h-10"
 				minLength="3"
-				onChange={(e) => onInputChanged(e)}
+				onChange={onInputChanged}
 				placeholder="Знайди щось на вечір"
 				ref={inputRef}
 				type="text"
@@ -16,8 +27,8 @@ export const SearchMovieInput = ({ handleKeyDown, inputRef, loading, onInputChan
 			<Button
 				className="h-10"
 				disabled={loading}
-				onClick={() => onSearchClicked()}
-				onKeyDown={(e) => handleKeyDown(e)}
+				onClick={onSearchClicked}
+				onKeyDown={handleKeyDown}
 			>
 				Пошук
 			</Button>

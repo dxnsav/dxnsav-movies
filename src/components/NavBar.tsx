@@ -1,6 +1,6 @@
 import { useAuth } from "@/hooks/useAuth";
 import { SearchIcon } from "@/icons/SearchIcon";
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import logo from "../assets/movua-lt.png";
@@ -12,12 +12,12 @@ import { ThemeToggleButton } from "./ThemeToggle";
 import UserNav from "./UserNav";
 import { Button } from "./ui/button";
 
-interface linkProps {
+interface LinkProps {
 	name: string;
 	path: string;
 }
 
-const links: linkProps[] = [
+const links: LinkProps[] = [
 	{
 		name: "Новинки",
 		path: "/discover",
@@ -32,15 +32,15 @@ const links: linkProps[] = [
 	},
 ];
 
-const NavBar = () => {
+const NavBar = (): FC => {
 	const pathName = window.location.pathname;
-	const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+	const [isSearchModalOpen, setIsSearchModalOpen] = useState<boolean>(false);
 
 	const session = useAuth();
 	const theme = useTheme();
 
-	const [loginDialogOpen, setLoginDialogOpen] = useState(false);
-	const [menus, setMenus] = useState(links);
+	const [loginDialogOpen, setLoginDialogOpen] = useState<boolean>(false);
+	const [menus, setMenus] = useState<LinkProps[]>(links);
 
 	const navigate = useNavigate();
 

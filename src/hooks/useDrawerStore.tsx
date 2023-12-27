@@ -1,12 +1,12 @@
 import create from 'zustand';
 
-interface DialogState {
+interface DrawerState {
 	checkRouteState: (pathname: string) => void;
 	onOpenChange: (open: boolean) => void;
 	open: boolean;
 }
 
-export const useDrawerStore = create<DialogState>((set) => ({
+export const useDrawerStore = create<DrawerState>((set) => ({
 	checkRouteState: (pathname: string) => {
 		if (pathname === '/search' || pathname === '/details') {
 			set({ open: true });

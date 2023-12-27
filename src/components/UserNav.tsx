@@ -1,5 +1,6 @@
 import { useAuth } from "@/hooks/useAuth.tsx";
-import { signOut, signOutLocally } from "@/supabase/supaClient.tsx";
+import { signOutLocally } from "@/supabase/supaClient.tsx";
+import { Session } from "@supabase/supabase-js";
 import { useEffect, useState } from "react";
 
 import { Avatar, AvatarFallback } from "./ui/avatar";
@@ -10,14 +11,11 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
-	DropdownMenuSub,
-	DropdownMenuSubContent,
-	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
 } from "./ui/dropdown-menu.tsx";
 
 export default function UserNav() {
-	const session = useAuth();
+	const session: Session | null = useAuth();
 	const [fallback, setFallback] = useState<string | undefined>(undefined);
 
 	useEffect(() => {
@@ -59,28 +57,11 @@ export default function UserNav() {
 				</DropdownMenuLabel>
 				<DropdownMenuItem>Акаунт</DropdownMenuItem>
 				<DropdownMenuItem>Підтримка</DropdownMenuItem>
+
 				<DropdownMenuSeparator />
-				<DropdownMenuSub>
-					<div className="flex flex-row space-x-1">
-						<Button
-							className="w-full rounded-sm"
-							onClick={() => signOutLocally()}
-							variant="ghost"
-						>
-							Вийти
-						</Button>
-						<DropdownMenuSubTrigger />
-						<DropdownMenuSubContent>
-							<Button
-								className="w-full rounded-sm"
-								onClick={() => signOut()}
-								variant="ghost"
-							>
-								Вийти з усіх пристроїв
-							</Button>
-						</DropdownMenuSubContent>
-					</div>
-				</DropdownMenuSub>
+				<DropdownMenuItem onClick={() => signOutLocally()}>
+					Вийти
+				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
