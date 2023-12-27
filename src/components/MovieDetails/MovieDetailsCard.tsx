@@ -23,22 +23,20 @@ interface IMovieDetailsCardProps {
 }
 
 export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) => {
-	const {
-		age_restriction,
-		age_restriction_details,
-		backdrop,
-		description: overview,
-		duration,
-		id,
-		isAdded,
-		matchPercentage,
-		movie_backdrop,
-		onStateChange,
-		release_year: releaseYear,
-		scroll: scrollToPlayer,
-		seasons,
-		title,
-	} = movie;
+
+
+	const age_restriction = movie?.age_restriction || null;
+	const age_restriction_details = movie?.age_restriction_details || null;
+	const movieBackdrop = movie?.backdrop || movie?.movie_backdrop || null;
+	const overview = movie?.description || null;
+	const duration = movie?.duration || null;
+	const id = movie?.id || null;
+	const isAdded = movie?.isAdded || null;
+	const matchPercentage = movie?.matchPercentage || null;
+	const onStateChange = movie?.onStateChange || null;
+	const releaseYear = movie?.release_year || null;
+	const seasons = movie?.seasons || null;
+	const title = movie?.title || null;
 
 	const navigate = useNavigate();
 	const { onOpenChange } = useDrawerStore();
@@ -58,8 +56,6 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 		}
 	}
 
-
-	const movieBackdrop = backdrop || movie_backdrop;
 	const isRecent = new Date().getFullYear() - releaseYear < 1;
 	//const backdropPath = "https://image.tmdb.org/t/p/w500" + backdrop_path;
 	//const posterPath = "https://eneyida.tv" + poster;

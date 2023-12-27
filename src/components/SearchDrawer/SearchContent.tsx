@@ -1,9 +1,10 @@
 import { useAuth } from "@/hooks/useAuth.tsx";
 import { fetchSearchData } from "@/lib/fetchSearchData.ts";
-import { useDebounce } from "@uidotdev/usehooks";
+import { IMovie } from "@/types/movie.ts";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ChangeEvent, KeyboardEvent } from "react";
 import { useLocation } from "react-router-dom";
+import { useDebounce } from "usehooks-ts";
 import { Drawer } from "vaul";
 
 import { supabase } from "../../supabase/supaClient.tsx";
@@ -13,17 +14,22 @@ import { SearchMovieInput } from "./SearchMovieInput.tsx";
 
 type Badge = string;
 
+interface SearchHistoryItem {
+	search_term: string;
+	user_id: string;
+}
+
 export const SearchContent = () => {
-	const [searchTerm, setSearchTerm] = useState("");
-	const [searchHistory, setSearchHistory] = useState<string[]>([]);
-	const [movies, setMovies] = useState([]);
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState(null);
-	const debouncedSearchTerm = useDebounce(searchTerm, 500);
+	const [searchTerm, setSearchTerm] = useState<string>("");
+	const [searchHistory, setSearchHistory] = useState<SearchHistoryItem[]>([]);
+	const [movies, setMovies] = useState<IMovie[]>([]);
+	const [loading, setLoading] = useState<boolean>(false);
+	const [error, setError] = useState<null | string>(null);
+	const debouncedSearchTerm = useDebounce<string>(searchTerm, 500);
 	const inputRef = useRef<HTMLInputElement>(null);
 	const userId = useAuth().user?.id;
 
-	const location = useLocation();
+	const location = useLocation<{ movie: { title: string } }>();
 	const navTitle = location.state?.movie.title;
 
 	const handleSearch = useCallback(async () => {
@@ -47,11 +53,7 @@ export const SearchContent = () => {
 				return null;
 			};
 
-			setMovies(
-				movieData
-					.map(processMovie)
-					.filter(movie => movie !== null)
-			);
+			setMovies(movieData.map(processMovie).filter((movie) => movie !== null));
 		} catch (error) {
 			setError(error.message);
 		} finally {

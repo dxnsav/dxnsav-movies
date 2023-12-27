@@ -1,58 +1,47 @@
+import { useWatchListStore } from '@/hooks/useWatchListStore.tsx';
 import { CheckIcon, PlusIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
+import { FC, useEffect } from 'react';
 
 import { useAuth } from '../hooks/useAuth';
-import { cn } from '../lib/utils.ts'
-import { supabase } from '../supabase/supaClient';
+import { cn } from '../lib/utils.ts';
 import { Button } from './ui/button';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 
-type Props = {
+interface AddToWatchListButtonProps {
 	className: string;
 	id: number;
 	isAdded: boolean;
 }
 
-export const AddToWatchListButton = ({ className, id, isAdded = false }: Props) => {
-	const [isInWatchlist, setIsInWatchlist] = useState(isAdded);
+export const AddToWatchListButton = ({ className, id }: AddToWatchListButtonProps): FC => {
 	const user_id = useAuth().user?.id;
+	const isInWatchList = useWatchListStore(state => state.isInWatchList);
+	const watchList = useWatchListStore(state => state.watchList);
+
+	useEffect(() => {
+		isInWatchList(id, user_id);
+	}, [isInWatchList, id, user_id]);
 
 	const handleAddToWatchlist = async (event: React.MouseEvent<HTMLButtonElement>) => {
 		event.stopPropagation();
 
-		if (isInWatchlist) {
-			const { error } = await supabase
-				.from('watch_list')
-				.delete()
-				.match({ id, user_id });
-
-			if (error) {
-				console.error('Error removing from watchlist:', error);
-			} else {
-				setIsInWatchlist(false);
-			}
+		if (watchList.has(id)) {
+			await removeFromWatchList(id, user_id);
 		} else {
-			const { error } = await supabase
-				.from('watch_list')
-				.insert([{ id, user_id }]);
-
-			if (error) {
-				console.error('Error adding to watchlist:', error);
-			} else {
-				setIsInWatchlist(true);
-			}
+			await addToWatchList(id, user_id)
 		}
 	};
+
 	return (
 		<TooltipProvider>
 			<Tooltip>
 				<TooltipTrigger asChild>
 					<Button className={cn("w-10 h-10 p-0 rounded-full border-2", className)} onClick={(event) => handleAddToWatchlist(event)} variant="outline">
-						{isInWatchlist ? <CheckIcon className="w-5 h-5" /> : <PlusIcon className="w-5 h-5" />}
+						{isInWatchList ? <CheckIcon className="w-5 h-5" /> : <PlusIcon className="w-5 h-5" />}
 					</Button>
 				</TooltipTrigger>
 				<TooltipContent className="bg-secondary">
-					<p>{isInWatchlist ? 'Видалити із списку' : 'Додати у список'}</p>
+					<p>{isInWatchList ? 'Видалити із списку' : 'Додати у список'}</p>
 				</TooltipContent>
 			</Tooltip>
 		</TooltipProvider>

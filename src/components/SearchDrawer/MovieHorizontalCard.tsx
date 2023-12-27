@@ -1,10 +1,15 @@
+import { IMovie } from "@/types/movie";
 import { useNavigate } from "react-router-dom";
 
 import { AddToWatchListButton } from "../AddToWatchListButton.tsx";
 import { Button } from "../ui/button.tsx";
 import { Skeleton } from "../ui/skeleton.tsx";
 
-export const MovieHorizontalCard = ({ movie }) => {
+interface MovieHorizontalCardProps {
+	movie: IMovie;
+}
+
+export const MovieHorizontalCard: React.FC<MovieHorizontalCardProps> = ({ movie }) => {
 	const { description, id, poster, title } = movie;
 
 	const posterPath = "https://eneyida.tv" + poster;
@@ -13,7 +18,7 @@ export const MovieHorizontalCard = ({ movie }) => {
 	const overview =
 		description?.length > 100 ? description.substring(0, 100) + "..." : description;
 
-	const handleOpenMovieDetails = (e) => {
+	const handleOpenMovieDetails = (e: React.MouseEvent<HTMLButtonElement>) => {
 		navigate(`/details`, { state: { movie } });
 		e.stopPropagation();
 	}
@@ -43,7 +48,7 @@ export const MovieHorizontalCard = ({ movie }) => {
 	);
 };
 
-export function MovieSkeleton() {
+export const MovieSkeleton: React.FC = () => {
 	return (
 		<div className="flex flex-row gap-2 items-center">
 			<Skeleton className="w-32 flex-shrink-0 h-[9rem] rounded-sm" />

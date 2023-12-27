@@ -2,23 +2,40 @@ import { TopTenIcon } from "@/icons/TopTenIcon";
 
 import { Badge } from "../ui/badge";
 
-export const NewMovieTag = () => (
+export const NewMovieTag: React.FC = () => (
 	<h4 className="font-semibold tracking-tight text-green-400">Новинка</h4>
 );
 
-export const QualityBadge = ({ quality, secondary = false }) => (
+interface QualityBadgeProps {
+	quality: string;
+	secondary?: boolean;
+}
+
+export const QualityBadge: React.FC<QualityBadgeProps> = ({ quality, secondary = false }) => (
 	<Badge className="h-5 p-2" variant={secondary ? "secondary" : "outline"}>
 		{quality}
 	</Badge>
 );
 
-export const SoundQualityBadge = ({ quality }) => (
+interface SoundQualityBadgeProps {
+	quality: string;
+}
+
+export const SoundQualityBadge: React.FC<SoundQualityBadgeProps> = ({ quality }) => (
 	<Badge className="h-5 p-2" variant="outline">
 		{quality}
 	</Badge>
 );
 
-export const AgeRestriction = ({ data, isShort = false }) => {
+interface AgeRestrictionProps {
+	data: {
+		age?: number;
+		details?: string;
+	};
+	isShort?: boolean;
+}
+
+export const AgeRestriction: React.FC<AgeRestrictionProps> = ({ data, isShort = false }) => {
 	const age = data?.age || parseInt(data.details?.match(/\d+/), 10);
 
 	return (
@@ -34,8 +51,12 @@ export const AgeRestriction = ({ data, isShort = false }) => {
 	)
 };
 
+interface PopularityTagProps {
+	movie_type: string;
+	rating: number;
+}
 
-export const PopularityTag = ({ movie_type, rating }) => {
+export const PopularityTag: React.FC<PopularityTagProps> = ({ movie_type, rating }) => {
 	let type = null;
 	switch (movie_type) {
 		case "movie":
@@ -67,7 +88,7 @@ export const PopularityTag = ({ movie_type, rating }) => {
 	)
 };
 
-export const MovieNewTag = () => (
+export const MovieNewTag: React.FC = () => (
 	<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">
 		<span className="inline-block bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold text-white mb-2">
 			Нещодавно додано
@@ -75,11 +96,10 @@ export const MovieNewTag = () => (
 	</div>
 );
 
-export const MovieNewSeasonTag = () => (
+export const MovieNewSeasonTag: React.FC = () => (
 	<div className="absolute flex items-center justify-center z-20 bottom-0 left-0 right-0">
 		<span className="inline-block bg-red-600 rounded-sm px-3 py-1 text-sm font-semibold text-white mb-2">
 			Новий сезон
 		</span>
 	</div>
 );
-

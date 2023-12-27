@@ -3,8 +3,6 @@ import ReactPlayer from "react-player";
 import MovieButtons from "./MovieButtons";
 
 export default function MovieVideo({ data }) {
-
-
 	return (
 		<div className="h-[70vh] lg:h-[70vh] w-full flex justify-start items-center">
 			<div className="w-full absolute top-0 left-0 object-cover -z-10 brightness-[60%]">

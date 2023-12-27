@@ -1,32 +1,21 @@
-import { supabase } from '@/supabase/supaClient'
-import React, { useEffect } from 'react'
+import { useWeekly } from '@/hooks/useWeekly'
+import React, { FC, useEffect } from 'react'
 
 import MovieVideo from '../MovieBg'
 import { MovieDetailsCard } from '../MovieDetails/MovieDetailsCard'
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '../ui/carousel'
 
-const HomePage = () => {
-	const [weeklyMovies, setWeeklyMovies] = React.useState([])
-	const [weeklySerials, setWeeklySerials] = React.useState([])
+const HomePage = (): FC => {
+	const fetchWeeklyMovies = useWeekly(state => state.fetchWeeklyMovies);
+	const weeklyMovies = useWeekly(state => state.weeklyMovies);
+
+	const fetchWeeklySerials = useWeekly(state => state.fetchWeeklySerials);
+	const weeklySerials = useWeekly(state => state.weeklySerials);
 
 	useEffect(() => {
-		const fetchWeeklyMovies = async () => {
-			const { data: movies } = await supabase.from('weekly_movies').select('*');
-			setWeeklyMovies(movies);
-		}
-
 		fetchWeeklyMovies();
-	}, [])
-
-	useEffect(() => {
-		const fetchWeeklySerials = async () => {
-			const { data: serials } = await supabase.from('weekly_serials').select('*');
-			setWeeklySerials(serials);
-			console.log(serials)
-		}
-
 		fetchWeeklySerials();
-	}, [])
+	}, [fetchWeeklyMovies, fetchWeeklySerials]);
 
 	return (
 		<div className="p-5 lg:p-0">

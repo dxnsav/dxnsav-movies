@@ -1,7 +1,8 @@
 import { useAuth } from "@/hooks/useAuth";
 import { useDrawerStore } from "@/hooks/useDrawerStore";
+import { useSimilarMoviesStore } from "@/hooks/useSimilarMoviesStore";
+import { useWatchListStore } from "@/hooks/useWatchListStore";
 import { formatDuration } from "@/lib/formatDuration.ts";
-import { supabase } from "@/supabase/supaClient";
 import {
 	ArrowLeftIcon,
 	Cross2Icon,
@@ -28,98 +29,34 @@ const MovieDetails = () => {
 	const { movie } = location.state;
 	const [muted, setMuted] = useState(true);
 	const userId = useAuth().user?.id;
-	const [isInWatchlist, setIsInWatchlist] = useState(false);
-	const [similarMovies, setSimilarMovies] = useState([]);
+
 	const playerRef = useRef(null);
 	const detailsRef = useRef(null);
 	const playButtonRef = useRef(null);
 	const { onOpenChange } = useDrawerStore();
 	const isRecent = new Date().getFullYear() - movie.release_year < 1;
 
-	const checkWatchlist = async () => {
-		const { data, error } = await supabase
-			.from("watch_list")
-			.select("*")
-			.eq("id", movie.id)
-			.eq("user_id", userId)
-			.single();
+	const similarMovies = useSimilarMoviesStore(state => state.similarMovies);
+	const fetchSimilarMovies = useSimilarMoviesStore(state => state.fetchSimilarMovies);
 
-		if (error) {
-			return;
-		}
-		setIsInWatchlist(!!data);
-	};
+	const isInWatchlist = useWatchListStore(state => state.isInWatchList);
 
 	useEffect(() => {
-		if (userId && movie.id)
-			checkWatchlist();
+		isInWatchlist(movie.id, userId);
+	}, [isInWatchlist, movie.id, userId]);
 
+	useEffect(() => {
+		fetchSimilarMovies(movie.id);
+
+	}, [movie.id, fetchSimilarMovies]);
+
+	useEffect(() => {
 		if (playButtonRef.current)
 			playButtonRef.current.focus();
 	})
 
-	useEffect(() => {
-		const fetchData = async () => {
-			const { data: preFilterData, error } = await supabase
-				.from("movie")
-				.select("*")
-				.neq("id", movie.id)
-				.limit(11)
-				.order("id", { ascending: true });
-
-			if (error) {
-				console.error("Error fetching movie:", error);
-				return;
-			}
-
-			// check if movie is recomended the same as is on page and return only 10
-			const data = preFilterData.filter(movie => movie.id !== movie.id);
-			if (data.length > 10) {
-				data.length = 10;
-			}
-
-			const movieIds = data.map((movie) => movie.id);
-
-			const { data: watchlistSimilarMovies, error: watchlistSimilarMoviesError } = await supabase
-				.from('watch_list')
-				.select('id')
-				.in('id', movieIds)
-				.eq('user_id', userId);
-
-			if (watchlistSimilarMoviesError) {
-				console.error('Error fetching watchlist movies:', error);
-				return;
-			}
-
-			const { data: similarMoviesData, error: similarMoviesError } =
-				await supabase
-					.from("movie")
-					.select("*")
-					.in("id", movieIds);
-
-			if (similarMoviesError) {
-				console.error("Error fetching movie:", similarMoviesError);
-				return;
-			}
-
-			const fullData = similarMoviesData.map((movie) => {
-				const movieData = {
-					...data.find((dataMovie) => dataMovie.id === movie.id),
-					...movie,
-					isAdded: !!watchlistSimilarMovies.find((watchlistMovie) => watchlistMovie.id === movie.id),
-				};
-				return movieData;
-			});
-
-			setSimilarMovies(fullData);
-		};
-
-		fetchData();
-	}, [userId, movie.id]);
-
-
 	const onStateChange = () => {
-		checkWatchlist();
+		isInWatchlist();
 	}
 
 	const handlePlay = () => {
@@ -263,15 +200,12 @@ const MovieDetails = () => {
 			<div className="flex flex-col gap-4 m-6">
 				<h3 className="text-lg font-semibold">Схожі</h3>
 				<div className="grid xs:grid-cols-1 sm:grid-cols-2 landscape:grid-cols-3 gap-4 overflow-x-auto">
-					{similarMovies.map((_, index) => (
+					{similarMovies.map((_) => (
 						<MovieDetailsCard
-							ageRating="16"
-							duration={141}
-							key={index}
 							matchPercentage="98"
+							movie={_}
 							onStateChange={onStateChange}
 							scroll={scrollToPlayer}
-							{..._}
 						/>
 					))}
 				</div>
@@ -293,14 +227,14 @@ const MovieDetails = () => {
 					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">
 						Озвучення:
 					</h3>
-					<p className="text-sm flex flex-row gap-2">
+					<div className="text-sm flex flex-row gap-2">
 						{movie.sound.map((sound, index) => (
 							<React.Fragment key={index}>
 								<SoundQualityBadge quality={sound.soundType} />
 								{sound.soundProd}
 							</React.Fragment>
 						))}
-					</p>
+					</div>
 				</div>
 				{movie.subttitles ? (<div className="flex">
 					<h3 className="text-sm text-muted-foreground mr-2 whitespace-nowrap">

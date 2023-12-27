@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function MovieButtons({ movie }) {
 	const navigate = useNavigate();
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useState<boolean>(false);
 
 	const onHandleClickWatch = () => {
 		navigate(`/watch`, { state: { movie } });
