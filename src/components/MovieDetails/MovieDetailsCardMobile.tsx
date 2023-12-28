@@ -52,7 +52,7 @@ export const MovieDetailsCardMobile: FC<IMovieDetailsCardMobileProps> = ({ isMai
 
 	return (
 		<Card className="relative cursor-pointer group w-full" key={`movie-details-card-mob-${movie.id}`} onClick={() => handleMovieDetailsCardClick()}>
-			<AspectRatio ratio={9 / 16} >
+			<AspectRatio ratio={2 / 3} >
 				<img
 					alt={title}
 					className="object-cover brightness-[70%] rounded-t-md h-full w-auto"

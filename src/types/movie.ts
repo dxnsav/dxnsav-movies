@@ -37,6 +37,7 @@ export interface IMovie {
 	backdrop?: string;
 	description?: string;
 	duration?: number;
+	embeddings?: number[][];
 	genres?: string[];
 	id: number;
 	images?: string[];

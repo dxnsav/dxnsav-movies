@@ -1,8 +1,8 @@
 import { IMovie } from '@/types/movie';
-import { FC, RefObject } from 'react';
+import React, { FC, RefObject } from 'react';
 
 import { MovieDetailsBlock } from "./MovieDetailsBlock";
-import { SoundQualityBadge } from './MovieDetailsUtils';
+import { AgeRestriction, SoundQualityBadge } from './MovieDetailsUtils';
 
 interface MovieDetailsFullProps {
 	detilsRef: RefObject<HTMLDivElement>;

@@ -4,7 +4,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { MovieDetailsFull } from "./MovieDetailsFull";
+import { MovieDetailsInfo } from "./MovieDetailsInfo";
 import { MovieDetailsPlayer } from "./MovieDetailsPlayer";
+import { MovieDetailsSimilar } from "./MovieDetailsSimilar";
 
 const MovieDetails = () => {
 	const location = useLocation();
@@ -40,7 +42,7 @@ const MovieDetails = () => {
 				<>
 					<MovieDetailsPlayer movie={movie} navigate={navigate} playButtonRef={playButtonRef} playerRef={playerRef} />
 					<MovieDetailsInfo movie={movie} scrollToFullDetails={scrollToFullDetails} />
-					<MovieDetailsSimilar id={movie.id} playerRef={playerRef} />
+					<MovieDetailsSimilar movie={movie} playerRef={playerRef} />
 					<MovieDetailsFull detailsRef={detailsRef} movie={movie} />
 				</>
 			)}

@@ -69,7 +69,7 @@ const NavBar = (): FC => {
 
 	return (
 		<>
-			<div className="w-full max-w-7xl mx-auto items-center justify-between px-5 sm:px-6 py-5 lg:px-8 flex backdrop-blur backdrop-brightness-150 dark:backdrop-brightness-75 h-16 uw:rounded-b-md">
+			<div className="w-full max-w-7xl mx-auto items-center justify-between px-5 sm:px-6 py-5 lg:px-8 flex backdrop-blur backdrop-brightness-150 dark:backdrop-brightness-75 h-16 landscape:rounded-b-lg">
 				<div className="flex items-center">
 					<Link className="w-32 flex flex-row items-center" href="/home">
 						<img alt="logo" className="w-20 mr-3" src={logo} />

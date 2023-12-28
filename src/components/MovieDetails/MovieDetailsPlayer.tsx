@@ -40,7 +40,7 @@ export const MovieDetailsPlayer = ({
 		>
 			<div className="mx-auto absolute w-12 h-1.5 flex-shrink-0 rounded-full bg-white z-20 top-4 left-0 right-0 m-auto" />
 			<Button
-				className="absolute left-4 rounded-full z-50 top-8"
+				className="fixed left-4 rounded-full z-50 top-8"
 				onClick={() => navigate("/search", { state: { movie } })}
 				size="icon"
 				variant="secondary"
@@ -48,7 +48,7 @@ export const MovieDetailsPlayer = ({
 				<ArrowLeftIcon className="w-6 h-6" />
 			</Button>
 			<Button
-				className="absolute right-4 rounded-full z-50 top-8"
+				className="fixed right-4 rounded-full z-50 top-8"
 				onClick={() => handleClose()}
 				size="icon"
 				variant="secondary"

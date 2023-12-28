@@ -1,5 +1,6 @@
 import { useDrawerStore } from "@/hooks/useDrawerStore";
 import { formatDuration } from "@/lib/formatDuration";
+import { cn } from "@/lib/utils";
 import { IMovie } from "@/types/movie";
 import { PlayIcon } from "@radix-ui/react-icons";
 import { useNavigate } from "react-router-dom";
@@ -23,7 +24,7 @@ interface IMovieDetailsCardProps {
 	movie: IMovieDetails;
 }
 
-export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) => {
+export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ className, isMain, movie }) => {
 	const {
 		age_restriction,
 		age_restriction_details,
@@ -31,11 +32,12 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 		description: overview,
 		duration,
 		id,
-		matchPercentage,
 		movie_backdrop,
+		movie_type: movieType,
 		onStateChange,
 		release_year: releaseYear,
-		seasons,
+		serial_data: serialData,
+		similarity,
 		title
 	} = movie || {};
 
@@ -69,9 +71,35 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 
 	const isAdded = false;
 
+	const formatSimilarity = (similarity: number) => {
+		return Math.round(similarity * 100)
+	};
+
+	function findMaxSeasonAndLastEpisode() {
+		let maxSeason = 0;
+		let lastEpisode = null;
+
+		serialData.forEach(series => {
+			series.folder.forEach(season => {
+				const seasonNumber = parseInt(season.title.match(/Сезон (\d+)/)[1]);
+
+				if (seasonNumber > maxSeason) {
+					maxSeason = seasonNumber;
+					lastEpisode = season.folder[season.folder.length - 1];
+				} else if (seasonNumber === maxSeason) {
+					const lastEpisodeInCurrentSeason = season.folder[season.folder.length - 1];
+					if (parseInt(lastEpisodeInCurrentSeason.id) > parseInt(lastEpisode.id)) {
+						lastEpisode = lastEpisodeInCurrentSeason;
+					}
+				}
+			});
+		});
+
+		return `${maxSeason} Сезон ${lastEpisode.title}`;
+	}
 
 	return (
-		<Card className="relative cursor-pointer group w-[320px]" key={`movie-details-card-${movie.id}`} onClick={() => handleMovieDetailsCardClick()}>
+		<Card className={cn("relative cursor-pointer group w-full w-max-[400px]", className)} key={`movie - details - card - ${movie.id} `} onClick={() => handleMovieDetailsCardClick()}>
 			<CardHeader className="relative w-full p-0">
 				<AspectRatio ratio={16 / 9} >
 					<img
@@ -83,12 +111,12 @@ export const MovieDetailsCard: FC<IMovieDetailsCardProps> = ({ isMain, movie }) 
 				<PlayIcon className="absolute w-12 h-12 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100" />
 				{isRecent && <MovieNewTag />}
 				<div className="absolute top-0 right-0 font-semibold text-foreground px-4 py-2">
-					{duration ? formatDuration(duration) : seasons}
+					{movieType === 'movie' ? formatDuration(duration) : findMaxSeasonAndLastEpisode()}
 				</div>
 			</CardHeader>
 			<CardContent className="px-6 py-4 flex flex-row justify-between bg-zinc-900">
 				<div className="flex flex-col gap-2">
-					{matchPercentage ? <h4 className="font-semibold text-sm text-green-400">Співпадіння: {matchPercentage}%</h4> : null}
+					{similarity ? <h4 className="font-semibold text-sm text-green-400">Співпадіння: {formatSimilarity(similarity)}%</h4> : null}
 					<div className="flex flex-row gap-2 items-center">
 						{ageRating ? <AgeRestriction
 							data={ageRating}
