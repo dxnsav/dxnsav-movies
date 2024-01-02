@@ -17,10 +17,10 @@ export const useWatchHistoryStore = create<WatchHistoryStore>((set) => ({
 			const { data: watchHistory, error } = await supabase
 				.from('watch_history')
 				.select(`
-                    movie_id,
-                    timestamp,
-										player_time,
-                    movie!inner(*)
+                  movie_id,
+                  timestamp,
+									player_time,
+                  movie!inner(*)
                 `)
 				.eq('user_id', userId)
 				.order('timestamp', { ascending: false })

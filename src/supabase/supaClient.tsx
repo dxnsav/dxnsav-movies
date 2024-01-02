@@ -5,18 +5,7 @@ const supabaseKey = import.meta.env.VITE_SUPABASE_KEY as string;
 
 export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
-export async function signInWithDiscord(): Promise<{
-	app_metadata: { provider: string };
-	aud: string;
-	confirmed_at: string;
-	created_at: string;
-	email: string;
-	id: string;
-	last_sign_in_at: string;
-	role: string;
-	updated_at: string;
-	user_metadata: null;
-} | void> {
+export async function signInWithDiscord(): Promise<unknown | void> {
 	try {
 		const { data, error } = await supabase.auth.signInWithOAuth({
 			provider: "discord",
